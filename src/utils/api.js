@@ -1,5 +1,5 @@
 // src/utils/api.js
-const BASE_URL = 'http://localhost:5000/api'
+const BASE_URL = 'https://reachhirejobs-backend.onrender.com/api'
 
 async function request(endpoint, options = {}) {
   const token = localStorage.getItem('rh_token')
@@ -31,18 +31,19 @@ export const authAPI = {
 
 // ── Orders ────────────────────────────────────────────────────
 export const ordersAPI = {
-  create:   (formData) => request('/orders',        { method:'POST', body: formData }),
-  getAll:   ()         => request('/orders'),
-  getStats: ()         => request('/orders/stats'),
-  getOne:   (id)       => request(`/orders/${id}`),
+  create:          (formData) => request('/orders',               { method:'POST', body: formData }),
+  getAll:          ()         => request('/orders'),
+  getStats:        ()         => request('/orders/stats'),
+  getOne:          (id)       => request(`/orders/${id}`),
+  getCompanyCount: ()         => request('/orders/company-count'),
 }
 
 // ── Payment ───────────────────────────────────────────────────
 export const paymentAPI = {
   initialize: (orderId) =>
-    request('/payment/initialize', { method:'POST', body: JSON.stringify({ orderId }) }),
+    request('/payment/initialize',        { method:'POST', body: JSON.stringify({ orderId }) }),
   verify: (reference, orderId) =>
-    request('/payment/verify',     { method:'POST', body: JSON.stringify({ reference, orderId }) }),
+    request('/payment/verify',            { method:'POST', body: JSON.stringify({ reference, orderId }) }),
   verifyByReference: (reference) =>
     request('/payment/verify-by-reference', { method:'POST', body: JSON.stringify({ reference }) }),
 }
