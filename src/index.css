@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Bricolage+Grotesque:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --blue: #1A56DB;
+  --blue-dark: #1044B2;
+  --blue-light: #EEF3FF;
+  --blue-mid: #3B6FE8;
+  --blue-glow: #5B8FF9;
+  --blue-pale: #D6E4FF;
+  --accent: #00C6FF;
+  --gold: #F59E0B;
+  --success: #10B981;
+  --error: #EF4444;
+  --white: #ffffff;
+  --gray-50: #F9FAFB;
+  --gray-100: #F3F4F6;
+  --gray-200: #E5E7EB;
+  --gray-300: #D1D5DB;
+  --gray-400: #9CA3AF;
+  --gray-500: #6B7280;
+  --gray-600: #4B5563;
+  --gray-700: #374151;
+  --gray-900: #111827;
+  --heading: 'Bricolage Grotesque', sans-serif;
+  --body: 'Plus Jakarta Sans', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--body);
+  background: var(--white);
+  color: var(--gray-900);
+  overflow-x: hidden;
+}
+
+/* ── Buttons ── */
+.btn-primary {
+  background: var(--blue);
+  color: var(--white);
+  border: none;
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: var(--body);
+  transition: all .2s;
+  box-shadow: 0 4px 16px rgba(26,86,219,.3);
+}
+.btn-primary:hover { background: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,86,219,.4); }
+
+.btn-outline {
+  background: var(--white);
+  color: var(--blue);
+  border: 2px solid var(--blue);
+  padding: 14px 28px;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: var(--body);
+  transition: all .2s;
+}
+.btn-outline:hover { background: var(--blue-light); }
+
+/* ── Range Input ── */
+input[type="range"] {
+  width: 100%;
+  height: 6px;
+  -webkit-appearance: none;
+  background: var(--gray-200);
+  border-radius: 10px;
+  outline: none;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 22px;
+  height: 22px;
+  background: var(--blue);
+  border-radius: 50%;
+  cursor: pointer;
+  border: 3px solid var(--white);
+  box-shadow: 0 2px 8px rgba(26,86,219,.4);
+}
+
+/* ── Number Input ── */
+.company-num-input {
+  width: 120px;
+  background: var(--gray-50);
+  border: 2px solid var(--gray-200);
+  color: var(--gray-900);
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: var(--heading);
+  outline: none;
+  text-align: center;
+  transition: border-color .2s;
+}
+.company-num-input:focus { border-color: var(--blue); }
+
+/* ── Form inputs ── */
+.form-input {
+  width: 100%;
+  background: var(--white);
+  border: 2px solid var(--gray-200);
+  color: var(--gray-900);
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 15px;
+  font-family: var(--body);
+  outline: none;
+  transition: border-color .2s;
+}
+.form-input:focus { border-color: var(--blue); }
+.form-input::placeholder { color: var(--gray-300); }
+
+.form-select {
+  width: 100%;
+  background: var(--white);
+  border: 2px solid var(--gray-200);
+  color: var(--gray-700);
+  padding: 11px 14px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-family: var(--body);
+  font-weight: 500;
+  outline: none;
+  transition: border-color .2s;
+  appearance: none;
+  cursor: pointer;
+}
+.form-select:focus { border-color: var(--blue); }
+
+/* ── Niche Tags ── */
+.ntag {
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 2px solid var(--gray-200);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all .2s;
+  color: var(--gray-600);
+  background: var(--white);
+  font-family: var(--body);
+  font-weight: 500;
+}
+.ntag.active { background: var(--blue); border-color: var(--blue); color: var(--white); }
+.ntag:hover:not(.active) { border-color: var(--blue); color: var(--blue); }
+
+/* ── Upload Zone ── */
+.upload-zone {
+  border: 2px dashed var(--gray-300);
+  border-radius: 12px;
+  padding: 28px;
+  text-align: center;
+  cursor: pointer;
+  transition: all .25s;
+  margin-bottom: 12px;
+}
+.upload-zone:hover { border-color: var(--blue); background: var(--blue-light); }
+
+/* ── Progress Bar ── */
+.prog-bar { height: 5px; background: var(--gray-100); border-radius: 5px; overflow: hidden; }
+.prog-fill { height: 100%; border-radius: 5px; background: linear-gradient(90deg, var(--blue), var(--accent)); transition: width 1s ease; }
+
+/* ── Order Status ── */
+.o-status { padding: 5px 12px; border-radius: 20px; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+.o-status.sent { background: rgba(16,185,129,.1); color: var(--success); }
+.o-status.sending { background: rgba(26,86,219,.1); color: var(--blue); }
+.o-status.pending { background: rgba(245,158,11,.1); color: var(--gold); }
+
+/* ── Ticker animation ── */
+@keyframes ticker { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.ticker-track { display: flex; gap: 14px; animation: ticker 35s linear infinite; white-space: nowrap; }
+
+/* ── Blink dot ── */
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: .3; } }
+
+/* ── Fade up ── */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+.fade-up { animation: fadeUp .6s ease both; }
+
+/* ── Responsive helpers ── */
+@media (max-width: 768px) {
+  .btn-primary, .btn-outline { width: 100%; text-align: center; }
+  .hero-btns { flex-direction: column; }
+}

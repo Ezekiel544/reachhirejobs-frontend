@@ -1,0 +1,180 @@
+/* ============================================================
+   SettingsPage.css — scoped with sp- prefix
+   ============================================================ */
+
+.sp-loading {
+  display: flex; align-items: center; justify-content: center;
+  height: 300px; font-size: 15px; color: var(--gray-400);
+}
+.sp-wrap { padding: 0; }
+.sp-header { margin-bottom: 28px; }
+.sp-title { font-family: var(--font-head); font-size: 22px; font-weight: 800; color: var(--gray-900); }
+.sp-sub   { font-size: 14px; color: var(--gray-400); margin-top: 4px; }
+
+/* ── Grid ── */
+.sp-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+}
+.sp-card {
+  background: var(--white); border: 1px solid var(--gray-200);
+  border-radius: 20px; padding: 28px;
+}
+.sp-full { grid-column: 1 / -1; }
+.sp-card-title {
+  font-family: var(--font-head); font-size: 17px; font-weight: 700;
+  color: var(--gray-900); margin-bottom: 22px;
+}
+
+/* ── Form ── */
+.sp-group { margin-bottom: 18px; }
+.sp-label {
+  font-size: 13px; color: var(--gray-600); font-weight: 600;
+  display: block; margin-bottom: 7px;
+}
+.sp-hint  { font-size: 12px; color: var(--gray-400); margin-top: 5px; display: block; }
+.sp-optional { font-weight: 400; color: var(--gray-400); font-size: 12px; }
+
+/* ── Niche tags ── */
+.sp-niche-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* ── Documents ── */
+.sp-docs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.sp-uploaded-file {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(16,185,129,.06); border: 1px solid rgba(16,185,129,.3);
+  border-radius: 10px; padding: 14px 16px;
+}
+.sp-uf-name { flex: 1; font-size: 13px; color: var(--gray-700); font-weight: 500; word-break: break-all; }
+.sp-replace-btn {
+  background: none; border:none;
+  color: none; padding: 6px 14px; border-radius: 7px;
+  font-size: 13px; font-weight: 600; cursor: pointer; white-space: nowrap;
+  font-family: var(--font-body); transition: all .2s; flex-shrink: 0;
+}
+.sp-replace-btn:hover { background: none; }
+.sp-uz-text { font-size: 14px; color: var(--gray-600); font-weight: 600; }
+.sp-uz-sub  { font-size: 12px; color: var(--gray-400); margin-top: 4px; }
+
+/* ── Save button ── */
+.sp-save-row { display: flex; justify-content: flex-end; margin-top: 24px; }
+.sp-save-btn {
+  background: var(--blue); color: var(--white); border: none;
+  padding: 14px 36px; border-radius: 12px; font-size: 16px; font-weight: 700;
+  cursor: pointer; font-family: var(--font-head);
+  box-shadow: 0 6px 20px rgba(26,86,219,.3); transition: all .2s;
+}
+.sp-save-btn:hover { background: var(--blue-dark); transform: translateY(-2px); }
+.sp-save-btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .sp-grid       { grid-template-columns: 1fr; }
+  .sp-docs-grid  { grid-template-columns: 1fr; }
+  .sp-save-row   { justify-content: stretch; }
+  .sp-save-btn   { width: 100%; text-align: center; }
+}
+
+/* ── Progress bar ── */
+.sp-progress-wrap  { margin-top: 16px; }
+.sp-progress-label { font-size: 13px; color: var(--gray-500); margin-bottom: 6px; }
+.sp-progress-bar   { height: 6px; background: var(--gray-100); border-radius: 99px; overflow: hidden; }
+.sp-progress-fill  { height: 100%; background: green; border-radius: 99px; transition: width .4s; }
+
+/* ── Intro section ── */
+.sp-intro-desc {
+  font-size: 14px; color: var(--gray-500); line-height: 1.6; margin-bottom: 20px;
+}
+.sp-intro-preview-label {
+  font-size: 12px; font-weight: 700; color: var(--gray-400);
+  text-transform: uppercase; letter-spacing: .05em; margin-bottom: 10px;
+}
+.sp-email-preview {
+  background: var(--gray-50); border: 1px solid var(--gray-200);
+  border-radius: 12px; padding: 20px; margin-bottom: 18px; font-size: 14px;
+}
+.sp-ep-row      { display: flex; gap: 10px; margin-bottom: 5px; font-size: 13px; color: var(--gray-600); }
+.sp-ep-key      { font-weight: 700; color: var(--gray-400); min-width: 70px; }
+.sp-ep-divider  { border-top: 1px solid var(--gray-200); margin: 14px 0; }
+.sp-ep-body     { color: var(--gray-700); line-height: 1.7; }
+.sp-ep-body p   { margin: 0 0 10px; }
+.sp-ep-intro    { color: var(--blue); font-style: italic; }
+
+.sp-intro-textarea {
+  width: 100%; padding: 14px 16px; border: 1.5px solid var(--gray-200);
+  border-radius: 12px; font-size: 14px; font-family: var(--font-body);
+  color: var(--gray-800); resize: vertical; min-height: 110px;
+  outline: none; transition: border .2s; box-sizing: border-box;
+  line-height: 1.6;
+}
+.sp-intro-textarea:focus { border-color: var(--blue); }
+.sp-word-count { font-size: 12px; margin-top: 6px; font-weight: 600; }
+.sp-logout-btn {
+  width: 100%; padding: 13px; border-radius: 12px; margin-bottom: 12px;
+  border: 1.5px solid var(--error); background: transparent;
+  color: var(--error); font-size: 15px; font-weight: 700;
+  cursor: pointer; transition: all .2s; font-family: var(--font-body);
+}
+.sp-logout-btn:hover { background: var(--error); color: #fff; }
+.sp-modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.45);
+  z-index: 999; display: flex; align-items: center; justify-content: center;
+}
+.sp-modal {
+  background: var(--white); border-radius: 20px; padding: 36px 32px;
+  max-width: 380px; width: 90%; text-align: center;
+  box-shadow: 0 20px 60px rgba(0,0,0,.15);
+}
+.sp-modal-icon  { font-size: 40px; margin-bottom: 14px; }
+.sp-modal-title { font-family: var(--font-head); font-size: 20px; font-weight: 800; color: var(--gray-900); margin-bottom: 8px; }
+.sp-modal-sub   { font-size: 14px; color: var(--gray-400); margin-bottom: 28px; line-height: 1.5; }
+.sp-modal-btns  { display: flex; gap: 12px; }
+.sp-modal-cancel { flex: 1; padding: 12px; border-radius: 10px; border: 1.5px solid var(--gray-200); background: var(--white); color: var(--gray-700); font-size: 15px; font-weight: 700; cursor: pointer; font-family: var(--font-body); }
+.sp-modal-cancel:hover { background: var(--gray-50); }
+.sp-modal-confirm { flex: 1; padding: 12px; border-radius: 10px; border: none; background: var(--error); color: #fff; font-size: 15px; font-weight: 700; cursor: pointer; font-family: var(--font-body); }
+.sp-modal-confirm:hover { opacity: .88; }
+.sp-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+.sp-logout-btn {
+  padding: 9px 18px; border-radius: 10px;
+  /* border: 1.5px solid var(--error); background: transparent; */
+  /* color: var(--error); font-size: 14px; font-weight: 700; */
+  cursor: pointer; transition: all .2s; font-family: var(--font-body);
+  white-space: nowrap;
+}
+/* .sp-logout-btn:hover { background: var(--error); color: #fff; } */
+.sp-logout-btn {
+  width: fit-content;
+  padding: 9px 18px;
+  border-radius: 10px;
+  border: 1.5px solid var(--error);
+  background: transparent;
+  color: var(--error);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .2s;
+  font-family: var(--font-body);
+  white-space: nowrap;
+}
+.sp-select-wrap {
+  position: relative;
+}
+.sp-select-wrap .rh-select {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 100%;
+  padding-right: 36px;
+}
+.sp-select-arrow {
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: var(--gray-400);
+  pointer-events: none;
+}

@@ -1,0 +1,81 @@
+/* ============================================================
+   AuthPage.css  — scoped with ap- prefix
+   ============================================================ */
+
+.ap-page {
+  min-height: 100vh; display: flex; align-items: center;
+  justify-content: center; padding: 40px 5%;
+  background: linear-gradient(160deg, var(--white) 50%, var(--blue-light) 100%);
+}
+.ap-card {
+  background: var(--white); border: 1px solid var(--gray-200);
+  border-radius: 24px; padding: 44px; width: 100%; max-width: 440px;
+  box-shadow: 0 20px 60px rgba(26,86,219,.1);
+}
+.ap-logo {
+  font-family: var(--font-head); font-size: 24px; font-weight: 800;
+  color: var(--gray-900); margin-bottom: 6px;
+}
+.ap-logo span { color: var(--blue); }
+.ap-tagline { font-size: 14px; color: var(--gray-400); margin-bottom: 28px; }
+
+/* Tabs */
+.ap-tabs {
+  display: flex; gap: 4px; background: var(--gray-100);
+  border-radius: 10px; padding: 4px; margin-bottom: 28px;
+}
+.ap-tab {
+  flex: 1; padding: 10px; border-radius: 7px; border: none;
+  background: transparent; color: var(--gray-500); font-size: 15px;
+  font-weight: 600; cursor: pointer; font-family: var(--font-body); transition: all .2s;
+}
+.ap-active {
+  background: var(--white); color: var(--blue);
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+}
+
+/* Form */
+.ap-group { margin-bottom: 18px; }
+.ap-label {
+  font-size: 13px; color: var(--gray-600); margin-bottom: 7px;
+  display: block; font-weight: 600;
+}
+.ap-submit-btn {
+  width: 100%; background: var(--blue); border: none; color: var(--white);
+  padding: 14px; border-radius: 10px; font-size: 16px; font-weight: 700;
+  cursor: pointer; font-family: var(--font-head);
+  box-shadow: 0 4px 16px rgba(26,86,219,.3); transition: all .2s; margin-top: 4px;
+}
+.ap-submit-btn:hover { background: var(--blue-dark); transform: translateY(-1px); }
+
+/* Divider */
+.ap-divider {
+  text-align: center; color: var(--gray-400); font-size: 13px;
+  margin: 18px 0; position: relative;
+}
+.ap-divider::before, .ap-divider::after {
+  content: ''; position: absolute; top: 50%; width: 42%;
+  height: 1px; background: var(--gray-200);
+}
+.ap-divider::before { left: 0; }
+.ap-divider::after  { right: 0; }
+
+/* Google button */
+.ap-google-btn {
+  width: 100%; background: var(--white); border: 2px solid var(--gray-200);
+  color: var(--gray-700); padding: 12px; border-radius: 10px; font-size: 15px;
+  font-weight: 600; cursor: pointer; font-family: var(--font-body); transition: all .2s;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+}
+.ap-google-btn:hover { border-color: var(--blue); color: var(--blue); }
+
+/* Back link */
+.ap-back {
+  display: block; text-align: center; margin-top: 20px;
+  color: var(--gray-400); font-size: 14px; cursor: pointer; transition: color .2s;
+}
+.ap-back:hover { color: var(--blue); }
+
+@media (max-width: 480px) {
+  .ap-card { padding: 28px 20px; }
+}
