@@ -1,4 +1,4 @@
-// src/utils/api.jss
+// src/utils/api.js
 const BASE_URL = 'https://reachhirejobs-backend.onrender.com/api'
 
 async function request(endpoint, options = {}) {
