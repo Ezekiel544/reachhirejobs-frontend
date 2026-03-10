@@ -92,7 +92,7 @@ export default function AuthPage({ defaultTab = 'login', onLogin, onBack }) {
   // ── Google Sign In ─────────────────────────────────────────
   function handleGoogle() {
     // Redirects to backend which redirects to Google
-    window.location.href = 'http://localhost:5000/api/auth/google'
+       window.location.href = 'http://localhost:5000/api/auth/google'
   }
 
   return (
