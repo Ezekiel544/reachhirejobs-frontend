@@ -16,7 +16,7 @@ import Targeticon from './images/target.png'
 import Instanticon from './images/instanticon.png'
 import Paymenticon from './images/payment.png'
 import Analyticsicon from './images/analytics.png'
-import Techicon from './images/Techrole.png'
+import Techicon from './images/techrole.png'
 import { calcPrice, fmtNaira, getBreakdown, COMPANIES } from '../utils/pricing'
 
 const MAX_COMPANIES = 1223
