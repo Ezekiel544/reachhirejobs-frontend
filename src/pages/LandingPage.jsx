@@ -7,7 +7,7 @@
  */
 import { useState, useEffect } from 'react'
 import './LandingPage.css'
-import cvicon from './images/cvicon.png'
+import usericon from './images/usericon.png'
 import Niche from './images/nicheicon.png'
 import Reachicon from './images/reachicon.png'
 import Blasticon from './images/blasticon.png'
@@ -140,7 +140,7 @@ function Ticker() {
 
 /* ── How It Works ──────────────────────────────────────────── */
 const STEPS = [
-  { n:'01', icon:<img src={cvicon} alt="CV" width={57} height={57} />, title:'Upload Your CV',    desc:'Upload your CV and cover letter. Secure and ready to send anytime.' },
+  { n:'01', icon:<img src={usericon} alt="CV" width={57} height={57} />, title:'Upload Your CV',    desc:'Upload your CV and cover letter. Secure and ready to send anytime.' },
   { n:'02', icon:<img src={Niche} alt="Niche" width={60} height={60} />, title:'Pick Your Niche',   desc:'Select your role and preferred industries — Fintech, SaaS, AI, Health and more.' },
   { n:'03', icon:<img src={Reachicon} alt="Reach" width={60} height={60} />, title:'Set Your Reach',    desc:`Drag the slider or type a number — up to ${MAX_COMPANIES.toLocaleString()} verified companies. Price updates instantly.` },
   { n:'04', icon:<img src={Blasticon} alt="Blast" width={60} height={60} />, title:'Pay & Blast',        desc:'Complete your payment via card, bank transfer, or USSD. We handle the rest.' },
