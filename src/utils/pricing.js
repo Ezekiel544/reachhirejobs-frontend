@@ -24,7 +24,7 @@ export function getBreakdown(n) {
   return { ng, gr, ke, sa, oa }
 }
 
-const COMPANIES = [
+export const COMPANIES = [
   { name: 'Paystack',         domain: 'paystack.com',        flag: '🇳🇬' },
   { name: 'Flutterwave',      domain: 'flutterwave.com',     flag: '🇳🇬' },
   { name: 'Safaricom',        domain: 'safaricom.co.ke',     flag: '🇰🇪' },
