@@ -71,14 +71,14 @@ function Hero({ onGetStarted }) {
             <span className="lp-dot" />
             {MAX_COMPANIES.toLocaleString()} Verified African &amp; Global Tech Companies
           </div> */}
-          <h1>Get Your CV to <span>Every</span> Tech Company That Matters</h1>f
+          <h1>Get Your CV to <span>Every</span> Tech Company That Matters</h1>
           <p className="lp-sub">
             Stop applying one by one. Upload your CV, choose your industry,
             drag the slider  and we deliver your profile to up to <strong>{MAX_COMPANIES.toLocaleString()} verified</strong> tech
             company HR inboxes across Africa and beyond, in minutes.
           </p>
           <div className="lp-hero-btns">
-            <button className="btn-primary" onClick={() => onGetStarted('signup')}>Start Now →</button>
+            <button className="btn-primary" onClick={() => onGetStarted('signup')}>Start Now </button>
             <button className="btn-outline" onClick={() => scrollTo('lp-how')}>See How It Works</button>
           </div>
           <div className="lp-stats">
