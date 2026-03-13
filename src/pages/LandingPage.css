@@ -180,3 +180,23 @@
   .lp-section, .lp-gray, .lp-white { padding: 60px 5%; }
   .lp-footer-bottom { flex-direction: column; text-align: center; }
 }
+.lp-step-animate {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.lp-step-visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.lp-step-animate {
+  opacity: 0;
+  transform: translateX(-60px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.lp-step-visible {
+  opacity: 1;
+  transform: translateX(0);
+}

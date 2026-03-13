@@ -5,7 +5,7 @@
  *  and its own LandingPage.css
  * ============================================================
  */
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './LandingPage.css'
 import usericon from './images/usericon.png'
 import Niche from './images/nicheicon.png'
@@ -34,13 +34,13 @@ function Navbar({ onGetStarted }) {
       <nav className="lp-nav">
         <div className="lp-nav-inner">
           <span className="lp-logo" onClick={() => window.scrollTo(0,0)}>
-            Reach<span>HireJobs</span>
+            Swift<span>Apply</span>
           </span>
           <div className="lp-nav-links">
             <a onClick={() => scrollTo('lp-how')}>How it Works</a>
             <a onClick={() => scrollTo('lp-features')}>Features</a>
             <a onClick={() => scrollTo('lp-pricing')}>Pricing</a>
-            <a className="lp-nav-cta" onClick={() => onGetStarted('signup')}>Get Started →</a>
+            <a className="lp-nav-cta" onClick={() => onGetStarted('signup')}>Get Started </a>
           </div>
           <button className={`lp-hamburger ${open ? 'open' : ''}`} onClick={() => setOpen(o => !o)}>
             <span /><span /><span />
@@ -52,7 +52,8 @@ function Navbar({ onGetStarted }) {
           <a onClick={() => { scrollTo('lp-how');      setOpen(false) }}>How it Works</a>
           <a onClick={() => { scrollTo('lp-features'); setOpen(false) }}>Features</a>
           <a onClick={() => { scrollTo('lp-pricing');  setOpen(false) }}>Pricing</a>
-          <a className="lp-m-cta" onClick={() => { onGetStarted('signup'); setOpen(false) }}>Get Started →</a>
+          <a className="lp-m-cta" onClick={() => { onGetStarted('signup'); setOpen(false) }}>Get Started </a>
+          {/* → */}
         </div>
       )}
     </>
@@ -70,7 +71,7 @@ function Hero({ onGetStarted }) {
             <span className="lp-dot" />
             {MAX_COMPANIES.toLocaleString()} Verified African &amp; Global Tech Companies
           </div> */}
-          <h1>Get Your CV to <span>Every</span> Tech Company That Matters</h1>
+          <h1>Get Your CV to <span>Every</span> Tech Company That Matters</h1>f
           <p className="lp-sub">
             Stop applying one by one. Upload your CV, choose your industry,
             drag the slider  and we deliver your profile to up to <strong>{MAX_COMPANIES.toLocaleString()} verified</strong> tech
@@ -103,9 +104,9 @@ function Hero({ onGetStarted }) {
             </div>
             <button className="lp-demo-btn" onClick={() => onGetStarted('signup')}>Proceed to Payment </button>
             <div className="lp-chips">
-              <span className="lp-chip">🇳🇬 Nigeria · 478 companies</span>
+              <span className="lp-chip"> Nigeria · 478 companies</span>
               <span className="lp-chip"> Remote · 277 companies</span>
-              <span className="lp-chip">🇰🇪 Kenya · 88 companies</span>
+              <span className="lp-chip"> Kenya · 88 companies</span>
             </div>
           </div>
         </div>
@@ -146,13 +147,39 @@ const STEPS = [
   { n:'04', icon:<img src={Blasticon} alt="Blast" width={60} height={60} />, title:'Pay & Blast',        desc:'Complete your payment via card, bank transfer, or USSD. We handle the rest.' },
 ]
 function HowItWorks() {
+  const [visible, setVisible] = useState([])
+  const sectionRef = useRef(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible([])
+          STEPS.forEach((_, i) => {
+            setTimeout(() => {
+              setVisible(prev => [...prev, i])
+            }, i * 300)
+          })
+        } else {
+          setVisible([])
+        }
+      },
+      { threshold: 0.2 }
+    )
+    if (sectionRef.current) observer.observe(sectionRef.current)
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <section id="lp-how" className="lp-section lp-gray">
+    <section id="lp-how" className="lp-section lp-gray" ref={sectionRef}>
       <div className="lp-sec-label">The Process</div>
       <h2 className="lp-sec-title">From Upload to Inbox <span>in Minutes</span></h2>
       <div className="lp-steps-grid">
-        {STEPS.map(s => (
-          <div key={s.n} className="lp-step-card">
+        {STEPS.map((s, i) => (
+          <div
+            key={s.n}
+            className={`lp-step-card lp-step-animate ${visible.includes(i) ? 'lp-step-visible' : ''}`}
+          >
             <span className="lp-step-num">{s.n}</span>
             <span className="lp-step-icon">{s.icon}</span>
             <div className="lp-step-title">{s.title}</div>
@@ -192,7 +219,7 @@ function Features() {
 }
 
 /* ── Pricing ───────────────────────────────────────────────── */
-const NICHES = [' Fintech',' SaaS',' AI/ML',' Healthtech',' Agritech',' Remote',' E-commerce',' EdTech',' Tech/Software',' Insurtech',' Marketing Tech',' Telecom',' Media/Creative','👥 HR Tech',' Crypto/Web3',' Cloud/DevOps',' GovTech',' CleanTech']
+const NICHES = [' Fintech',' SaaS',' AI/ML',' Healthtech',' Agritech',' Remote',' E-commerce',' EdTech',' Tech/Software',' Insurtech',' Marketing Tech',' Telecom',' Media/Creative','HR Tech',' Crypto/Web3',' Cloud/DevOps',' GovTech',' CleanTech']
 
 function Pricing({ onGetStarted }) {
   const [count, setCount]   = useState(500)
