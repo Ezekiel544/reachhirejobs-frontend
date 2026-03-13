@@ -230,3 +230,19 @@
   color: var(--gray-400);
   pointer-events: none;
 }
+
+.dp-sn-disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dp-sn-soon {
+  margin-left: auto;
+  font-size: 9px;
+  font-weight: 700;
+  background: #FFF3CD;
+  color: #B8860B;
+  padding: 2px 7px;
+  border-radius: 20px;
+  white-space: nowrap;
+}

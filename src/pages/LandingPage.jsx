@@ -17,6 +17,8 @@ import Instanticon from './images/instanticon.png'
 import Paymenticon from './images/payment.png'
 import Analyticsicon from './images/analytics.png'
 import Techicon from './images/techrole.png'
+import Africa from './images/africa.svg'
+import Global from './images/global.svg'
 import { calcPrice, fmtNaira, getBreakdown, COMPANIES } from '../utils/pricing'
 
 const MAX_COMPANIES = 1223
@@ -34,7 +36,7 @@ function Navbar({ onGetStarted }) {
       <nav className="lp-nav">
         <div className="lp-nav-inner">
           <span className="lp-logo" onClick={() => window.scrollTo(0,0)}>
-            Swift<span>Apply</span>
+            Swifty<span>Apply</span> 
           </span>
           <div className="lp-nav-links">
             <a onClick={() => scrollTo('lp-how')}>How it Works</a>
@@ -53,7 +55,6 @@ function Navbar({ onGetStarted }) {
           <a onClick={() => { scrollTo('lp-features'); setOpen(false) }}>Features</a>
           <a onClick={() => { scrollTo('lp-pricing');  setOpen(false) }}>Pricing</a>
           <a className="lp-m-cta" onClick={() => { onGetStarted('signup'); setOpen(false) }}>Get Started </a>
-          {/* → */}
         </div>
       )}
     </>
@@ -67,14 +68,10 @@ function Hero({ onGetStarted }) {
       <div className="lp-hero-inner">
         {/* Left */}
         <div className="lp-hero-left">
-          {/* <div className="lp-badge">
-            <span className="lp-dot" />
-            {MAX_COMPANIES.toLocaleString()} Verified African &amp; Global Tech Companies
-          </div> */}
           <h1>Get Your CV to <span>Every</span> Tech Company That Matters</h1>
           <p className="lp-sub">
             Stop applying one by one. Upload your CV, choose your industry,
-            drag the slider  and we deliver your profile to up to <strong>{MAX_COMPANIES.toLocaleString()} verified</strong> tech
+            drag the slider and we deliver your profile to up to <strong>{MAX_COMPANIES.toLocaleString()} verified</strong> tech
             company HR inboxes across Africa and beyond, in minutes.
           </p>
           <div className="lp-hero-btns">
@@ -84,7 +81,7 @@ function Hero({ onGetStarted }) {
           <div className="lp-stats">
             <div><div className="lp-stat-num">{MAX_COMPANIES.toLocaleString()}</div><div className="lp-stat-lbl">Verified Companies</div></div>
             <div><div className="lp-stat-num">24</div><div className="lp-stat-lbl">Countries</div></div>
-            <div><div className="lp-stat-num">₦2k</div><div className="lp-stat-lbl">Starting From</div></div>
+            <div><div className="lp-stat-num">₦5k</div><div className="lp-stat-lbl">Starting From</div></div>
           </div>
         </div>
         {/* Right — demo card */}
@@ -99,8 +96,8 @@ function Hero({ onGetStarted }) {
               <div className="lp-demo-fill"><div className="lp-demo-thumb" /></div>
             </div>
             <div className="lp-demo-price-row">
-              <div><div className="lp-price-lbl">Total</div><div className="lp-price-amt">₦96,000</div></div>
-              <div style={{ textAlign:'right' }}><div className="lp-price-lbl">Per company</div><div className="lp-per">₦120</div></div>
+              <div><div className="lp-price-lbl">Total</div><div className="lp-price-amt">₦200,000</div></div>
+              <div style={{ textAlign:'right' }}><div className="lp-price-lbl">Per company</div><div className="lp-per">₦250</div></div>
             </div>
             <button className="lp-demo-btn" onClick={() => onGetStarted('signup')}>Proceed to Payment </button>
             <div className="lp-chips">
@@ -143,9 +140,10 @@ function Ticker() {
 const STEPS = [
   { n:'01', icon:<img src={usericon} alt="CV" width={57} height={57} />, title:'Upload Your CV',    desc:'Upload your CV and cover letter. Secure and ready to send anytime.' },
   { n:'02', icon:<img src={Niche} alt="Niche" width={60} height={60} />, title:'Pick Your Niche',   desc:'Select your role and preferred industries — Fintech, SaaS, AI, Health and more.' },
-  { n:'03', icon:<img src={Reachicon} alt="Reach" width={60} height={60} />, title:'Set Your Reach',    desc:`Drag the slider or type a number — up to ${MAX_COMPANIES.toLocaleString()} verified companies. Price updates instantly.` },
-  { n:'04', icon:<img src={Blasticon} alt="Blast" width={60} height={60} />, title:'Pay & Blast',        desc:'Complete your payment via card, bank transfer, or USSD. We handle the rest.' },
+  { n:'03', icon:<img src={Reachicon} alt="Reach" width={60} height={60} />, title:'Set Your Reach', desc:`Drag the slider or type a number — up to ${MAX_COMPANIES.toLocaleString()} verified companies. Price updates instantly.` },
+  { n:'04', icon:<img src={Blasticon} alt="Blast" width={60} height={60} />, title:'Pay & Blast',    desc:'Complete your payment via card, bank transfer, or USSD. We handle the rest.' },
 ]
+
 function HowItWorks() {
   const [visible, setVisible] = useState([])
   const sectionRef = useRef(null)
@@ -193,21 +191,48 @@ function HowItWorks() {
 
 /* ── Features ──────────────────────────────────────────────── */
 const FEATS = [
-  {  icon:<img src={Africaicon} alt="africa" width={35} height={35} />, title:'Pan-African Reach',   desc:'From Lagos to Nairobi, Accra to Cairo — plus 277 global remote companies.' },
+  { icon:<img src={Africaicon} alt="africa" width={35} height={35} />, title:'Pan-African Reach',   desc:'From Lagos to Nairobi, Accra to Cairo — plus 277 global remote companies.' },
   { icon:<img src={Targeticon} alt="target" width={35} height={35} />, title:'Smart Targeting',     desc:'Filter by industry, role, and location. Your CV only goes where it matters.' },
-  { icon:<img src={Instanticon} alt="instant" width={35} height={35} />, title:'Instant Delivery',    desc:'Once payment is confirmed, emails go out immediately — no waiting.' },
-  { icon:<img src={Paymenticon} alt="payment" width={35} height={35} />, title:'Secure Payments',     desc:'Card, bank transfer, USSD or mobile money in Naira. Fully automated.' },
-  { icon: <img src={Analyticsicon} alt="analytics" width={35} height={35} />, title:'Live Tracking',       desc:'See exactly which companies got your CV, broken down by country and industry.' },
-  { icon:<img src={Techicon} alt="tech" width={35} height={35} />, title:'Every Tech Role',     desc:'Frontend, Backend, Data, DevOps, Product, Design, QA — all covered.' },
+  { icon:<img src={Instanticon} alt="instant" width={35} height={35} />, title:'Instant Delivery',  desc:'Once payment is confirmed, emails go out immediately — no waiting.' },
+  { icon:<img src={Paymenticon} alt="payment" width={35} height={35} />, title:'Secure Payments',   desc:'Card, bank transfer, USSD or mobile money in Naira. Fully automated.' },
+  { icon:<img src={Analyticsicon} alt="analytics" width={35} height={35} />, title:'Live Tracking', desc:'See exactly which companies got your CV, broken down by country and industry.' },
+  { icon:<img src={Techicon} alt="tech" width={35} height={35} />, title:'Every Tech Role',         desc:'Frontend, Backend, Data, DevOps, Product, Design, QA — all covered.' },
 ]
+
 function Features() {
+  const [visible, setVisible] = useState([])
+  const sectionRef = useRef(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible([])
+          FEATS.forEach((_, i) => {
+            setTimeout(() => {
+              setVisible(prev => [...prev, i])
+            }, i * 250)
+          })
+        } else {
+          setVisible([])
+        }
+      },
+      { threshold: 0.5 }
+    )
+    if (sectionRef.current) observer.observe(sectionRef.current)
+    return () => observer.disconnect()
+  }, [])
+
   return (
-    <section id="lp-features" className="lp-section lp-white">
+    <section id="lp-features" className="lp-section lp-white" ref={sectionRef}>
       <div className="lp-sec-label">Why ReachHireJobs</div>
       <h2 className="lp-sec-title">Built for <span>African Tech Talent</span></h2>
       <div className="lp-feats-grid">
-        {FEATS.map(f => (
-          <div key={f.title} className="lp-feat-card">
+        {FEATS.map((f, i) => (
+          <div
+            key={f.title}
+            className={`lp-feat-card lp-feat-animate ${visible.includes(i) ? 'lp-feat-visible' : ''}`}
+          >
             <div className="lp-feat-icon">{f.icon}</div>
             <div className="lp-feat-title">{f.title}</div>
             <div className="lp-feat-desc">{f.desc}</div>
@@ -222,7 +247,7 @@ function Features() {
 const NICHES = [' Fintech',' SaaS',' AI/ML',' Healthtech',' Agritech',' Remote',' E-commerce',' EdTech',' Tech/Software',' Insurtech',' Marketing Tech',' Telecom',' Media/Creative','HR Tech',' Crypto/Web3',' Cloud/DevOps',' GovTech',' CleanTech']
 
 function Pricing({ onGetStarted }) {
-  const [count, setCount]   = useState(500)
+  const [count, setCount]   = useState(20)
   const [niches, setNiches] = useState(['🏦 Fintech','💻 SaaS','🌍 Remote'])
 
   const { per, total } = calcPrice(count)
@@ -231,7 +256,7 @@ function Pricing({ onGetStarted }) {
   function handleNum(e) {
     let v = Number(e.target.value)
     if (isNaN(v)) return
-    setCount(Math.min(Math.max(v, 10), MAX_COMPANIES))
+    setCount(Math.min(Math.max(v, 20), MAX_COMPANIES))
   }
   function toggleNiche(n) {
     setNiches(p => p.includes(n) ? p.filter(x => x !== n) : [...p, n])
@@ -239,10 +264,10 @@ function Pricing({ onGetStarted }) {
 
   const regions = [
     { flag:'🇳🇬', name:'Nigeria',       count: bd.ng, pct: 45 },
-    { flag:'Www',  name:'Global/Remote', count: bd.gr, pct: 25 },
+    { flag:<img src={Global} alt="Global" width={17} height={17} />,  name:'Global/Remote', count: bd.gr, pct: 25 },
     { flag:'🇰🇪', name:'Kenya',         count: bd.ke, pct: 15 },
     { flag:'🇿🇦', name:'South Africa',  count: bd.sa, pct: 10 },
-    { flag:'Afr',  name:'Other Africa',  count: bd.oa, pct:  5 },
+    { flag:<img src={Africa} alt="Africa" width={17} height={17} />,  name:'Other Africa',  count: bd.oa, pct:  5 },
   ]
 
   return (
@@ -250,20 +275,20 @@ function Pricing({ onGetStarted }) {
       <div style={{ textAlign:'center' }}>
         <div className="lp-sec-label">Pricing</div>
         <h2 className="lp-sec-title" style={{ maxWidth:'100%' }}>Pay Only for <span>What You Need</span></h2>
-        <p className="lp-sec-sub">Drag or type to pick your reach. More companies = less per email. Up to <strong>{MAX_COMPANIES.toLocaleString()} verified companies</strong> available.</p>
+        <p className="lp-sec-sub">Drag or type to pick your reach. ₦250 per company. Up to <strong>{MAX_COMPANIES.toLocaleString()} verified companies</strong> available.</p>
       </div>
 
       <div className="lp-pricing-box">
         {/* Left */}
         <div>
           <div className="lp-calc-title">Build Your Blast</div>
-          <div className="lp-calc-sub">Minimum 10 · Maximum {MAX_COMPANIES.toLocaleString()} verified companies</div>
-          <div className="lp-range-labels"><span>10</span><span>{MAX_COMPANIES.toLocaleString()}</span></div>
-          <input className="rh-range" type="range" min="10" max={MAX_COMPANIES} step="10"
+          <div className="lp-calc-sub">Minimum 20 · Maximum {MAX_COMPANIES.toLocaleString()} verified companies</div>
+          <div className="lp-range-labels"><span>20</span><span>{MAX_COMPANIES.toLocaleString()}</span></div>
+          <input className="rh-range" type="range" min="20" max={MAX_COMPANIES} step="1"
             value={count} onChange={e => setCount(Number(e.target.value))} />
           <div className="lp-input-row">
             <span className="lp-input-lbl">Companies:</span>
-            <input className="rh-num-input" type="number" min="10" max={MAX_COMPANIES} value={count} onChange={handleNum} />
+            <input className="rh-num-input" type="number" min="20" max={MAX_COMPANIES} value={count} onChange={handleNum} />
           </div>
           <div className="lp-niche-lbl">Filter by Industry</div>
           <div className="lp-niche-tags">
@@ -309,7 +334,7 @@ function Footer() {
     <footer className="lp-footer">
       <div className="lp-footer-inner">
         <div>
-          <div className="lp-f-logo">Swift<span>Appply</span></div>
+          <div className="lp-f-logo">Swifty<span>Apply</span></div>
           <div className="lp-f-desc">The fastest way for African tech talent to get noticed. Blast your CV to {MAX_COMPANIES.toLocaleString()} verified companies across Africa and beyond.</div>
         </div>
         <div className="lp-f-col"><div className="lp-f-col-title">Product</div>
@@ -325,7 +350,7 @@ function Footer() {
         </div>
       </div>
       <div className="lp-footer-bottom">
-        <span>© 2025 ReachHireJobs. All rights reserved.</span>
+        <span>© 2025 SwiftyApply. All rights reserved.</span>
         <span>Made with ❤️ for African Tech Talent</span>
       </div>
     </footer>

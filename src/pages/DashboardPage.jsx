@@ -7,19 +7,21 @@ import { calcPrice, fmtNaira } from '../utils/pricing'
 import { ordersAPI, profileAPI, paymentAPI } from '../utils/api'
 import Emailicon from './images/spent.png'
 import Blasticon from './images/blastmade.png'
+import Usericon from './images/usericon.png'
 import Moneyicon from './images/money.png'
 import Dateicon from './images/date.png'
 import Refreshicon from './images/reload.png'
 import Dashboardicon from './images/dashboard.png'
 import Responseicon from './images/response.png'
 import Editicon from './images/editicon.png'
+import Linkdlnicon from './images/linkdln.svg'
 import SettingsPage from './SettingsPage' 
 import './DashboardPage.css'
 
 const NAV_ITEMS = [
   { icon: <img src={Dashboardicon} alt="dashboard" width={18} height={18} className='mt-12'/>, label: 'Dashboard'  },
-  // { icon: '🚀', label: 'New Blast' },
-  // { icon: '📋', label: 'My Orders' },
+  { icon: <img src={Usericon} alt="dashboard" width={18} height={18} className='mt-12'/>, label: 'CV Builder',       soon: true },
+  { icon: <img src={Linkdlnicon} alt="dashboard" width={24} height={24} className='mt-12'/>, label: 'LinkedIn Blaster', soon: true },
   { icon: '⚙️', label: 'Settings' },
 ]
 const ROLES = [
@@ -72,7 +74,7 @@ export default function DashboardPage({ user, onLogout }) {
   const [role,           setRole]           = useState('')
   const [location,       setLocation]       = useState('')
   const [activeNiches,   setActiveNiches]   = useState(['🏦 Fintech'])
-  const [count,          setCount]          = useState(100)
+  const [count,          setCount]          = useState(20)
   const [submitting,     setSubmitting]     = useState(false)
   const [companyCount,   setCompanyCount]   = useState(1223)
   const [pendingRef,     setPendingRef]     = useState(null)
@@ -85,12 +87,10 @@ export default function DashboardPage({ user, onLogout }) {
 
   useEffect(() => {
     loadAll()
-    // Restore any pending reference from previous session
     const saved = localStorage.getItem('rh_pending_ref')
     if (saved) setPendingRef(saved)
   }, [])
 
-  // Auto-refresh orders + stats every 5 seconds
   useEffect(() => {
     const interval = setInterval(async () => {
       try {
@@ -106,14 +106,12 @@ export default function DashboardPage({ user, onLogout }) {
     return () => clearInterval(interval)
   }, [])
 
-  // Auto-retry any pending verify on page load or tab focus
   useEffect(() => {
     async function retryPendingVerify() {
       const pending = localStorage.getItem('pending_verify')
       if (!pending) return
       try {
         const { reference, orderId } = JSON.parse(pending)
-        console.log('Retrying pending verify:', reference, orderId)
         await paymentAPI.verify(reference, orderId)
         localStorage.removeItem('pending_verify')
         showToast('Payment verified! Blast starting 🚀', 'success')
@@ -174,8 +172,8 @@ export default function DashboardPage({ user, onLogout }) {
   function handleNumInput(e) {
     let v = Number(e.target.value)
     if (isNaN(v)) return
-    if (v < 10) { showToast('Minimum is 10 companies', 'error'); v = 10 }
-    if (v > 1223) { showToast(`Maximum is ${companyCount.toLocaleString()} companies (all we have)`, 'info'); v = companyCount }
+    if (v < 20) { showToast('Minimum is 20 companies', 'error'); v = 20 }
+    if (v > companyCount) { showToast(`Maximum is ${companyCount.toLocaleString()} companies (all we have)`, 'info'); v = companyCount }
     setCount(Math.min(v, companyCount))
   }
   function toggleNiche(n) {
@@ -184,11 +182,10 @@ export default function DashboardPage({ user, onLogout }) {
   function handleCvUpload(e) { const f = e.target.files[0]; if (f) { setCvFile(f); showToast('CV uploaded! 📄', 'success') } }
   function handleClUpload(e) { const f = e.target.files[0]; if (f) { setClFile(f); showToast('Cover letter uploaded! ✉️', 'success') } }
 
-  const effectiveCv    = cvFile ? cvFile.name : profile?.cvOriginalName || null
-  const effectiveCl    = clFile ? clFile.name : profile?.clOriginalName || null
+  const effectiveCv     = cvFile ? cvFile.name : profile?.cvOriginalName || null
+  const effectiveCl     = clFile ? clFile.name : profile?.clOriginalName || null
   const profileComplete = profile?.profileComplete
 
-  // ── Start polling orders while blast is running ──────────────
   function startPolling() {
     const poll = setInterval(async () => {
       try {
@@ -201,7 +198,6 @@ export default function DashboardPage({ user, onLogout }) {
     setTimeout(() => clearInterval(poll), 600000)
   }
 
-  // ── Confirm blast after payment ─────────────────────────────
   async function handleConfirmBlast() {
     const ref = pendingRef || localStorage.getItem('rh_pending_ref')
     if (!ref) { showToast('No pending payment found', 'error'); return }
@@ -209,7 +205,6 @@ export default function DashboardPage({ user, onLogout }) {
       setSubmitting(true)
       showToast('Verifying payment...', 'info')
       const result = await paymentAPI.verifyByReference(ref)
-      console.log('Blast confirmed:', result)
       setPendingRef(null)
       localStorage.removeItem('rh_pending_ref')
       showToast('🎉 Your CV is being blasted now!', 'success')
@@ -217,20 +212,16 @@ export default function DashboardPage({ user, onLogout }) {
       await fetchStats()
       startPolling()
     } catch (err) {
-      console.error('Confirm blast error:', err)
       showToast(err.message || 'Verification failed', 'error')
     } finally {
       setSubmitting(false)
     }
   }
 
-  // ── Open Paystack popup ──────────────────────────────────────
   function openPaystack({ email, amount, orderId, publicKey }) {
     const oid = String(orderId)
     const ref = `rh_${oid}_${Date.now()}`
-    console.log('Opening Paystack — orderId:', oid, 'ref:', ref)
 
-    // Save ref immediately so we can verify even if callback fails
     localStorage.setItem('rh_pending_ref', ref)
     localStorage.setItem('rh_pending_oid', oid)
     setPendingRef(ref)
@@ -243,7 +234,6 @@ export default function DashboardPage({ user, onLogout }) {
       ref,
       metadata: { orderId: oid },
       onSuccess: (transaction) => {
-        console.log('onSuccess fired:', transaction)
         verifyPayment(transaction.reference || ref)
       },
       onCancel: () => {
@@ -253,8 +243,6 @@ export default function DashboardPage({ user, onLogout }) {
     })
     handler.openIframe()
 
-    // Poll Paystack every 3s to check if payment went through
-    // This is a fallback in case onSuccess doesn't fire
     let pollCount = 0
     const pollPayment = setInterval(async () => {
       pollCount++
@@ -262,7 +250,6 @@ export default function DashboardPage({ user, onLogout }) {
         const result = await paymentAPI.verifyByReference(ref)
         if (result.message === 'Payment verified!') {
           clearInterval(pollPayment)
-          console.log('Poll verify success!')
           setPendingRef(null)
           localStorage.removeItem('rh_pending_ref')
           localStorage.removeItem('rh_pending_oid')
@@ -271,18 +258,14 @@ export default function DashboardPage({ user, onLogout }) {
           fetchStats()
           startPolling()
         }
-      } catch {
-        // Not verified yet, keep polling
-      }
-      if (pollCount >= 40) clearInterval(pollPayment) // stop after 2 mins
+      } catch {}
+      if (pollCount >= 40) clearInterval(pollPayment)
     }, 3000)
   }
 
   async function verifyPayment(ref) {
     try {
-      console.log('Verifying:', ref)
       const result = await paymentAPI.verifyByReference(ref)
-      console.log('Verified:', result)
       setPendingRef(null)
       localStorage.removeItem('rh_pending_ref')
       localStorage.removeItem('rh_pending_oid')
@@ -295,14 +278,13 @@ export default function DashboardPage({ user, onLogout }) {
     }
   }
 
-  // ── Main payment handler ─────────────────────────────────────
   async function handlePayment() {
     if (!profile?.intro) {
       showToast('Please complete your profile in Settings first', 'error')
       setActiveNav('Settings'); return
     }
-    if (!role)        { showToast('Please select your role', 'error');                return }
-    if (!location)    { showToast('Please select your preferred location', 'error');  return }
+    if (!role)        { showToast('Please select your role', 'error');                 return }
+    if (!location)    { showToast('Please select your preferred location', 'error');   return }
     if (!effectiveCv) { showToast('Please upload your CV in Settings first', 'error'); setActiveNav('Settings'); return }
 
     try {
@@ -321,16 +303,12 @@ export default function DashboardPage({ user, onLogout }) {
       formData.append('industries',     JSON.stringify(activeNiches))
 
       const { order } = await ordersAPI.create(formData)
-      console.log('Order created:', order)
       showToast('Order created! Opening payment... ', 'info')
 
       const payData = await paymentAPI.initialize(String(order._id))
-      console.log('Paystack init data:', payData)
-
       openPaystack(payData)
 
     } catch (err) {
-      console.error('handlePayment error:', err)
       showToast(err.message || 'Failed to create order', 'error')
     } finally {
       setSubmitting(false)
@@ -353,41 +331,43 @@ export default function DashboardPage({ user, onLogout }) {
       {sidebarOpen && <div className="dp-overlay" onClick={() => setSidebarOpen(false)} />}
 
       <aside className={`dp-sidebar ${sidebarOpen ? 'dp-sidebar-open' : ''}`}>
-  <div className="dp-sb-logo">Reach<span>HireJobs</span></div>
-  <nav className="dp-sb-nav">
-    {NAV_ITEMS.filter(i => i.label !== 'Settings').map(item => (
-      <div key={item.label}
-        className={`dp-sn-item ${activeNav === item.label ? 'dp-sn-active' : ''}`}
-        onClick={() => { setActiveNav(item.label); setSidebarOpen(false) }}>
-        <span className="dp-sn-icon">{item.icon}</span>{item.label}
-      </div>
-    ))}
-    <div
-      className={`dp-sn-item ${activeNav === 'Settings' ? 'dp-sn-active' : ''}`}
-      style={{ marginTop: 'auto' }}
-      onClick={() => { setActiveNav('Settings'); setSidebarOpen(false) }}>
-      <span className="dp-sn-icon">⚙️</span> Settings
+        <div className="dp-sb-logo">Swiftly<span>Apply</span></div>
+       <nav className="dp-sb-nav">
+  {NAV_ITEMS.filter(i => i.label !== 'Settings').map(item => (
+    <div key={item.label}
+      className={`dp-sn-item ${activeNav === item.label ? 'dp-sn-active' : ''} ${item.soon ? 'dp-sn-disabled' : ''}`}
+      onClick={() => { if (!item.soon) { setActiveNav(item.label); setSidebarOpen(false) } }}>
+      <span className="dp-sn-icon">{item.icon}</span>
+      {item.label}
+      {item.soon && <span className="dp-sn-soon">Coming Soon</span>}
     </div>
-  </nav>
-  <div className="dp-sb-user">
-    <div className="dp-sb-avatar">{cap.charAt(0)}</div>
-    <div>
-      <div className="dp-sb-name">{user?.name || 'User'}</div>
-      <div className="dp-sb-email">{user?.email || ''}</div>
-    </div>
+  ))}
+  <div
+    className={`dp-sn-item ${activeNav === 'Settings' ? 'dp-sn-active' : ''}`}
+    style={{ marginTop: 'auto' }}
+    onClick={() => { setActiveNav('Settings'); setSidebarOpen(false) }}>
+    <span className="dp-sn-icon">⚙️</span> Settings
   </div>
-</aside>
+</nav>
+        <div className="dp-sb-user">
+          <div className="dp-sb-avatar">{cap.charAt(0)}</div>
+          <div>
+            <div className="dp-sb-name">{user?.name || 'User'}</div>
+            <div className="dp-sb-email">{user?.email || ''}</div>
+          </div>
+        </div>
+      </aside>
 
       <main className="dp-main">
 
-       {activeNav === 'Settings' && (
-  <SettingsPage user={user} onLogout={onLogout} onProfileUpdate={(updated) => {
-    setProfile(updated)
-    if (updated.role)               setRole(updated.role)
-    if (updated.location)           setLocation(updated.location)
-    if (updated.industries?.length) setActiveNiches(updated.industries)
-  }} />
-)}
+        {activeNav === 'Settings' && (
+          <SettingsPage user={user} onLogout={onLogout} onProfileUpdate={(updated) => {
+            setProfile(updated)
+            if (updated.role)               setRole(updated.role)
+            if (updated.location)           setLocation(updated.location)
+            if (updated.industries?.length) setActiveNiches(updated.industries)
+          }} />
+        )}
 
         {activeNav !== 'Settings' && (
           <>
@@ -396,7 +376,6 @@ export default function DashboardPage({ user, onLogout }) {
                 <div className="dp-title">Welcome back, {cap} 👋</div>
                 <div className="dp-sub">Ready to blast your CV to more companies?</div>
               </div>
-              {/* <button className="btn-primary" onClick={() => setActiveNav('New Blast')}>+ New Blast</button> */}
             </div>
 
             {showBanner && (
@@ -416,7 +395,7 @@ export default function DashboardPage({ user, onLogout }) {
                 { icon:<img src={Emailicon} alt="email" width={50} height={50} />, val: loadingStats ? '...' : (stats?.totalCVsSent  || 0).toLocaleString(), lbl:'CVs Sent' },
                 { icon:<img src={Dateicon} alt="blast" width={40} height={40} />, val: loadingStats ? '...' : (stats?.totalBlasts   || 0).toLocaleString(), lbl:'Blasts Made' },
                 { icon:<img src={Responseicon} alt="response" width={45} height={45} />, val: '—', lbl:'Responses' },
-                { icon:<img src={Moneyicon} alt="spent" width={45} height={45} />, val: loadingStats ? '...' : fmtNaira(stats?.totalSpent || 0),             lbl:'Total Spent' },
+                { icon:<img src={Moneyicon} alt="spent" width={45} height={45} />, val: loadingStats ? '...' : fmtNaira(stats?.totalSpent || 0), lbl:'Total Spent' },
               ].map(s => (
                 <div key={s.lbl} className="dp-stat-card">
                   <div className="dp-sc-icon">{s.icon}</div>
@@ -472,20 +451,20 @@ export default function DashboardPage({ user, onLogout }) {
                 )}
                 <input ref={clRef} type="file" accept=".pdf,.doc,.docx" style={{ display:'none' }} onChange={handleClUpload} />
 
-               <div className="sp-select-wrap">
-  <select className="rh-select dp-select-gap" value={role} onChange={e => setRole(e.target.value)}>
-    <option value="">🎯 Select your role...</option>
-    {ROLES.map(r => <option key={r}>{r}</option>)}
-  </select>
-  <span className="sp-select-arrow">▾</span>
-</div>
                 <div className="sp-select-wrap">
-  <select className="rh-select" value={location} onChange={e => setLocation(e.target.value)}>
-    <option value="">🌍 Preferred location...</option>
-    {LOCATIONS.map(l => <option key={l}>{l}</option>)}
-  </select>
-  <span className="sp-select-arrow">▾</span>
-</div>
+                  <select className="rh-select dp-select-gap" value={role} onChange={e => setRole(e.target.value)}>
+                    <option value="">🎯 Select your role...</option>
+                    {ROLES.map(r => <option key={r}>{r}</option>)}
+                  </select>
+                  <span className="sp-select-arrow">▾</span>
+                </div>
+                <div className="sp-select-wrap">
+                  <select className="rh-select" value={location} onChange={e => setLocation(e.target.value)}>
+                    <option value="">🌍 Preferred location...</option>
+                    {LOCATIONS.map(l => <option key={l}>{l}</option>)}
+                  </select>
+                  <span className="sp-select-arrow">▾</span>
+                </div>
 
                 <div className="dp-niche-lbl">Industries</div>
                 <div className="dp-niche-tags">
@@ -498,19 +477,19 @@ export default function DashboardPage({ user, onLogout }) {
                 <div className="dp-slider-wrap">
                   <div className="dp-slider-top">
                     <div>
-                      <div className="dp-slider-lbl">Companies to reach <span style={{fontSize:11,color:"var(--gray-400)"}}>/ 1,223 available</span></div>
+                      <div className="dp-slider-lbl">Companies to reach <span style={{fontSize:11,color:"var(--gray-400)"}}>/ {companyCount.toLocaleString()} available</span></div>
                       <div className="dp-slider-count">{count.toLocaleString()}</div>
                     </div>
                     <div style={{ textAlign:'right' }}>
-                      <div className="dp-slider-lbl">Total</div>
+                      <div className="dp-slider-lbl">Total <span style={{fontSize:11,color:"var(--gray-400)"}}>@ ₦250/company</span></div>
                       <div className="dp-slider-price">{fmtNaira(total)}</div>
                     </div>
                   </div>
-                  <input className="rh-range" type="range" min="10" max={companyCount} step="10"
+                  <input className="rh-range" type="range" min="20" max={companyCount} step="1"
                     value={count} onChange={handleSlider} style={{ width:'100%', margin:'12px 0' }} />
                   <div className="dp-num-row">
                     <span className="dp-num-lbl">Or type a number:</span>
-                    <input className="rh-num-input" type="number" min="10" max={companyCount} value={count} onChange={handleNumInput} />
+                    <input className="rh-num-input" type="number" min="20" max={companyCount} value={count} onChange={handleNumInput} />
                   </div>
                 </div>
 
@@ -523,16 +502,16 @@ export default function DashboardPage({ user, onLogout }) {
                 <div className="dp-card">
                   <div className="dp-card-title-row">
                     <div className="dp-card-title"> Latest Blast Progress</div>
-                    <button  className="dp-refresh-btn"
-  onAnimationEnd={(e) => e.currentTarget.classList.remove('spinning')}
-  onClick={(e) => {
-    const btn = e.currentTarget
-    btn.classList.remove('spinning')
-    requestAnimationFrame(() => requestAnimationFrame(() => btn.classList.add('spinning')))
-    fetchOrders()
-  }}
-  title="Refresh">
-                         <img src={Refreshicon} alt="Refresh" width={20} height={20} />
+                    <button className="dp-refresh-btn"
+                      onAnimationEnd={(e) => e.currentTarget.classList.remove('spinning')}
+                      onClick={(e) => {
+                        const btn = e.currentTarget
+                        btn.classList.remove('spinning')
+                        requestAnimationFrame(() => requestAnimationFrame(() => btn.classList.add('spinning')))
+                        fetchOrders()
+                      }}
+                      title="Refresh">
+                      <img src={Refreshicon} alt="Refresh" width={20} height={20} />
                     </button>
                   </div>
                   {!latestOrder ? (
@@ -566,15 +545,15 @@ export default function DashboardPage({ user, onLogout }) {
                 <div className="dp-card">
                   <div className="dp-card-title-row">
                     <div className="dp-card-title"> Recent Orders</div>
-                    <button  className="dp-refresh-btn"
-              onAnimationEnd={(e) => e.currentTarget.classList.remove('spinning')}
-              onClick={(e) => {
-                const btn = e.currentTarget
-                btn.classList.remove('spinning')
-                requestAnimationFrame(() => requestAnimationFrame(() => btn.classList.add('spinning')))
-                fetchOrders()
-              }}
-              title="Refresh">
+                    <button className="dp-refresh-btn"
+                      onAnimationEnd={(e) => e.currentTarget.classList.remove('spinning')}
+                      onClick={(e) => {
+                        const btn = e.currentTarget
+                        btn.classList.remove('spinning')
+                        requestAnimationFrame(() => requestAnimationFrame(() => btn.classList.add('spinning')))
+                        fetchOrders()
+                      }}
+                      title="Refresh">
                       <img src={Refreshicon} alt="Refresh" width={20} height={20} />
                     </button>
                   </div>

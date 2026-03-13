@@ -200,3 +200,14 @@
   opacity: 1;
   transform: translateX(0);
 }
+
+.lp-feat-animate {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.lp-feat-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
