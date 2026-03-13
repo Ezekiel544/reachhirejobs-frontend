@@ -79,7 +79,7 @@ function Hero({ onGetStarted }) {
           </p>
           <div className="lp-hero-btns">
             <button className="btn-primary" onClick={() => onGetStarted('signup')}>Start Now →</button>
-            <button className="btn-outline" onClick={() => scrollTo('lp-how')}>▶ See How It Works</button>
+            <button className="btn-outline" onClick={() => scrollTo('lp-how')}>See How It Works</button>
           </div>
           <div className="lp-stats">
             <div><div className="lp-stat-num">{MAX_COMPANIES.toLocaleString()}</div><div className="lp-stat-lbl">Verified Companies</div></div>
@@ -309,7 +309,7 @@ function Footer() {
     <footer className="lp-footer">
       <div className="lp-footer-inner">
         <div>
-          <div className="lp-f-logo">Reach<span>HireJobs</span></div>
+          <div className="lp-f-logo">Swift<span>Appply</span></div>
           <div className="lp-f-desc">The fastest way for African tech talent to get noticed. Blast your CV to {MAX_COMPANIES.toLocaleString()} verified companies across Africa and beyond.</div>
         </div>
         <div className="lp-f-col"><div className="lp-f-col-title">Product</div>
