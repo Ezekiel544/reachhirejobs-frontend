@@ -1,5 +1,5 @@
 /*
- * DashboardPage.jsx — full Paystack + email blast integrationz
+ * DashboardPage.jsx — full Paystack + email blast integration
  */
 import { useState, useRef, useEffect } from 'react'
 import { useToast } from '../context/ToastContext'
