@@ -178,3 +178,8 @@
   color: var(--gray-400);
   pointer-events: none;
 }
+@media (max-width: 1024px) {
+  .setting-cards {
+    grid-template-columns: 1fr;
+  }
+}

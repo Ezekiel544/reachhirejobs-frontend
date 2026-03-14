@@ -121,7 +121,7 @@ function Ticker() {
         {doubled.map((c, i) => (
           <span key={i} className="lp-ticker-item">
             <img
-              src={`https://logo.clearbit.com/${c.domain}`}
+              src={`https://www.google.com/s2/favicons?domain=${c.domain}&sz=32`}
               alt={c.name}
               width={18}
               height={18}
@@ -146,16 +146,31 @@ const STEPS = [
 
 function HowItWorks() {
   const [visible, setVisible] = useState([])
+  const [scrollingUp, setScrollingUp] = useState(false)
   const sectionRef = useRef(null)
+  const lastScrollY = useRef(window.scrollY)
+
+  useEffect(() => {
+    function handleScroll() {
+      const currentY = window.scrollY
+      setScrollingUp(currentY < lastScrollY.current)
+      lastScrollY.current = currentY
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setVisible([])
-          STEPS.forEach((_, i) => {
+          const order = scrollingUp
+            ? [...STEPS.keys()].reverse()
+            : [...STEPS.keys()]
+          order.forEach((idx, i) => {
             setTimeout(() => {
-              setVisible(prev => [...prev, i])
+              setVisible(prev => [...prev, idx])
             }, i * 300)
           })
         } else {
@@ -166,7 +181,7 @@ function HowItWorks() {
     )
     if (sectionRef.current) observer.observe(sectionRef.current)
     return () => observer.disconnect()
-  }, [])
+  }, [scrollingUp])
 
   return (
     <section id="lp-how" className="lp-section lp-gray" ref={sectionRef}>
@@ -201,16 +216,31 @@ const FEATS = [
 
 function Features() {
   const [visible, setVisible] = useState([])
+  const [scrollingUp, setScrollingUp] = useState(false)
   const sectionRef = useRef(null)
+  const lastScrollY = useRef(window.scrollY)
+
+  useEffect(() => {
+    function handleScroll() {
+      const currentY = window.scrollY
+      setScrollingUp(currentY < lastScrollY.current)
+      lastScrollY.current = currentY
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           setVisible([])
-          FEATS.forEach((_, i) => {
+          const order = scrollingUp
+            ? [...FEATS.keys()].reverse()
+            : [...FEATS.keys()]
+          order.forEach((idx, i) => {
             setTimeout(() => {
-              setVisible(prev => [...prev, i])
+              setVisible(prev => [...prev, idx])
             }, i * 250)
           })
         } else {
@@ -221,7 +251,7 @@ function Features() {
     )
     if (sectionRef.current) observer.observe(sectionRef.current)
     return () => observer.disconnect()
-  }, [])
+  }, [scrollingUp])
 
   return (
     <section id="lp-features" className="lp-section lp-white" ref={sectionRef}>

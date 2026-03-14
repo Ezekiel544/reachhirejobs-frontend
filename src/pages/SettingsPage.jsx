@@ -135,7 +135,7 @@ export default function SettingsPage({ user, onProfileUpdate, onLogout }) {
   </div>
 </div>
 
-      <div className="sp-grid">
+      <div className="sp-grid setting-cards">
 
         {/* Personal Info */}
         <div className="sp-card">
@@ -228,7 +228,7 @@ export default function SettingsPage({ user, onProfileUpdate, onLogout }) {
 
         {/* Documents */}
         <div className="sp-card sp-full">
-          <div className="sp-card-title">📄 Your Documents</div>
+          <div className="sp-card-title">Your Documents</div>
           <div className="sp-docs-grid">
             <div>
               <label className="sp-label">CV / Resume *</label>
@@ -261,7 +261,7 @@ export default function SettingsPage({ user, onProfileUpdate, onLogout }) {
                 </div>
               ) : (
                 <div className="upload-zone" onClick={() => clRef.current.click()}>
-                  <div style={{ fontSize:32, marginBottom:8 }}>✉️</div>
+                  <div style={{ fontSize:32, marginBottom:8 }}></div>
                   <div className="sp-uz-text">{uploadingCl ? 'Uploading...' : 'Upload Cover Letter'}</div>
                   <div className="sp-uz-sub">PDF, DOC, DOCX · Max 5MB</div>
                 </div>

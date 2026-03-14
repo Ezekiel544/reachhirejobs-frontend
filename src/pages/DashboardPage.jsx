@@ -1,5 +1,5 @@
 /*
- * DashboardPage.jsx — full Paystack + email blast integration heres
+ * DashboardPage.jsx — full Paystack + email blast integration
  */
 import { useState, useRef, useEffect } from 'react'
 import { useToast } from '../context/ToastContext'
@@ -12,16 +12,17 @@ import Moneyicon from './images/money.png'
 import Dateicon from './images/date.png'
 import Refreshicon from './images/reload.png'
 import Dashboardicon from './images/dashboard.png'
-import Responseicon from './images/response.png'
+import Companyicon from './images/company.svg'
 import Editicon from './images/editicon.png'
 import Linkdlnicon from './images/linkdln.svg'
-import SettingsPage from './SettingsPage' 
+import Outgoingicon from './images/outgoing.svg'
+import SettingsPage from './SettingsPage'
 import './DashboardPage.css'
 
 const NAV_ITEMS = [
-  { icon: <img src={Dashboardicon} alt="dashboard" width={18} height={18} className='mt-12'/>, label: 'Dashboard'  },
-  { icon: <img src={Usericon} alt="dashboard" width={18} height={18} className='mt-12'/>, label: 'CV Builder',       soon: true },
-  { icon: <img src={Linkdlnicon} alt="dashboard" width={24} height={24} className='mt-12'/>, label: 'LinkedIn Blaster', soon: true },
+  { icon: <img src={Dashboardicon} alt="dashboard" width={18} height={18} className='mt-12'/>, label: 'Dashboard' },
+  { icon: <img src={Usericon} alt="cv builder" width={18} height={18} className='mt-12'/>, label: 'CV Builder', soon: true },
+  { icon: <img src={Linkdlnicon} alt="linkedin" width={24} height={24} className='mt-12'/>, label: 'LI Blaster', soon: true },
   { icon: '⚙️', label: 'Settings' },
 ]
 const ROLES = [
@@ -39,7 +40,7 @@ function StatusBadge({ status }) {
   const map = {
     pending: { cls:'badge-pending', txt:'Pending Payment' },
     paid:    { cls:'badge-sending', txt:'Paid ✓' },
-    sending: { cls:'badge-sending', txt:'Sending... 🚀' },
+    sending: { cls:'badge-sending', txt: <span style={{display:'flex',alignItems:'center',gap:4}}>Sending... </span> },
     sent:    { cls:'badge-sent',    txt:'Sent ✓' },
     failed:  { cls:'badge-pending', txt:'Failed' },
   }
@@ -78,6 +79,8 @@ export default function DashboardPage({ user, onLogout }) {
   const [submitting,     setSubmitting]     = useState(false)
   const [companyCount,   setCompanyCount]   = useState(1223)
   const [pendingRef,     setPendingRef]     = useState(null)
+  const [resumeOrder,    setResumeOrder]    = useState(null)
+  const ordersScrollRef = useRef()
   const cvRef = useRef()
   const clRef = useRef()
 
@@ -168,6 +171,10 @@ export default function DashboardPage({ user, onLogout }) {
     finally  { setLoadingOrders(false) }
   }
 
+  function scrollOrdersToTop() {
+    ordersScrollRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
   function handleSlider(e) { setCount(Number(e.target.value)) }
   function handleNumInput(e) {
     let v = Number(e.target.value)
@@ -187,6 +194,7 @@ export default function DashboardPage({ user, onLogout }) {
   const profileComplete = profile?.profileComplete
 
   function startPolling() {
+    scrollOrdersToTop()
     const poll = setInterval(async () => {
       try {
         const updated = await ordersAPI.getAll()
@@ -219,6 +227,7 @@ export default function DashboardPage({ user, onLogout }) {
   }
 
   function openPaystack({ email, amount, orderId, publicKey }) {
+    scrollOrdersToTop()
     const oid = String(orderId)
     const ref = `rh_${oid}_${Date.now()}`
 
@@ -304,6 +313,7 @@ export default function DashboardPage({ user, onLogout }) {
 
       const { order } = await ordersAPI.create(formData)
       showToast('Order created! Opening payment... ', 'info')
+      scrollOrdersToTop()
 
       const payData = await paymentAPI.initialize(String(order._id))
       openPaystack(payData)
@@ -321,7 +331,7 @@ export default function DashboardPage({ user, onLogout }) {
   return (
     <div className="dp-layout">
       <div className="dp-topbar">
-        <span className="dp-topbar-logo">Reach<span>HireJobs</span></span>
+        <span className="dp-topbar-logo">Swifty<span>Apply</span></span>
         <button className={`dp-hamburger ${sidebarOpen ? 'dp-ham-open' : ''}`}
           onClick={() => setSidebarOpen(o => !o)} aria-label="Open menu">
           <span /><span /><span />
@@ -332,23 +342,23 @@ export default function DashboardPage({ user, onLogout }) {
 
       <aside className={`dp-sidebar ${sidebarOpen ? 'dp-sidebar-open' : ''}`}>
         <div className="dp-sb-logo">Swiftly<span>Apply</span></div>
-       <nav className="dp-sb-nav">
-  {NAV_ITEMS.filter(i => i.label !== 'Settings').map(item => (
-    <div key={item.label}
-      className={`dp-sn-item ${activeNav === item.label ? 'dp-sn-active' : ''} ${item.soon ? 'dp-sn-disabled' : ''}`}
-      onClick={() => { if (!item.soon) { setActiveNav(item.label); setSidebarOpen(false) } }}>
-      <span className="dp-sn-icon">{item.icon}</span>
-      {item.label}
-      {item.soon && <span className="dp-sn-soon">Coming Soon</span>}
-    </div>
-  ))}
-  <div
-    className={`dp-sn-item ${activeNav === 'Settings' ? 'dp-sn-active' : ''}`}
-    style={{ marginTop: 'auto' }}
-    onClick={() => { setActiveNav('Settings'); setSidebarOpen(false) }}>
-    <span className="dp-sn-icon">⚙️</span> Settings
-  </div>
-</nav>
+        <nav className="dp-sb-nav">
+          {NAV_ITEMS.filter(i => i.label !== 'Settings').map(item => (
+            <div key={item.label}
+              className={`dp-sn-item ${activeNav === item.label ? 'dp-sn-active' : ''} ${item.soon ? 'dp-sn-disabled' : ''}`}
+              onClick={() => { if (!item.soon) { setActiveNav(item.label); setSidebarOpen(false) } }}>
+              <span className="dp-sn-icon">{item.icon}</span>
+              {item.label}
+              {item.soon && <span className="dp-sn-soon">Coming Soon</span>}
+            </div>
+          ))}
+          <div
+            className={`dp-sn-item ${activeNav === 'Settings' ? 'dp-sn-active' : ''}`}
+            style={{ marginTop: 'auto' }}
+            onClick={() => { setActiveNav('Settings'); setSidebarOpen(false) }}>
+            <span className="dp-sn-icon">⚙️</span> Settings
+          </div>
+        </nav>
         <div className="dp-sb-user">
           <div className="dp-sb-avatar">{cap.charAt(0)}</div>
           <div>
@@ -393,8 +403,8 @@ export default function DashboardPage({ user, onLogout }) {
             <div className="dp-stats-row">
               {[
                 { icon:<img src={Emailicon} alt="email" width={50} height={50} />, val: loadingStats ? '...' : (stats?.totalCVsSent  || 0).toLocaleString(), lbl:'CVs Sent' },
-                { icon:<img src={Dateicon} alt="blast" width={40} height={40} />, val: loadingStats ? '...' : (stats?.totalBlasts   || 0).toLocaleString(), lbl:'Blasts Made' },
-                { icon:<img src={Responseicon} alt="response" width={45} height={45} />, val: '—', lbl:'Responses' },
+                { icon:<img src={Dateicon} alt="blast" width={35} height={35} />, val: loadingStats ? '...' : (stats?.totalBlasts   || 0).toLocaleString(), lbl:'Blasts Made' },
+                { icon:<img src={Companyicon} alt="company" width={45} height={45} />, val: loadingStats ? '...' : (stats?.totalCVsSent || 0).toLocaleString(), lbl:'CVs Delivered' },
                 { icon:<img src={Moneyicon} alt="spent" width={45} height={45} />, val: loadingStats ? '...' : fmtNaira(stats?.totalSpent || 0), lbl:'Total Spent' },
               ].map(s => (
                 <div key={s.lbl} className="dp-stat-card">
@@ -453,14 +463,14 @@ export default function DashboardPage({ user, onLogout }) {
 
                 <div className="sp-select-wrap">
                   <select className="rh-select dp-select-gap" value={role} onChange={e => setRole(e.target.value)}>
-                    <option value="">🎯 Select your role...</option>
+                    <option value="">Select your role...</option>
                     {ROLES.map(r => <option key={r}>{r}</option>)}
                   </select>
                   <span className="sp-select-arrow">▾</span>
                 </div>
                 <div className="sp-select-wrap">
                   <select className="rh-select" value={location} onChange={e => setLocation(e.target.value)}>
-                    <option value="">🌍 Preferred location...</option>
+                    <option value="">Preferred location...</option>
                     {LOCATIONS.map(l => <option key={l}>{l}</option>)}
                   </select>
                   <span className="sp-select-arrow">▾</span>
@@ -502,17 +512,6 @@ export default function DashboardPage({ user, onLogout }) {
                 <div className="dp-card">
                   <div className="dp-card-title-row">
                     <div className="dp-card-title"> Latest Blast Progress</div>
-                    <button className="dp-refresh-btn"
-                      onAnimationEnd={(e) => e.currentTarget.classList.remove('spinning')}
-                      onClick={(e) => {
-                        const btn = e.currentTarget
-                        btn.classList.remove('spinning')
-                        requestAnimationFrame(() => requestAnimationFrame(() => btn.classList.add('spinning')))
-                        fetchOrders()
-                      }}
-                      title="Refresh">
-                      <img src={Refreshicon} alt="Refresh" width={20} height={20} />
-                    </button>
                   </div>
                   {!latestOrder ? (
                     <div className="dp-empty">No active blast yet. Create one to get started!</div>
@@ -542,40 +541,96 @@ export default function DashboardPage({ user, onLogout }) {
                   )}
                 </div>
 
-                <div className="dp-card">
-                  <div className="dp-card-title-row">
-                    <div className="dp-card-title"> Recent Orders</div>
-                    <button className="dp-refresh-btn"
-                      onAnimationEnd={(e) => e.currentTarget.classList.remove('spinning')}
-                      onClick={(e) => {
-                        const btn = e.currentTarget
-                        btn.classList.remove('spinning')
-                        requestAnimationFrame(() => requestAnimationFrame(() => btn.classList.add('spinning')))
-                        fetchOrders()
-                      }}
-                      title="Refresh">
-                      <img src={Refreshicon} alt="Refresh" width={20} height={20} />
-                    </button>
-                  </div>
-                  {loadingOrders ? (
-                    <div className="dp-empty">Loading orders...</div>
-                  ) : orders.length === 0 ? (
-                    <div className="dp-empty">No orders yet. Create your first blast!</div>
-                  ) : (
-                    orders.slice(0, 5).map(o => (
-                      <div key={o._id} className="dp-order-item">
-                        <div className="dp-o-icon">{o.status === 'sending' ? '🚀' : <img src={Emailicon} alt="email" width={30} height={30} />}</div>
-                        <div style={{ flex:1 }}>
-                          <div className="dp-o-name">{o.role} · {o.location}</div>
-                          <div className="dp-o-meta">
-                            {o.companiesCount.toLocaleString()} companies · {fmtNaira(o.amount)} · {timeAgo(o.createdAt)}
-                          </div>
-                        </div>
-                        <StatusBadge status={o.status} />
-                      </div>
-                    ))
-                  )}
+      <div className="dp-card">
+  <div className="dp-card-title-row">
+    <div className="dp-card-title"> Recent Orders</div>
+    <button className="dp-refresh-btn"
+      onAnimationEnd={(e) => e.currentTarget.classList.remove('spinning')}
+      onClick={(e) => {
+        const btn = e.currentTarget
+        btn.classList.remove('spinning')
+        requestAnimationFrame(() => requestAnimationFrame(() => btn.classList.add('spinning')))
+        fetchOrders()
+      }}
+      title="Refresh">
+      <img src={Refreshicon} alt="Refresh" width={20} height={20} />
+    </button>
+  </div>
+  {loadingOrders ? (
+    <div className="dp-empty">Loading orders...</div>
+  ) : orders.length === 0 ? (
+    <div className="dp-empty">No orders yet. Create your first blast!</div>
+  ) : (
+    <div className="dp-orders-scroll-wrap">
+      <div className="dp-orders-scroll" ref={ordersScrollRef}>
+        {[...orders]
+          .sort((a, b) => {
+            if (resumeOrder?._id === a._id) return -1
+            if (resumeOrder?._id === b._id) return 1
+            const priority = { sending: 0, paid: 1 }
+            const aPri = priority[a.status] ?? 99
+            const bPri = priority[b.status] ?? 99
+            if (aPri !== bPri) return aPri - bPri
+            return new Date(b.createdAt) - new Date(a.createdAt)
+          })
+          .map(o => (
+            <div key={o._id}
+              className={`dp-order-item ${o.status === 'pending' ? 'dp-order-pending-click' : ''}`}
+              onClick={() => {
+                if (o.status === 'pending') {
+                  scrollOrdersToTop()
+                  setResumeOrder(o)
+                }
+              }}>
+              <div className="dp-o-icon">
+                {o.status === 'sending'
+                  ? <img src={Outgoingicon} alt="outgoing" width={30} height={30} />
+                  : <img src={Emailicon} alt="email" width={30} height={30} />}
+              </div>
+              <div style={{ flex:1 }}>
+                <div className="dp-o-name">{o.role} · {o.location}</div>
+                <div className="dp-o-meta">
+                  {o.companiesCount.toLocaleString()} companies · {fmtNaira(o.amount)} · {timeAgo(o.createdAt)}
                 </div>
+              </div>
+              <StatusBadge status={o.status} />
+            </div>
+          ))}
+      </div>
+      {orders.length > 3 && (
+        <div className="dp-scroll-hint">
+          <span>↓</span>
+        </div>
+      )}
+    </div>
+  )}
+    </div>
+
+                {/* Resume Payment Modal */}
+                {resumeOrder && (
+                  <div className="dp-modal-overlay" onClick={() => setResumeOrder(null)}>
+                    <div className="dp-modal" onClick={e => e.stopPropagation()}>
+                      <div className="dp-modal-title">⚠️ Incomplete Payment</div>
+                      <div className="dp-modal-body">
+                        You have a pending payment for <strong>{resumeOrder.role}</strong> — <strong>{fmtNaira(resumeOrder.amount)}</strong> for {resumeOrder.companiesCount.toLocaleString()} companies. Would you like to complete it?
+                      </div>
+                      <div className="dp-modal-btns">
+                        <button className="dp-modal-cancel" onClick={() => setResumeOrder(null)}>Cancel</button>
+                        <button className="dp-modal-confirm" onClick={async () => {
+                          setResumeOrder(null)
+                          scrollOrdersToTop()
+                          try {
+                            const payData = await paymentAPI.initialize(String(resumeOrder._id))
+                            openPaystack(payData)
+                          } catch (err) {
+                            showToast(err.message || 'Failed to resume payment', 'error')
+                          }
+                        }}>Yes, Complete Payment </button>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
               </div>
             </div>
           </>

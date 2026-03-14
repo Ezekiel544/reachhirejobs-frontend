@@ -246,3 +246,117 @@
   border-radius: 20px;
   white-space: nowrap;
 }
+.dp-show-more-btn {
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px;
+  background: none;
+  border: 1.5px dashed var(--gray-200);
+  border-radius: 10px;
+  color: var(--blue);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.dp-show-more-btn:hover { background: var(--gray-50); }
+
+.dp-order-pending-click { cursor: pointer; }
+.dp-order-pending-click:hover { background: #fffbeb; border-radius: 10px; }
+
+.dp-modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000;
+}
+.dp-modal {
+  background: white; border-radius: 16px;
+  padding: 28px; max-width: 420px; width: 90%;
+}
+.dp-modal-title { font-size: 18px; font-weight: 800; margin-bottom: 12px; }
+.dp-modal-body  { font-size: 14px; color: var(--gray-500); line-height: 1.6; margin-bottom: 24px; }
+.dp-modal-btns  { display: flex; gap: 12px; justify-content: flex-end; }
+.dp-modal-cancel  { padding: 10px 20px; border-radius: 8px; border: 1px solid var(--gray-200); background: none; cursor: pointer; font-weight: 600; }
+.dp-modal-confirm { padding: 10px 20px; border-radius: 8px; background: var(--blue); color: white; border: none; cursor: pointer; font-weight: 600; }
+.dp-orders-scroll-wrap {
+  position: relative;
+}
+.dp-orders-scroll-wrap::before,
+.dp-orders-scroll-wrap::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  height: 32px;
+  pointer-events: none;
+  z-index: 1;
+}
+.dp-orders-scroll-wrap::before {
+  top: 0;
+  background: linear-gradient(to bottom, white, transparent);
+}
+.dp-orders-scroll-wrap::after {
+  bottom: 0;
+  background: linear-gradient(to top, white, transparent);
+}
+
+.dp-orders-scroll {
+  max-height: 320px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-right: 4px;
+}
+
+.dp-orders-scroll::-webkit-scrollbar { width: 4px; }
+.dp-orders-scroll::-webkit-scrollbar-track { background: transparent; }
+.dp-orders-scroll::-webkit-scrollbar-thumb {
+  background: var(--gray-200);
+  border-radius: 10px;
+}
+
+.dp-order-pending-click { cursor: pointer; }
+.dp-order-pending-click:hover { background: #fffbeb; border-radius: 10px; }
+
+@media (max-width: 600px) {
+  .dp-orders-scroll { max-height: 240px; }
+}
+.dp-scroll-hint {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 28px;
+  height: 28px;
+  background: var(--gray-100);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: var(--gray-800);
+  pointer-events: none;
+  animation: bounce 1.5s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50%       { transform: translateX(-50%) translateY(4px); }
+}
+.dp-right-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.dp-right-col .dp-card:last-child {
+  flex: 1;
+}
+.dp-orders-scroll {
+  max-height: 450px;
+}
+@media (max-width: 1024px) {
+  .dp-grid {
+    grid-template-columns: 1fr;
+  }
+}
