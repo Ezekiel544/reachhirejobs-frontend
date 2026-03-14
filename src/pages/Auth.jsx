@@ -11,15 +11,18 @@ const GoogleIcon = () => (
   </svg>
 )
 
+const BACKEND_URL = import.meta.env.VITE_API_URL
+  ? import.meta.env.VITE_API_URL.replace('/api', '')
+  : 'http://localhost:5001'
+
 export default function Auth({ defaultTab = 'login', onLogin, onBack }) {
   const [tab, setTab] = useState(defaultTab)
+  const [googleLoading, setGoogleLoading] = useState(false)
   const { showToast } = useToast()
 
-  // Login state
   const [loginEmail, setLoginEmail] = useState('')
   const [loginPass, setLoginPass] = useState('')
 
-  // Signup state
   const [signupName, setSignupName] = useState('')
   const [signupEmail, setSignupEmail] = useState('')
   const [signupPass, setSignupPass] = useState('')
@@ -38,8 +41,35 @@ export default function Auth({ defaultTab = 'login', onLogin, onBack }) {
   }
 
   function handleGoogle() {
-    showToast('Connecting with Google...', 'info', 1500)
-    setTimeout(() => onLogin({ name: 'Google User', email: 'user@gmail.com' }), 1500)
+    setGoogleLoading(true)
+    setTimeout(() => {
+      window.location.href = `${BACKEND_URL}/api/auth/google`
+    }, 1500)
+  }
+
+  if (googleLoading) {
+    return (
+      <div style={{
+        position: 'fixed', inset: 0,
+        background: '#fff',
+        display: 'flex', flexDirection: 'column',
+        alignItems: 'center', justifyContent: 'center',
+        zIndex: 9999, gap: 20,
+      }}>
+        <div style={{ fontSize: 28, fontWeight: 800, color: '#0f172a' }}>
+          Reach<span style={{ color: 'var(--blue)' }}>HireJobs</span>
+        </div>
+        <div style={{
+          width: 44, height: 44, border: '4px solid #e2e8f0',
+          borderTop: '4px solid var(--blue)', borderRadius: '50%',
+          animation: 'spin 0.8s linear infinite',
+        }} />
+        <div style={{ fontSize: 15, color: '#64748b', fontWeight: 500 }}>
+          Redirecting to Google...
+        </div>
+        <style>{`@keyframes spin { to { transform: rotate(360deg) } }`}</style>
+      </div>
+    )
   }
 
   return (

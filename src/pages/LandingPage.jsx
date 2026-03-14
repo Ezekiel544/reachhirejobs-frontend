@@ -162,7 +162,7 @@ function HowItWorks() {
           setVisible([])
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.6 }
     )
     if (sectionRef.current) observer.observe(sectionRef.current)
     return () => observer.disconnect()
@@ -217,7 +217,7 @@ function Features() {
           setVisible([])
         }
       },
-      { threshold: 0.5 }
+      { threshold: 0.7 }
     )
     if (sectionRef.current) observer.observe(sectionRef.current)
     return () => observer.disconnect()
