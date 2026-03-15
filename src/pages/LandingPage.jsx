@@ -357,9 +357,42 @@ function Pricing({ onGetStarted }) {
     </section>
   )
 }
+const FAQS = [
+  { q: 'How does SwiftyApply work?', a: 'You upload your CV and cover letter, select how many companies you want to reach, pay, and we immediately send your CV directly to the HR inboxes of verified tech companies across Africa and globally.' },
+  { q: 'How many companies will receive my CV?', a: 'You choose — from a minimum of 20 companies up to our full database of 1,223+ verified tech companies. The more companies you select, the more exposure you get.' },
+  { q: 'Will companies actually see my CV?', a: 'Yes. We send directly to HR and careers email addresses — not job portals or forms. Your CV lands in a real inbox. Some emails may bounce due to company mail server restrictions, but the majority are delivered successfully.' },
+  { q: 'What happens after I pay?', a: 'Your blast starts immediately after payment is confirmed. You can track progress in real time on your dashboard, broken down by country and region.' },
+  { q: 'Can I get a refund?', a: 'We do not offer refunds once a blast has started, as the service has been rendered. If your blast fails entirely due to a technical error on our end before any emails go out, you are entitled to a full refund or free re-blast.' },
+  { q: 'What file formats are accepted?', a: 'We accept PDF, DOC, and DOCX files up to 5MB. We recommend PDF for best compatibility across different email clients.' },
+  { q: 'How long does a blast take?', a: 'Most blasts complete within a few minutes. Larger blasts to 500+ companies may take up to 30 minutes depending on server load.' },
+  { q: 'Do I need a cover letter?', a: 'No — a cover letter is completely optional. Many users blast with just their CV. However, including one can increase your chances of getting a response.' },
+  { q: 'Why are some emails bouncing back to me?', a: 'Some companies have mail servers that restrict emails from external senders. This is normal in email blasting — typically 5–15% of emails may bounce. The majority will be delivered successfully.' },
+  { q: 'Is my data safe?', a: 'Yes. Your CV and personal data are stored securely and never sold or shared with anyone other than the companies you choose to blast to. See our Privacy Policy for full details.' },
+  { q: 'Can I blast again after my first one?', a: 'Absolutely. You can create as many blast orders as you want. Many users blast every few weeks to stay top of mind with companies.' },
+  { q: 'What industries and countries are covered?', a: 'Our database covers Fintech, SaaS, AI/ML, Healthtech, E-commerce and more. Countries include Nigeria, Kenya, South Africa, Ghana, Egypt and 277 global remote companies.' },
+]
 
+function FAQ() {
+  const [open, setOpen] = useState(null)
+  return (
+    <section className="lp-section lp-white faq" id="lp-faq">
+      <h2 className="lp-sec-title faqtitle">Frequently Asked <span>Questions</span></h2>
+      <div className="lp-faq-list">
+        {FAQS.map((f, i) => (
+          <div key={i} className={`lp-faq-item ${open === i ? 'lp-faq-open' : ''}`}>
+            <button className="lp-faq-q" onClick={() => setOpen(open === i ? null : i)}>
+              <span>{f.q}</span>
+              <span className="lp-faq-icon">{open === i ? '−' : '+'}</span>
+            </button>
+            {open === i && <div className="lp-faq-a">{f.a}</div>}
+          </div>
+        ))}
+      </div>
+    </section>
+  )
+}
 /* ── Footer ────────────────────────────────────────────────── */
-function Footer() {
+function Footer({ onGetStarted }) {
   return (
     <footer className="lp-footer">
       <div className="lp-footer-inner">
@@ -373,10 +406,12 @@ function Footer() {
           <a onClick={() => scrollTo('lp-features')}>Features</a>
         </div>
         <div className="lp-f-col"><div className="lp-f-col-title">Company</div>
-          <a>About Us</a><a>Blog</a><a>Contact</a>
+          <a onClick={() => onGetStarted('about')}>About Us</a><a>Blog</a><a onClick={() => onGetStarted('contact')}>Contact</a>
         </div>
         <div className="lp-f-col"><div className="lp-f-col-title">Legal</div>
-          <a>Privacy Policy</a><a>Terms of Service</a><a>Refund Policy</a>
+          <a onClick={() => onGetStarted('privacy')}>Privacy Policy</a>
+          <a onClick={() => onGetStarted('terms')}>Terms of Service</a>
+          <a>Refund Policy</a>
         </div>
       </div>
       <div className="lp-footer-bottom">
@@ -397,7 +432,8 @@ export default function LandingPage({ onGetStarted }) {
       <HowItWorks />
       <Features />
       <Pricing onGetStarted={onGetStarted} />
-      <Footer />
+      <FAQ />
+      <Footer onGetStarted={onGetStarted} />
     </>
   )
 }

@@ -17,11 +17,12 @@ import Editicon from './images/editicon.png'
 import Linkdlnicon from './images/linkdln.svg'
 import Outgoingicon from './images/outgoing.svg'
 import SettingsPage from './SettingsPage'
+import CVBuilderPage from './cvbuilderpage'
 import './DashboardPage.css'
 
 const NAV_ITEMS = [
   { icon: <img src={Dashboardicon} alt="dashboard" width={18} height={18} className='mt-12'/>, label: 'Dashboard' },
-  { icon: <img src={Usericon} alt="cv builder" width={18} height={18} className='mt-12'/>, label: 'CV Builder', soon: true },
+  { icon: <img src={Usericon} alt="cv builder" width={18} height={18} className='mt-12'/>, label: 'CV Builder' },
   { icon: <img src={Linkdlnicon} alt="linkedin" width={24} height={24} className='mt-12'/>, label: 'LI Blaster', soon: true },
   { icon: '⚙️', label: 'Settings' },
 ]
@@ -324,7 +325,18 @@ export default function DashboardPage({ user, onLogout }) {
       setSubmitting(false)
     }
   }
-
+if (activeNav === 'CV Builder') {
+  return (
+    <CVBuilderPage
+      profile={profile}
+      onBack={() => setActiveNav('Dashboard')}
+      onUseForBlast={(file, mode) => {
+        if (file) setCvFile(file)
+        setActiveNav('Dashboard')
+      }}
+    />
+  )
+}
   const latestOrder = orders.find(o => ['paid','sending','sent'].includes(o.status))
   const showBanner  = !profileLoading && !profileComplete
 
@@ -369,273 +381,272 @@ export default function DashboardPage({ user, onLogout }) {
       </aside>
 
       <main className="dp-main">
+  {activeNav === 'Settings' && (
+    <SettingsPage user={user} onLogout={onLogout} onProfileUpdate={(updated) => {
+      setProfile(updated)
+      if (updated.role)               setRole(updated.role)
+      if (updated.location)           setLocation(updated.location)
+      if (updated.industries?.length) setActiveNiches(updated.industries)
+    }} />
+  )}
 
-        {activeNav === 'Settings' && (
-          <SettingsPage user={user} onLogout={onLogout} onProfileUpdate={(updated) => {
-            setProfile(updated)
-            if (updated.role)               setRole(updated.role)
-            if (updated.location)           setLocation(updated.location)
-            if (updated.industries?.length) setActiveNiches(updated.industries)
-          }} />
-        )}
-
-        {activeNav !== 'Settings' && (
-          <>
-            <div className="dp-header">
-              <div>
-                <div className="dp-title">Welcome back, {cap} 👋</div>
-                <div className="dp-sub">Ready to blast your CV to more companies?</div>
-              </div>
-            </div>
-
-            {showBanner && (
-              <div className="dp-banner">
-                <span className="dp-banner-icon">⚠️</span>
-                <div className="dp-banner-text">
-                  <strong>Your profile is incomplete</strong> — add your CV, role, and introduction to start blasting.
-                </div>
-                <button className="dp-banner-btn" onClick={() => setActiveNav('Settings')}>
-                  Complete Profile →
-                </button>
-              </div>
-            )}
-
-            <div className="dp-stats-row">
-              {[
-                { icon:<img src={Emailicon} alt="email" width={50} height={50} />, val: loadingStats ? '...' : (stats?.totalCVsSent  || 0).toLocaleString(), lbl:'CVs Sent' },
-                { icon:<img src={Dateicon} alt="blast" width={35} height={35} />, val: loadingStats ? '...' : (stats?.totalBlasts   || 0).toLocaleString(), lbl:'Blasts Made' },
-                { icon:<img src={Companyicon} alt="company" width={45} height={45} />, val: loadingStats ? '...' : (stats?.totalCVsSent || 0).toLocaleString(), lbl:'CVs Delivered' },
-                { icon:<img src={Moneyicon} alt="spent" width={45} height={45} />, val: loadingStats ? '...' : fmtNaira(stats?.totalSpent || 0), lbl:'Total Spent' },
-              ].map(s => (
-                <div key={s.lbl} className="dp-stat-card">
-                  <div className="dp-sc-icon">{s.icon}</div>
-                  <div className="dp-sc-val">{s.val}</div>
-                  <div className="dp-sc-lbl">{s.lbl}</div>
-                </div>
-              ))}
-            </div>
-
-            <div className="dp-grid">
-              <div className="dp-card">
-                <div className="dp-card-title"> New CV Blast</div>
-
-                <div className="dp-upload-lbl">Your CV *</div>
-                {!cvFile && effectiveCv ? (
-                  <div className="dp-uploaded-file">
-                    <span>📄</span>
-                    <span className="dp-uf-name">{effectiveCv} <span className="dp-saved-tag">saved</span></span>
-                    <span className="dp-uf-rm" onClick={() => cvRef.current.click()}><img src={Editicon} alt="edit" width={21} height={21} /></span>
-                  </div>
-                ) : !cvFile ? (
-                  <div className="upload-zone" onClick={() => cvRef.current.click()}>
-                    <div style={{ fontSize:32, marginBottom:8 }}>📄</div>
-                    <div className="dp-uz-text">Drop CV here or click to browse</div>
-                    <div className="dp-uz-sub">PDF, DOC, DOCX · Max 5MB</div>
-                  </div>
-                ) : (
-                  <div className="dp-uploaded-file">
-                    <span>📄</span><span className="dp-uf-name">{cvFile.name}</span>
-                    <span className="dp-uf-rm" onClick={() => setCvFile(null)}>✕</span>
-                  </div>
-                )}
-                <input ref={cvRef} type="file" accept=".pdf,.doc,.docx" style={{ display:'none' }} onChange={handleCvUpload} />
-
-                <div className="dp-upload-lbl">Cover Letter (optional)</div>
-                {!clFile && effectiveCl ? (
-                  <div className="dp-uploaded-file">
-                    <span>✉️</span>
-                    <span className="dp-uf-name">{effectiveCl} <span className="dp-saved-tag">saved</span></span>
-                    <span className="dp-uf-rm" onClick={() => clRef.current.click()}><img src={Editicon} alt="edit" width={21} height={21} /></span>
-                  </div>
-                ) : !clFile ? (
-                  <div className="upload-zone" onClick={() => clRef.current.click()}>
-                    <div style={{ fontSize:32, marginBottom:8 }}>✉️</div>
-                    <div className="dp-uz-text">Drop cover letter or click</div>
-                    <div className="dp-uz-sub">PDF, DOC, DOCX · Max 5MB</div>
-                  </div>
-                ) : (
-                  <div className="dp-uploaded-file">
-                    <span>✉️</span><span className="dp-uf-name">{clFile.name}</span>
-                    <span className="dp-uf-rm" onClick={() => setClFile(null)}>✕</span>
-                  </div>
-                )}
-                <input ref={clRef} type="file" accept=".pdf,.doc,.docx" style={{ display:'none' }} onChange={handleClUpload} />
-
-                <div className="sp-select-wrap">
-                  <select className="rh-select dp-select-gap" value={role} onChange={e => setRole(e.target.value)}>
-                    <option value="">Select your role...</option>
-                    {ROLES.map(r => <option key={r}>{r}</option>)}
-                  </select>
-                  <span className="sp-select-arrow">▾</span>
-                </div>
-                <div className="sp-select-wrap">
-                  <select className="rh-select" value={location} onChange={e => setLocation(e.target.value)}>
-                    <option value="">Preferred location...</option>
-                    {LOCATIONS.map(l => <option key={l}>{l}</option>)}
-                  </select>
-                  <span className="sp-select-arrow">▾</span>
-                </div>
-
-                <div className="dp-niche-lbl">Industries</div>
-                <div className="dp-niche-tags">
-                  {NICHES.map(n => (
-                    <button key={n} className={`ntag ${activeNiches.includes(n) ? 'active' : ''}`}
-                      onClick={() => toggleNiche(n)}>{n}</button>
-                  ))}
-                </div>
-
-                <div className="dp-slider-wrap">
-                  <div className="dp-slider-top">
-                    <div>
-                      <div className="dp-slider-lbl">Companies to reach <span style={{fontSize:11,color:"var(--gray-400)"}}>/ {companyCount.toLocaleString()} available</span></div>
-                      <div className="dp-slider-count">{count.toLocaleString()}</div>
-                    </div>
-                    <div style={{ textAlign:'right' }}>
-                      <div className="dp-slider-lbl">Total <span style={{fontSize:11,color:"var(--gray-400)"}}>@ ₦250/company</span></div>
-                      <div className="dp-slider-price">{fmtNaira(total)}</div>
-                    </div>
-                  </div>
-                  <input className="rh-range" type="range" min="20" max={companyCount} step="1"
-                    value={count} onChange={handleSlider} style={{ width:'100%', margin:'12px 0' }} />
-                  <div className="dp-num-row">
-                    <span className="dp-num-lbl">Or type a number:</span>
-                    <input className="rh-num-input" type="number" min="20" max={companyCount} value={count} onChange={handleNumInput} />
-                  </div>
-                </div>
-
-                <button className="dp-send-btn" onClick={handlePayment} disabled={submitting}>
-                  {submitting ? 'Processing...' : `Pay ${fmtNaira(total)} & Blast `}
-                </button>
-              </div>
-
-              <div className="dp-right-col">
-                <div className="dp-card">
-                  <div className="dp-card-title-row">
-                    <div className="dp-card-title"> Latest Blast Progress</div>
-                  </div>
-                  {!latestOrder ? (
-                    <div className="dp-empty">No active blast yet. Create one to get started!</div>
-                  ) : (
-                    <>
-                      <div className="dp-prog-order-name">{latestOrder.role} · {latestOrder.location}</div>
-                      {[
-                        { lbl:'🇳🇬 Nigeria',     pct:45 },
-                        { lbl:'🌍 Global Remote', pct:25 },
-                        { lbl:'🇰🇪 Kenya',        pct:15 },
-                        { lbl:'🇿🇦 South Africa', pct:10 },
-                      ].map(p => {
-                        const sent  = Math.round((latestOrder.emailsSent || 0) * (p.pct / 100))
-                        const total = Math.round(latestOrder.companiesCount * (p.pct / 100))
-                        const pct   = total > 0 ? Math.round((sent / total) * 100) : 0
-                        return (
-                          <div key={p.lbl} className="dp-prog-item">
-                            <div className="dp-prog-head">
-                              <span className="dp-prog-lbl">{p.lbl}</span>
-                              <span className="dp-prog-val">{sent} / {total}</span>
-                            </div>
-                            <div className="prog-bar"><div className="prog-fill" style={{ width:`${pct}%` }} /></div>
-                          </div>
-                        )
-                      })}
-                    </>
-                  )}
-                </div>
-
-      <div className="dp-card">
-  <div className="dp-card-title-row">
-    <div className="dp-card-title"> Recent Orders</div>
-    <button className="dp-refresh-btn"
-      onAnimationEnd={(e) => e.currentTarget.classList.remove('spinning')}
-      onClick={(e) => {
-        const btn = e.currentTarget
-        btn.classList.remove('spinning')
-        requestAnimationFrame(() => requestAnimationFrame(() => btn.classList.add('spinning')))
-        fetchOrders()
-      }}
-      title="Refresh">
-      <img src={Refreshicon} alt="Refresh" width={20} height={20} />
-    </button>
-  </div>
-  {loadingOrders ? (
-    <div className="dp-empty">Loading orders...</div>
-  ) : orders.length === 0 ? (
-    <div className="dp-empty">No orders yet. Create your first blast!</div>
-  ) : (
-    <div className="dp-orders-scroll-wrap">
-      <div className="dp-orders-scroll" ref={ordersScrollRef}>
-        {[...orders]
-          .sort((a, b) => {
-            if (resumeOrder?._id === a._id) return -1
-            if (resumeOrder?._id === b._id) return 1
-            const priority = { sending: 0, paid: 1 }
-            const aPri = priority[a.status] ?? 99
-            const bPri = priority[b.status] ?? 99
-            if (aPri !== bPri) return aPri - bPri
-            return new Date(b.createdAt) - new Date(a.createdAt)
-          })
-          .map(o => (
-            <div key={o._id}
-              className={`dp-order-item ${o.status === 'pending' ? 'dp-order-pending-click' : ''}`}
-              onClick={() => {
-                if (o.status === 'pending') {
-                  scrollOrdersToTop()
-                  setResumeOrder(o)
-                }
-              }}>
-              <div className="dp-o-icon">
-                {o.status === 'sending'
-                  ? <img src={Outgoingicon} alt="outgoing" width={30} height={30} />
-                  : <img src={Emailicon} alt="email" width={30} height={30} />}
-              </div>
-              <div style={{ flex:1 }}>
-                <div className="dp-o-name">{o.role} · {o.location}</div>
-                <div className="dp-o-meta">
-                  {o.companiesCount.toLocaleString()} companies · {fmtNaira(o.amount)} · {timeAgo(o.createdAt)}
-                </div>
-              </div>
-              <StatusBadge status={o.status} />
-            </div>
-          ))}
+  {activeNav !== 'Settings' && activeNav !== 'CV Builder' && (
+    <>
+      <div className="dp-header">
+        <div>
+          <div className="dp-title">Welcome back, {cap} 👋</div>
+          <div className="dp-sub">Ready to blast your CV to more companies?</div>
+        </div>
       </div>
-      {orders.length > 3 && (
-        <div className="dp-scroll-hint">
-          <span>↓</span>
+
+      {showBanner && (
+        <div className="dp-banner">
+          <span className="dp-banner-icon">⚠️</span>
+          <div className="dp-banner-text">
+            <strong>Your profile is incomplete</strong> — add your CV, role, and introduction to start blasting.
+          </div>
+          <button className="dp-banner-btn" onClick={() => setActiveNav('Settings')}>
+            Complete Profile →
+          </button>
         </div>
       )}
-    </div>
-  )}
-    </div>
 
-                {/* Resume Payment Modal */}
-                {resumeOrder && (
-                  <div className="dp-modal-overlay" onClick={() => setResumeOrder(null)}>
-                    <div className="dp-modal" onClick={e => e.stopPropagation()}>
-                      <div className="dp-modal-title">⚠️ Incomplete Payment</div>
-                      <div className="dp-modal-body">
-                        You have a pending payment for <strong>{resumeOrder.role}</strong> — <strong>{fmtNaira(resumeOrder.amount)}</strong> for {resumeOrder.companiesCount.toLocaleString()} companies. Would you like to complete it?
-                      </div>
-                      <div className="dp-modal-btns">
-                        <button className="dp-modal-cancel" onClick={() => setResumeOrder(null)}>Cancel</button>
-                        <button className="dp-modal-confirm" onClick={async () => {
-                          setResumeOrder(null)
-                          scrollOrdersToTop()
-                          try {
-                            const payData = await paymentAPI.initialize(String(resumeOrder._id))
-                            openPaystack(payData)
-                          } catch (err) {
-                            showToast(err.message || 'Failed to resume payment', 'error')
-                          }
-                        }}>Yes, Complete Payment </button>
-                      </div>
-                    </div>
-                  </div>
-                )}
+      <div className="dp-stats-row">
+        {[
+          { icon:<img src={Emailicon} alt="email" width={50} height={50} />, val: loadingStats ? '...' : (stats?.totalCVsSent  || 0).toLocaleString(), lbl:'CVs Sent' },
+          { icon:<img src={Dateicon} alt="blast" width={35} height={35} />, val: loadingStats ? '...' : (stats?.totalBlasts   || 0).toLocaleString(), lbl:'Blasts Made' },
+          { icon:<img src={Companyicon} alt="company" width={45} height={45} />, val: loadingStats ? '...' : (stats?.totalCVsSent || 0).toLocaleString(), lbl:'CVs Delivered' },
+          { icon:<img src={Moneyicon} alt="spent" width={45} height={45} />, val: loadingStats ? '...' : fmtNaira(stats?.totalSpent || 0), lbl:'Total Spent' },
+        ].map(s => (
+          <div key={s.lbl} className="dp-stat-card">
+            <div className="dp-sc-icon">{s.icon}</div>
+            <div className="dp-sc-val">{s.val}</div>
+            <div className="dp-sc-lbl">{s.lbl}</div>
+          </div>
+        ))}
+      </div>
 
+      <div className="dp-grid">
+        <div className="dp-card">
+          <div className="dp-card-title"> New CV Blast</div>
+
+          <div className="dp-upload-lbl">Your CV *</div>
+          {!cvFile && effectiveCv ? (
+            <div className="dp-uploaded-file">
+              <span>📄</span>
+              <span className="dp-uf-name">{effectiveCv} <span className="dp-saved-tag">saved</span></span>
+              <span className="dp-uf-rm" onClick={() => cvRef.current.click()}><img src={Editicon} alt="edit" width={21} height={21} /></span>
+            </div>
+          ) : !cvFile ? (
+            <div className="upload-zone" onClick={() => cvRef.current.click()}>
+              <div style={{ fontSize:32, marginBottom:8 }}>📄</div>
+              <div className="dp-uz-text">Drop CV here or click to browse</div>
+              <div className="dp-uz-sub">PDF, DOC, DOCX · Max 5MB</div>
+            </div>
+          ) : (
+            <div className="dp-uploaded-file">
+              <span>📄</span><span className="dp-uf-name">{cvFile.name}</span>
+              <span className="dp-uf-rm" onClick={() => setCvFile(null)}>✕</span>
+            </div>
+          )}
+          <input ref={cvRef} type="file" accept=".pdf,.doc,.docx" style={{ display:'none' }} onChange={handleCvUpload} />
+
+          <div className="dp-upload-lbl">Cover Letter (optional)</div>
+          {!clFile && effectiveCl ? (
+            <div className="dp-uploaded-file">
+              <span>✉️</span>
+              <span className="dp-uf-name">{effectiveCl} <span className="dp-saved-tag">saved</span></span>
+              <span className="dp-uf-rm" onClick={() => clRef.current.click()}><img src={Editicon} alt="edit" width={21} height={21} /></span>
+            </div>
+          ) : !clFile ? (
+            <div className="upload-zone" onClick={() => clRef.current.click()}>
+              <div style={{ fontSize:32, marginBottom:8 }}>✉️</div>
+              <div className="dp-uz-text">Drop cover letter or click</div>
+              <div className="dp-uz-sub">PDF, DOC, DOCX · Max 5MB</div>
+            </div>
+          ) : (
+            <div className="dp-uploaded-file">
+              <span>✉️</span><span className="dp-uf-name">{clFile.name}</span>
+              <span className="dp-uf-rm" onClick={() => setClFile(null)}>✕</span>
+            </div>
+          )}
+          <input ref={clRef} type="file" accept=".pdf,.doc,.docx" style={{ display:'none' }} onChange={handleClUpload} />
+
+          <div className="sp-select-wrap">
+            <select className="rh-select dp-select-gap" value={role} onChange={e => setRole(e.target.value)}>
+              <option value="">Select your role...</option>
+              {ROLES.map(r => <option key={r}>{r}</option>)}
+            </select>
+            <span className="sp-select-arrow">▾</span>
+          </div>
+          <div className="sp-select-wrap">
+            <select className="rh-select" value={location} onChange={e => setLocation(e.target.value)}>
+              <option value="">Preferred location...</option>
+              {LOCATIONS.map(l => <option key={l}>{l}</option>)}
+            </select>
+            <span className="sp-select-arrow">▾</span>
+          </div>
+
+          <div className="dp-niche-lbl">Industries</div>
+          <div className="dp-niche-tags">
+            {NICHES.map(n => (
+              <button key={n} className={`ntag ${activeNiches.includes(n) ? 'active' : ''}`}
+                onClick={() => toggleNiche(n)}>{n}</button>
+            ))}
+          </div>
+
+          <div className="dp-slider-wrap">
+            <div className="dp-slider-top">
+              <div>
+                <div className="dp-slider-lbl">Companies to reach <span style={{fontSize:11,color:"var(--gray-400)"}}>/ {companyCount.toLocaleString()} available</span></div>
+                <div className="dp-slider-count">{count.toLocaleString()}</div>
+              </div>
+              <div style={{ textAlign:'right' }}>
+                <div className="dp-slider-lbl">Total <span style={{fontSize:11,color:"var(--gray-400)"}}>@ ₦250/company</span></div>
+                <div className="dp-slider-price">{fmtNaira(total)}</div>
               </div>
             </div>
-          </>
-        )}
-      </main>
+            <input className="rh-range" type="range" min="20" max={companyCount} step="1"
+              value={count} onChange={handleSlider} style={{ width:'100%', margin:'12px 0' }} />
+            <div className="dp-num-row">
+              <span className="dp-num-lbl">Or type a number:</span>
+              <input className="rh-num-input" type="number" min="20" max={companyCount} value={count} onChange={handleNumInput} />
+            </div>
+          </div>
+
+          <button className="dp-send-btn" onClick={handlePayment} disabled={submitting}>
+            {submitting ? 'Processing...' : `Pay ${fmtNaira(total)} & Blast `}
+          </button>
+        </div>
+
+        <div className="dp-right-col">
+          <div className="dp-card">
+            <div className="dp-card-title-row">
+              <div className="dp-card-title"> Latest Blast Progress</div>
+            </div>
+            {!latestOrder ? (
+              <div className="dp-empty">No active blast yet. Create one to get started!</div>
+            ) : (
+              <>
+                <div className="dp-prog-order-name">{latestOrder.role} · {latestOrder.location}</div>
+                {[
+                  { lbl:'🇳🇬 Nigeria',     pct:45 },
+                  { lbl:'🌍 Global Remote', pct:25 },
+                  { lbl:'🇰🇪 Kenya',        pct:15 },
+                  { lbl:'🇿🇦 South Africa', pct:10 },
+                ].map(p => {
+                  const sent  = Math.round((latestOrder.emailsSent || 0) * (p.pct / 100))
+                  const total = Math.round(latestOrder.companiesCount * (p.pct / 100))
+                  const pct   = total > 0 ? Math.round((sent / total) * 100) : 0
+                  return (
+                    <div key={p.lbl} className="dp-prog-item">
+                      <div className="dp-prog-head">
+                        <span className="dp-prog-lbl">{p.lbl}</span>
+                        <span className="dp-prog-val">{sent} / {total}</span>
+                      </div>
+                      <div className="prog-bar"><div className="prog-fill" style={{ width:`${pct}%` }} /></div>
+                    </div>
+                  )
+                })}
+              </>
+            )}
+          </div>
+
+          <div className="dp-card">
+            <div className="dp-card-title-row">
+              <div className="dp-card-title"> Recent Orders</div>
+              <button className="dp-refresh-btn"
+                onAnimationEnd={(e) => e.currentTarget.classList.remove('spinning')}
+                onClick={(e) => {
+                  const btn = e.currentTarget
+                  btn.classList.remove('spinning')
+                  requestAnimationFrame(() => requestAnimationFrame(() => btn.classList.add('spinning')))
+                  fetchOrders()
+                }}
+                title="Refresh">
+                <img src={Refreshicon} alt="Refresh" width={20} height={20} />
+              </button>
+            </div>
+            {loadingOrders ? (
+              <div className="dp-empty">Loading orders...</div>
+            ) : orders.length === 0 ? (
+              <div className="dp-empty">No orders yet. Create your first blast!</div>
+            ) : (
+              <div className="dp-orders-scroll-wrap">
+                <div className="dp-orders-scroll" ref={ordersScrollRef}>
+                  {[...orders]
+                    .sort((a, b) => {
+                      if (resumeOrder?._id === a._id) return -1
+                      if (resumeOrder?._id === b._id) return 1
+                      const priority = { sending: 0, paid: 1 }
+                      const aPri = priority[a.status] ?? 99
+                      const bPri = priority[b.status] ?? 99
+                      if (aPri !== bPri) return aPri - bPri
+                      return new Date(b.createdAt) - new Date(a.createdAt)
+                    })
+                    .map(o => (
+                      <div key={o._id}
+                        className={`dp-order-item ${o.status === 'pending' ? 'dp-order-pending-click' : ''}`}
+                        onClick={() => {
+                          if (o.status === 'pending') {
+                            scrollOrdersToTop()
+                            setResumeOrder(o)
+                          }
+                        }}>
+                        <div className="dp-o-icon">
+                          {o.status === 'sending'
+                            ? <img src={Outgoingicon} alt="outgoing" width={30} height={30} />
+                            : <img src={Emailicon} alt="email" width={30} height={30} />}
+                        </div>
+                        <div style={{ flex:1 }}>
+                          <div className="dp-o-name">{o.role} · {o.location}</div>
+                          <div className="dp-o-meta">
+                            {o.companiesCount.toLocaleString()} companies · {fmtNaira(o.amount)} · {timeAgo(o.createdAt)}
+                          </div>
+                        </div>
+                        <StatusBadge status={o.status} />
+                      </div>
+                    ))}
+                </div>
+                {orders.length > 3 && (
+                  <div className="dp-scroll-hint">
+                    <span>↓</span>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Resume Payment Modal */}
+          {resumeOrder && (
+            <div className="dp-modal-overlay" onClick={() => setResumeOrder(null)}>
+              <div className="dp-modal" onClick={e => e.stopPropagation()}>
+                <div className="dp-modal-title">⚠️ Incomplete Payment</div>
+                <div className="dp-modal-body">
+                  You have a pending payment for <strong>{resumeOrder.role}</strong> — <strong>{fmtNaira(resumeOrder.amount)}</strong> for {resumeOrder.companiesCount.toLocaleString()} companies. Would you like to complete it?
+                </div>
+                <div className="dp-modal-btns">
+                  <button className="dp-modal-cancel" onClick={() => setResumeOrder(null)}>Cancel</button>
+                  <button className="dp-modal-confirm" onClick={async () => {
+                    setResumeOrder(null)
+                    scrollOrdersToTop()
+                    try {
+                      const payData = await paymentAPI.initialize(String(resumeOrder._id))
+                      openPaystack(payData)
+                    } catch (err) {
+                      showToast(err.message || 'Failed to resume payment', 'error')
+                    }
+                  }}>Yes, Complete Payment </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+        </div>
+      </div>
+    </>
+  )}
+</main>
     </div>
   )
 }
