@@ -42,7 +42,7 @@ export default function AboutPage({ onBack, scrollTo: scrollTarget }) {
   return (
     <div className="about-page">
 
-      {/* Nav */}
+      {/* Navs */}
       <div className="about-nav">
         <span className="about-logo">Swifty<span>Apply</span></span>
         <div className="about-nav-right">
