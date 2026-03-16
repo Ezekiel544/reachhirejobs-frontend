@@ -1,9 +1,15 @@
 /*
  * PrivacyPage.jsx — SwiftyApply Privacy Policy
  */
-import './LegalPage.css'
+import './legalpage.css'
+import Footer from './footer'
 
 export default function PrivacyPage({ onBack }) {
+  function handleNavigate(tab) {
+    if (tab === 'landing') { onBack(); return }
+    window.dispatchEvent(new CustomEvent('navigate', { detail: tab }))
+  }
+
   return (
     <div className="legal-page">
       <div className="legal-nav">
@@ -28,7 +34,6 @@ export default function PrivacyPage({ onBack }) {
           <section>
             <h2>2. Data We Collect</h2>
             <p>We collect the following types of personal data:</p>
-
             <h3>Account Information</h3>
             <ul>
               <li>Full name</li>
@@ -36,26 +41,22 @@ export default function PrivacyPage({ onBack }) {
               <li>Password (stored encrypted — we never see your plain text password)</li>
               <li>Google account information (if you sign in with Google)</li>
             </ul>
-
             <h3>Profile Information</h3>
             <ul>
               <li>Professional role and preferred job location</li>
               <li>Industries of interest</li>
               <li>Professional introduction / bio</li>
             </ul>
-
             <h3>Documents</h3>
             <ul>
               <li>Your CV file (PDF, DOC, or DOCX)</li>
               <li>Your cover letter file (optional)</li>
             </ul>
-
             <h3>Order and Payment Information</h3>
             <ul>
               <li>Blast order history (companies count, amount, status)</li>
               <li>Payment reference numbers (we do not store your card details — Paystack handles all card data)</li>
             </ul>
-
             <h3>Technical Data</h3>
             <ul>
               <li>IP address and browser type (collected automatically by our hosting provider)</li>
@@ -174,13 +175,7 @@ export default function PrivacyPage({ onBack }) {
         </div>
       </div>
 
-      <div className="legal-footer">
-        <span>© 2026 SwiftyApply. All rights reserved.</span>
-        <div className="legal-footer-links">
-          <button onClick={() => window.dispatchEvent(new CustomEvent('navigate', { detail: 'terms' }))}>Terms of Service</button>
-          <span className="legal-active">Privacy Policy</span>
-        </div>
-      </div>
+      <Footer onNavigate={handleNavigate} />
     </div>
   )
 }

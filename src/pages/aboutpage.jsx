@@ -3,6 +3,7 @@
  */
 import { useEffect } from 'react'
 import './aboutpage.css'
+import Footer from './footer'
 
 const STATS = [
   { val: '1,223+', lbl: 'Verified Companies' },
@@ -29,24 +30,19 @@ export default function AboutPage({ onBack, scrollTo: scrollTarget }) {
     }
   }, [scrollTarget])
 
-  function handleSubmit(e) {
-    e.preventDefault()
-    const form = e.target
-    const name    = form.name.value.trim()
-    const email   = form.email.value.trim()
-    const message = form.message.value.trim()
-    if (!name || !email || !message) return
-    window.location.href = `mailto:[SUPPORT_EMAIL]?subject=Message from ${encodeURIComponent(name)}&body=${encodeURIComponent(message)}%0A%0AFrom: ${encodeURIComponent(email)}`
+  function handleNavigate(tab) {
+    if (tab === 'landing') { onBack(); return }
+    window.dispatchEvent(new CustomEvent('navigate', { detail: tab }))
   }
 
   return (
     <div className="about-page">
 
-      {/* Nav*/}
+      {/* Nav */}
       <div className="about-nav">
-        <span className="about-logo">Swifty<span>Apply</span></span>
+        <span className="about-logo" onClick={onBack} style={{ cursor:'pointer' }}>Swifty<span>Apply</span></span>
         <div className="about-nav-right">
-          <button className="about-nav-link" onClick={() => document.getElementById('about-contact')?.scrollIntoView({ behavior: 'smooth' })}>Contact</button>
+          {/* <button className="about-nav-link" onClick={() => document.getElementById('about-contact')?.scrollIntoView({ behavior: 'smooth' })}>Contact</button> */}
           <button className="about-back" onClick={onBack}>Back to Home</button>
         </div>
       </div>
@@ -112,12 +108,51 @@ export default function AboutPage({ onBack, scrollTo: scrollTarget }) {
         </div>
       </section>
 
-      {/* Footer */}
-      <div className="about-footer">
-        <span>© 2026 SwiftyApply. All rights reserved.</span>
-        <button onClick={onBack}>← Back to Home</button>
-      </div>
+      {/* Contact */}
+      {/* <section id="about-contact" className="about-contact">
+        <div className="about-contact-inner">
+          <div className="about-contact-left">
+            <div className="about-section-label">Get in Touch</div>
+            <h2>We'd Love to Hear from You</h2>
+            <p>Have a question, feedback, or partnership idea? Reach out directly and we'll get back to you as soon as possible.</p>
+            <div className="about-contact-items">
+              <div className="about-contact-item">
+                <span className="about-ci-icon">✉️</span>
+                <div>
+                  <div className="about-ci-label">Email Us</div>
+                  <div className="about-ci-val">swiftyapply@gmail.com</div>
+                </div>
+              </div>
+              <div className="about-contact-item">
+                <span className="about-ci-icon">🌍</span>
+                <div>
+                  <div className="about-ci-label">Based in</div>
+                  <div className="about-ci-val">Nigeria, Africa</div>
+                </div>
+              </div>
+              <div className="about-contact-item">
+                <span className="about-ci-icon">⏱️</span>
+                <div>
+                  <div className="about-ci-label">Response Time</div>
+                  <div className="about-ci-val">Within 24–48 hours</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="about-contact-right">
+            <div className="about-email-box">
+              <div className="about-email-icon">✉️</div>
+              <div className="about-email-title">Send us an Email</div>
+              <div className="about-email-desc">Click below to send us an email directly. We read every message and respond within 24–48 hours.</div>
+              <a href="mailto:swiftyapply@gmail.com" className="about-email-btn">
+                Email SwiftyApply →
+              </a>
+            </div>
+          </div>
+        </div>
+      </section> */}
 
+      <Footer onNavigate={handleNavigate} />
     </div>
   )
 }

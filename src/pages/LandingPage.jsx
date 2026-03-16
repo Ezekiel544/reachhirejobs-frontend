@@ -406,7 +406,7 @@ function Footer({ onGetStarted }) {
           <a onClick={() => scrollTo('lp-features')}>Features</a>
         </div>
         <div className="lp-f-col"><div className="lp-f-col-title">Company</div>
-          <a onClick={() => onGetStarted('about')}>About Us</a><a>Blog</a><a onClick={() => onGetStarted('contact')}>Contact</a>
+          <a onClick={() => onGetStarted('about')}>About Us</a><a>Blog</a> <a href="mailto:swiftapply@gmail.com">Contact</a>
         </div>
         <div className="lp-f-col"><div className="lp-f-col-title">Legal</div>
           <a onClick={() => onGetStarted('privacy')}>Privacy Policy</a>

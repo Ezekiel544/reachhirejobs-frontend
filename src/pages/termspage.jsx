@@ -1,13 +1,19 @@
 /*
  * TermsPage.jsx — SwiftyApply Terms of Service
  */
-import './LegalPage.css'
+import './legalpage.css'
+import Footer from './footer'
 
 export default function TermsPage({ onBack }) {
+  function handleNavigate(tab) {
+    if (tab === 'landing') { onBack(); return }
+    window.dispatchEvent(new CustomEvent('navigate', { detail: tab }))
+  }
+
   return (
     <div className="legal-page">
       <div className="legal-nav">
-        <span className="legal-logo">Swifty<span>Apply</span></span>
+        <span className="legal-logo" onClick={onBack} style={{ cursor:'pointer' }}>Swifty<span>Apply</span></span>
         <button className="legal-back" onClick={onBack}>Back to Home</button>
       </div>
 
@@ -145,13 +151,7 @@ export default function TermsPage({ onBack }) {
         </div>
       </div>
 
-      <div className="legal-footer">
-        <span>© 2026 SwiftyApply. All rights reserved.</span>
-        <div className="legal-footer-links">
-          <span className="legal-active">Terms of Service</span>
-          <button onClick={() => window.dispatchEvent(new CustomEvent('navigate', { detail: 'privacy' }))}>Privacy Policy</button>
-        </div>
-      </div>
+      <Footer onNavigate={handleNavigate} />
     </div>
   )
 }
