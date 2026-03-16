@@ -23,7 +23,7 @@ import { calcPrice, fmtNaira, getBreakdown, COMPANIES } from '../utils/pricing'
 
 const MAX_COMPANIES = 1223
 
-/* helpers */
+/* helper*/
 function scrollTo(id) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
