@@ -3,7 +3,7 @@
  */
 import { useState, useRef } from 'react'
 import { useToast } from '../context/ToastContext'
-import './CVBuilderPage.css'
+import './cvbuilderpage.css'
 
 const STEPS = [
   { id: 1, label: 'Personal Info' },
