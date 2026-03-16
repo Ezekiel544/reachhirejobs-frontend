@@ -1,7 +1,7 @@
 /*
  * TermsPage.jsx — SwiftyApply Terms of Service
  */
-import './legalpage.css'
+import './LegalPage.css'
 import Footer from './footer'
 
 export default function TermsPage({ onBack }) {
