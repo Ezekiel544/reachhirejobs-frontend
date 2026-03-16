@@ -75,7 +75,7 @@ export default function Auth({ defaultTab = 'login', onLogin, onBack }) {
   return (
     <div className={styles.page}>
       <div className={styles.card}>
-        <div className={styles.logo}>Reach<span>Hire</span></div>
+        <div className={styles.logo}>RJobto<span>Mail</span></div>
         <div className={styles.tagline}>Get your CV to 1,223+ tech companies across Africa</div>
 
         <div className={styles.tabs}>

@@ -98,7 +98,7 @@ export default function AuthPage({ defaultTab = 'login', onLogin, onBack }) {
   return (
     <div className="ap-page">
       <div className="ap-card">
-        <div className="ap-logo">Swiftly<span>Apply</span></div>
+        <div className="ap-logo">Jobto<span>Mail</span></div>
         <div className="ap-tagline">Get your CV to 1,223+ tech companies across Africa</div>
 
         {/* Tabs */}

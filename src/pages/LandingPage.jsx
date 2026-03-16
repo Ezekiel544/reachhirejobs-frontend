@@ -36,7 +36,7 @@ function Navbar({ onGetStarted }) {
       <nav className="lp-nav">
         <div className="lp-nav-inner">
           <span className="lp-logo" onClick={() => window.scrollTo(0,0)}>
-            Swifty<span>Apply</span> 
+            Jobto<span>Mail</span> 
           </span>
           <div className="lp-nav-links">
             <a onClick={() => scrollTo('lp-how')}>How it Works</a>
@@ -397,7 +397,7 @@ function Footer({ onGetStarted }) {
     <footer className="lp-footer">
       <div className="lp-footer-inner">
         <div>
-          <div className="lp-f-logo">Swifty<span>Apply</span></div>
+          <div className="lp-f-logo">Jobto<span>Mail</span></div>
           <div className="lp-f-desc">The fastest way for African tech talent to get noticed. Blast your CV to {MAX_COMPANIES.toLocaleString()} verified companies across Africa and beyond.</div>
         </div>
         <div className="lp-f-col"><div className="lp-f-col-title">Product</div>
@@ -415,7 +415,7 @@ function Footer({ onGetStarted }) {
         </div>
       </div>
       <div className="lp-footer-bottom">
-        <span>© 2025 SwiftyApply. All rights reserved.</span>
+        <span>© 2025 JobtoMail. All rights reserved.</span>
         <span>Made with ❤️ for African Tech Talent</span>
       </div>
     </footer>
