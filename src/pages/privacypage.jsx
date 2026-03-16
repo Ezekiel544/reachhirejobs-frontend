@@ -1,7 +1,7 @@
 /*
  * PrivacyPage.jsx — SwiftyApply Privacy Policy
  */
-import './legalpage.css'
+// import './legalpage.css'
 import Footer from './footer'
 
 export default function PrivacyPage({ onBack }) {

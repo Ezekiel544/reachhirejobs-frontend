@@ -2,7 +2,7 @@
  * AboutPage.jsx — About Us + Contact combined page
  */
 import { useEffect } from 'react'
-import './aboutpage.css'
+// import './aboutpage.css'
 import Footer from './footer'
 
 const STATS = [
