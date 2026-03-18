@@ -265,7 +265,7 @@
       rgba(10, 15, 30, 0.75) 50%,
       rgba(10, 15, 30, 0.55) 100%
     ),
-    url('./images/cvsent.jpg') center center / cover no-repeat;
+    url('./images/cvsent.jpg') center center / cover noo-repeat;
   position: relative;
 }
 .lp-hero h1 { color: white; }
