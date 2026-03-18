@@ -6,6 +6,7 @@
  * ============================================================
  */
 import { useState, useEffect, useRef } from 'react'
+import './aboutpage.css'
 import './LandingPage.css'
 import usericon from './images/usericon.png'
 import Niche from './images/nicheicon.png'
@@ -19,6 +20,7 @@ import Analyticsicon from './images/analytics.png'
 import Techicon from './images/techrole.png'
 import Africa from './images/africa.svg'
 import Global from './images/global.svg'
+import Cvsent from './images/hired.avif'
 import { calcPrice, fmtNaira, getBreakdown, COMPANIES } from '../utils/pricing'
 
 const MAX_COMPANIES = 1223
@@ -30,19 +32,27 @@ function scrollTo(id) {
 
 /* ── Navbar ────────────────────────────────────────────────── */
 function Navbar({ onGetStarted }) {
-  const [open, setOpen] = useState(false)
+  const [open,     setOpen]     = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    function handleScroll() { setScrolled(window.scrollY > 60) }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
   return (
     <>
-      <nav className="lp-nav">
+      <nav className={`lp-nav ${scrolled ? 'lp-nav-scrolled' : 'lp-nav-top'}`}>
         <div className="lp-nav-inner">
           <span className="lp-logo" onClick={() => window.scrollTo(0,0)}>
-            Jobto<span>Mail</span> 
+            Jobto<span>Mail</span>
           </span>
           <div className="lp-nav-links">
             <a onClick={() => scrollTo('lp-how')}>How it Works</a>
             <a onClick={() => scrollTo('lp-features')}>Features</a>
             <a onClick={() => scrollTo('lp-pricing')}>Pricing</a>
-            <a className="lp-nav-cta" onClick={() => onGetStarted('signup')}>Get Started </a>
+            <a className="lp-nav-cta" onClick={() => onGetStarted('signup')}>Get Started</a>
           </div>
           <button className={`lp-hamburger ${open ? 'open' : ''}`} onClick={() => setOpen(o => !o)}>
             <span /><span /><span />
@@ -54,17 +64,26 @@ function Navbar({ onGetStarted }) {
           <a onClick={() => { scrollTo('lp-how');      setOpen(false) }}>How it Works</a>
           <a onClick={() => { scrollTo('lp-features'); setOpen(false) }}>Features</a>
           <a onClick={() => { scrollTo('lp-pricing');  setOpen(false) }}>Pricing</a>
-          <a className="lp-m-cta" onClick={() => { onGetStarted('signup'); setOpen(false) }}>Get Started </a>
+          <a className="lp-m-cta" onClick={() => { onGetStarted('signup'); setOpen(false) }}>Get Started</a>
         </div>
       )}
     </>
   )
 }
-
 /* ── Hero ──────────────────────────────────────────────────── */
 function Hero({ onGetStarted }) {
   return (
-    <section className="lp-hero">
+    <section className="lp-hero" style={{
+      backgroundImage: `linear-gradient(
+        to right,
+        rgba(10, 15, 30, 0.92) 0%,
+        rgba(10, 15, 30, 0.75) 50%,
+        rgba(10, 15, 30, 0.55) 100%
+      ), url(${Cvsent})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center top',
+      backgroundRepeat: 'no-repeat',
+    }}>
       <div className="lp-hero-inner">
         {/* Left */}
         <div className="lp-hero-left">
@@ -135,7 +154,25 @@ function Ticker() {
     </div>
   )
 }
-
+ 
+function About() {
+  return (
+    // Hero           ← single-line comment is fine too
+    <section className="about-hero">
+      <div className="about-hero-inner">
+        <h1 className='lp-sec-title'>
+          Built for African Tech Talent.<br />
+          <span>By Africans.</span>
+        </h1>
+        <p>
+          SwiftyApply was born from a simple frustration — talented developers,
+          designers, and product managers in Africa spending weeks sending CVs
+          one by one, never hearing back. We decided to change that.
+        </p>
+      </div>
+    </section>
+  );
+}
 /* ── How It Works ──────────────────────────────────────────── */
 const STEPS = [
   { n:'01', icon:<img src={usericon} alt="CV" width={57} height={57} />, title:'Upload Your CV',    desc:'Upload your CV and cover letter. Secure and ready to send anytime.' },
@@ -184,7 +221,7 @@ function HowItWorks() {
   }, [scrollingUp])
 
   return (
-    <section id="lp-how" className="lp-section lp-gray" ref={sectionRef}>
+    <section id="lp-how" className="lp-section lp-gray howitworks" ref={sectionRef}>
       <div className="lp-sec-label">The Process</div>
       <h2 className="lp-sec-title">From Upload to Inbox <span>in Minutes</span></h2>
       <div className="lp-steps-grid">
@@ -301,11 +338,11 @@ function Pricing({ onGetStarted }) {
   ]
 
   return (
-    <section id="lp-pricing" className="lp-section lp-gray">
+    <section id="lp-pricing" className="lp-section lp-gray lp lp-pricingsection">
       <div style={{ textAlign:'center' }}>
-        <div className="lp-sec-label">Pricing</div>
-        <h2 className="lp-sec-title" style={{ maxWidth:'100%' }}>Pay Only for <span>What You Need</span></h2>
-        <p className="lp-sec-sub">Drag or type to pick your reach. ₦250 per company. Up to <strong>{MAX_COMPANIES.toLocaleString()} verified companies</strong> available.</p>
+        <div className="lp-sec-label" style={{ color: 'white' }}>Pricing</div>
+        <h2 className="lp-sec-title" style={{ maxWidth:'100%',color: 'white' }}>Pay Only for <span>What You Need</span></h2>
+        <p className="lp-sec-sub text-center">Drag or type to pick your reach. ₦250 per company. Up to <strong>{MAX_COMPANIES.toLocaleString()} verified companies</strong> available.</p>
       </div>
 
       <div className="lp-pricing-box">
@@ -357,6 +394,7 @@ function Pricing({ onGetStarted }) {
     </section>
   )
 }
+
 const FAQS = [
   { q: 'How does SwiftyApply work?', a: 'You upload your CV and cover letter, select how many companies you want to reach, pay, and we immediately send your CV directly to the HR inboxes of verified tech companies across Africa and globally.' },
   { q: 'How many companies will receive my CV?', a: 'You choose — from a minimum of 20 companies up to our full database of 1,223+ verified tech companies. The more companies you select, the more exposure you get.' },
@@ -365,17 +403,17 @@ const FAQS = [
   { q: 'Can I get a refund?', a: 'We do not offer refunds once a blast has started, as the service has been rendered. If your blast fails entirely due to a technical error on our end before any emails go out, you are entitled to a full refund or free re-blast.' },
   { q: 'What file formats are accepted?', a: 'We accept PDF, DOC, and DOCX files up to 5MB. We recommend PDF for best compatibility across different email clients.' },
   { q: 'How long does a blast take?', a: 'Most blasts complete within a few minutes. Larger blasts to 500+ companies may take up to 30 minutes depending on server load.' },
-  { q: 'Do I need a cover letter?', a: 'No — a cover letter is completely optional. Many users blast with just their CV. However, including one can increase your chances of getting a response.' },
-  { q: 'Why are some emails bouncing back to me?', a: 'Some companies have mail servers that restrict emails from external senders. This is normal in email blasting — typically 5–15% of emails may bounce. The majority will be delivered successfully.' },
-  { q: 'Is my data safe?', a: 'Yes. Your CV and personal data are stored securely and never sold or shared with anyone other than the companies you choose to blast to. See our Privacy Policy for full details.' },
-  { q: 'Can I blast again after my first one?', a: 'Absolutely. You can create as many blast orders as you want. Many users blast every few weeks to stay top of mind with companies.' },
-  { q: 'What industries and countries are covered?', a: 'Our database covers Fintech, SaaS, AI/ML, Healthtech, E-commerce and more. Countries include Nigeria, Kenya, South Africa, Ghana, Egypt and 277 global remote companies.' },
+  // { q: 'Do I need a cover letter?', a: 'No — a cover letter is completely optional. Many users blast with just their CV. However, including one can increase your chances of getting a response.' },
+  // { q: 'Why are some emails bouncing back to me?', a: 'Some companies have mail servers that restrict emails from external senders. This is normal in email blasting — typically 5–15% of emails may bounce. The majority will be delivered successfully.' },
+  // { q: 'Is my data safe?', a: 'Yes. Your CV and personal data are stored securely and never sold or shared with anyone other than the companies you choose to blast to. See our Privacy Policy for full details.' },
+  // { q: 'Can I blast again after my first one?', a: 'Absolutely. You can create as many blast orders as you want. Many users blast every few weeks to stay top of mind with companies.' },
+  // { q: 'What industries and countries are covered?', a: 'Our database covers Fintech, SaaS, AI/ML, Healthtech, E-commerce and more. Countries include Nigeria, Kenya, South Africa, Ghana, Egypt and 277 global remote companies.' },
 ]
 
 function FAQ() {
   const [open, setOpen] = useState(null)
   return (
-    <section className="lp-section lp-white faq" id="lp-faq">
+    <section className="lp-section lp-white faq " id="lp-faq" style={{ backgroundColor:""}}>
       <h2 className="lp-sec-title faqtitle">Frequently Asked <span>Questions</span></h2>
       <div className="lp-faq-list">
         {FAQS.map((f, i) => (
@@ -384,7 +422,7 @@ function FAQ() {
               <span>{f.q}</span>
               <span className="lp-faq-icon">{open === i ? '−' : '+'}</span>
             </button>
-            {open === i && <div className="lp-faq-a">{f.a}</div>}
+            {open === i && <div className="lp-faq-a" style={{ color: '#ded7d7' }}>{f.a}</div>}
           </div>
         ))}
       </div>
@@ -429,10 +467,12 @@ export default function LandingPage({ onGetStarted }) {
       <Navbar onGetStarted={onGetStarted} />
       <Hero   onGetStarted={onGetStarted} />
       <Ticker />
-      <HowItWorks />
-      <Features />
+       <About />
+      <HowItWorks  />
       <Pricing onGetStarted={onGetStarted} />
+      <Features />
       <FAQ />
+      <Ticker />
       <Footer onGetStarted={onGetStarted} />
     </>
   )
