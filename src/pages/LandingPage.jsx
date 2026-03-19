@@ -1,7 +1,7 @@
 /*
  * ============================================================
  *  LandingPage.jsx
- *  Seelf-contained — imports only global.css (via main.jsx)
+ *  Se\elf-contained — imports only global.css (via main.jsx)
  *  and its own LandingPage.css
  * ============================================================
  */
