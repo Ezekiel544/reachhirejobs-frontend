@@ -345,13 +345,6 @@
   padding-top: 125px;
 }
 
-
-.lp-mobile-menu {
-  /* background: rgba(10, 15, 30, 0.97);
-  backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(255,255,255,0.08); */
-}
-
 .lp-mobile-menu a {
   color: rgba(255,255,255,0.85);
 }
