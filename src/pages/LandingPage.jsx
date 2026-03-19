@@ -1,7 +1,7 @@
 /*
  * ============================================================
  *  LandingPage.jsx
- *  Self-containe — imports only global.css (via main.jsx)
+ *  Self-contained — imports only global.css (via main.jsx)
  *  and its own LandingPage.css
  * ============================================================
  */
@@ -25,7 +25,7 @@ import { calcPrice, fmtNaira, getBreakdown, COMPANIES } from '../utils/pricing'
 
 const MAX_COMPANIES = 1223
 
-/* helper*/
+/* heeelper*/
 function scrollTo(id) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
