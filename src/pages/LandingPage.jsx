@@ -133,9 +133,14 @@ function Hero({ onGetStarted }) {
 
 /* ── Ticker ────────────────────────────────────────────────── */
 function Ticker() {
-  const doubled = [...COMPANIES, ...COMPANIES]
+  const doubled = [...COMPANIES, ...COMPANIES] 
   return (
+    
     <div className="lp-ticker-wrap">
+       <div d="lp-how" className="lp-section lp-gray howitworks ticker-header">
+           <div className="lp-sec-label">The Procedure</div>
+      <h2 className="lp-sec-title">Get yur CV seen by <span>Top Tech Companies</span></h2>
+       </div>
       <div className="lp-ticker-track">
         {doubled.map((c, i) => (
           <span key={i} className="lp-ticker-item">
@@ -292,7 +297,7 @@ function Features() {
 
   return (
     <section id="lp-features" className="lp-section lp-white" ref={sectionRef}>
-      <div className="lp-sec-label">Why ReachHireJobs</div>
+      <div className="lp-sec-label">Why Jobtomail</div>
       <h2 className="lp-sec-title">Built for <span>African Tech Talent</span></h2>
       <div className="lp-feats-grid">
         {FEATS.map((f, i) => (
@@ -429,6 +434,51 @@ function FAQ() {
     </section>
   )
 }
+
+function Mission() {
+  return (
+    <section className="about-mission">
+      <div className="about-mission-inner">
+        <div className="about-mission-text">
+          <div className="about-section-label lp-sec-label">Our Mission</div>
+          <h2 className='lp-sec-title'>Closing the Gap Between African Talent and <span>Global Opportunity</span></h2>
+           {/* <h1 className='lp-sec-title'>
+          Built for African Tech Talent.<br />
+          <span>By Africans.</span>
+        </h1> */}
+          <p style={{ color: '#666666' }}>
+            The African tech ecosystem is producing world-class engineers, designers, and product builders. But the job search process hasn't kept up. Job boards are flooded, referrals are gatekept, and cold outreach is time-consuming.
+          </p>
+          <p style={{ color: '#666666' }}>
+            SwiftyApply levels the playing field. We give every job seeker ,whether they're in Lagos, Nairobi, Accra or Kigali — the ability to put their CV directly in front of the people who can hire them, at scale, in minutes.
+          </p>
+          <p style={{ color: '#666666' }}>
+            We're not just a tool. We're infrastructure for African career growth.
+          </p>
+        </div>
+        <div className="about-mission-visual">
+          <div className="about-visual-card">
+            <div className="about-vc-top"></div>
+            <div className="about-vc-title ">The Problem We Solve</div>
+            <div className="about-vc-item">
+              <span className="about-vc-before">Before SwiftyApply</span>
+              <p style={{ color: '#666666' }}>
+                Apply to 5 companies per day manually. Spend weeks hoping for responses. Miss out on companies you didn't even know were hiring.
+              </p>
+            </div>
+            <div className="about-vc-divider" />
+            <div className="about-vc-item">
+              <span className="about-vc-after">With SwiftyApply</span>
+              <p style={{ color: '#666666' }}>
+                Blast your CV to 1,223+ verified companies in minutes. Get in front of HR managers before jobs are even posted.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 /* ── Footer ────────────────────────────────────────────────── */
 function Footer({ onGetStarted }) {
   return (
@@ -472,7 +522,7 @@ export default function LandingPage({ onGetStarted }) {
       <Pricing onGetStarted={onGetStarted} />
       <Features />
       <FAQ />
-      <Ticker />
+      <Mission />
       <Footer onGetStarted={onGetStarted} />
     </>
   )

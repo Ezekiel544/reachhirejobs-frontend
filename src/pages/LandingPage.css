@@ -6,7 +6,8 @@
 .lp-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 200;
   background: rgba(255,255,255,.95); backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--gray-100); padding: 0 5%;
+   padding: 0 5%;
+   border-bottom: 1px solid var(--gray-100);
 }
 .lp-nav-inner {
   display: flex; align-items: center; justify-content: space-between;
@@ -62,7 +63,9 @@
 .lp-hero-left h1 span { color: var(--blue); }
 .lp-sub { font-size: clamp(15px, 1.5vw, 18px); color: var(--gray-500); line-height: 1.7; margin-bottom: 36px; }
 .lp-hero-btns { display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 48px; }
-.lp-stats { display: flex; gap: 36px; padding-top: 32px; border-top: 1px solid var(--gray-200); flex-wrap: wrap; }
+.lp-stats { display: flex; gap: 36px; padding-top: 32px; ; flex-wrap: wrap;
+/* border-top: 1px solid var(--gray-200)  */
+}
 .lp-stat-num { font-family: var(--font-head); font-size: 30px; font-weight: 800; color: var(--blue); }
 .lp-stat-lbl { font-size: 13px; color: var(--gray-400); margin-top: 2px; }
 
@@ -344,9 +347,9 @@
 
 
 .lp-mobile-menu {
-  background: rgba(10, 15, 30, 0.97);
+  /* background: rgba(10, 15, 30, 0.97);
   backdrop-filter: blur(12px);
-  border-top: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(255,255,255,0.08); */
 }
 
 .lp-mobile-menu a {
@@ -357,8 +360,21 @@
   color: white;
   background: none;
 }
-.lp-mobile-menu {
+/* .lp-mobile-menu {
   background: transparent;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255,255,255,0.08);
+} */
+
+ /* .lp-mobile-menu {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255,255,255,0.08);
+} */
+ .lp-mobile-menu {
+  background: rgba(15, 15, 15, 0.45);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border-top: 1px solid rgba(255,255,255,0.08);
@@ -469,3 +485,19 @@
 .lp-faq-icon { font-size: 22px; font-weight: 300; color: var(--blue-glow); flex-shrink: 0; }
 .lp-faq-a { padding: 0 0 20px; font-size: 15px; color: var(--text-secondary); line-height: 1.8; text-align: left; }
 .lp-faq-open .lp-faq-q { color: var(--blue-bright); }
+
+@media (max-width: 370px) {
+  .lp-stats {
+    flex-wrap: nowrap;
+    gap: 24px;
+  }
+
+  .lp-stat-lbl {
+    font-size: 11px;
+  }
+}
+.ticker-header{
+  /* border: 2px solid redd; */
+  padding-top: 10px;
+  padding-bottom: 50px;
+}
