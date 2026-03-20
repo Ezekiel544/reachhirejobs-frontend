@@ -1,7 +1,7 @@
 /*
  * ============================================================
  *  LandingPage.jsxd
- *  Self-contained — imports only global.css (via main.jsx)
+ *  Self-contained — imports only global.css (via main.djsx)
  *  and its own LandingPage.css
  * ============================================================
  */
