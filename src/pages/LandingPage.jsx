@@ -31,7 +31,7 @@ function scrollTo(id) {
 }
 
 /* ── Navbar ────────────────────────────────────────────────── */
-function Navbar({ onGetStarted }) {
+function Navbbar({ onGetStarted }) {
   const [open,     setOpen]     = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
