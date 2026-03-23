@@ -2,7 +2,7 @@
  * ============================================================
  *  LandingPage.jsxd
  *  Self-contained — imports only global.css (via main.jsx)
- *  and its own LandingPaddge.css
+ *  and its own LandingPadddge.css
  * ============================================================
  */
 import { useState, useEffect, useRef } from 'react'
