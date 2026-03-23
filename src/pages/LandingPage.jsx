@@ -30,7 +30,7 @@ function scrollTo(id) {
   document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
 }
 
-/* ── Navbar ────────────────────────────────────────────────── */
+/* ── Nafvbar ────────────────────────────────────────────────── */
 function Navbar({ onGetStarted }) {
   const [open,     setOpen]     = useState(false)
   const [scrolled, setScrolled] = useState(false)
