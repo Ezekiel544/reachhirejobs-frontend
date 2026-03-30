@@ -155,14 +155,14 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
     6: { q: "You're almost done!", sub: "Review your CV, download it or use it for a blast." },
   }
 
-  // const missingFields = []
-  // if (!cv.firstName || !cv.lastName) missingFields.push('Full name')
-  // if (!cv.email) missingFields.push('Email')
-  // if (!cv.phone) missingFields.push('Phone')
-  // if (!cv.experience.some(e => e.company && e.role)) missingFields.push('At least one work experience')
-  // if (!cv.education.some(e => e.school)) missingFields.push('At least one education entry')
-  // if (cv.skills.length === 0) missingFields.push('At least one skill')
-  // if (!cv.summary) missingFields.push('Professional summary')
+  const missingFields = []
+  if (!cv.firstName || !cv.lastName) missingFields.push('Full name')
+  if (!cv.email) missingFields.push('Email')
+  if (!cv.phone) missingFields.push('Phone')
+  if (!cv.experience.some(e => e.company && e.role)) missingFields.push('At least one work experience')
+  if (!cv.education.some(e => e.school)) missingFields.push('At least one education entry')
+  if (cv.skills.length === 0) missingFields.push('At least one skill')
+  if (!cv.summary) missingFields.push('Professional summary')
 
   return (
     <div className="cvb-page">
