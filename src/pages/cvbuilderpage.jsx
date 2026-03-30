@@ -256,7 +256,7 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
           )}
 
           {/* Step 2 — Experience */}
-          {step === 2 && (
+          {/* {step === 2 && (
             <div className="cvb-form-body">
               {cv.experience.map((exp, i) => (
                 <div key={i} className="cvb-block">
@@ -300,7 +300,7 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
               ))}
               <button className="cvb-add-block" onClick={addExp}>+ Add another position</button>
             </div>
-          )}
+          )} */}
 
           {/* Step 3 — Education */}
           {step === 3 && (
