@@ -45,18 +45,18 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
   function update(field, val) { setCv(p => ({ ...p, [field]: val })) }
 
   Validation
-  function isComplete() {
-    return (
-      cv.firstName.trim() &&
-      cv.lastName.trim() &&
-      cv.email.trim() &&
-      cv.phone.trim() &&
-      cv.experience.some(e => e.company.trim() && e.role.trim()) &&
-      cv.education.some(e => e.school.trim()) &&
-      cv.skills.length > 0 &&
-      cv.summary.trim()
-    )
-  }
+  // function isComplete() {
+  //   return (
+  //     cv.firstName.trim() &&
+  //     cv.lastName.trim() &&
+  //     cv.email.trim() &&
+  //     cv.phone.trim() &&
+  //     cv.experience.some(e => e.company.trim() && e.role.trim()) &&
+  //     cv.education.some(e => e.school.trim()) &&
+  //     cv.skills.length > 0 &&
+  //     cv.summary.trim()
+  //   )
+  // }
 
   // Photo
   function handlePhoto(e) {
