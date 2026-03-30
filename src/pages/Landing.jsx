@@ -150,108 +150,108 @@ function Features() {
 // ── Pricing Calculator ────────────────────────────────────────────────────────
 const NICHES = ['🏦 Fintech','💻 SaaS','🤖 AI/ML','🏥 Healthtech','🌾 Agritech','🌍 Remote','🛒 E-commerce','📚 EdTech']
 
-// function PricingSection({ onGetStarted }) {
-//   const [count, setCount] = useState(500)
-//   const [activeNiches, setActiveNiches] = useState(['🏦 Fintech','💻 SaaS','🌍 Remote'])
+function PricingSection({ onGetStarted }) {
+  const [count, setCount] = useState(500)
+  const [activeNiches, setActiveNiches] = useState(['🏦 Fintech','💻 SaaS','🌍 Remote'])
 
-//   const { per, total } = calcPrice(count)
-//   const bd = getBreakdown(count)
+  const { per, total } = calcPrice(count)
+  const bd = getBreakdown(count)
 
-//   function handleSlider(e) { setCount(Number(e.target.value)) }
-//   function handleInput(e) {
-//     let v = Number(e.target.value)
-//     if (isNaN(v)) return
-//     v = Math.min(Math.max(v, 10), 20000)
-//     setCount(v)
-//   }
-//   function toggleNiche(n) {
-//     setActiveNiches(prev => prev.includes(n) ? prev.filter(x => x !== n) : [...prev, n])
-//   }
+  function handleSlider(e) { setCount(Number(e.target.value)) }
+  function handleInput(e) {
+    let v = Number(e.target.value)
+    if (isNaN(v)) return
+    v = Math.min(Math.max(v, 10), 20000)
+    setCount(v)
+  }
+  function toggleNiche(n) {
+    setActiveNiches(prev => prev.includes(n) ? prev.filter(x => x !== n) : [...prev, n])
+  }
 
-//   return (
-//     <section id="pricing-section" className={styles.sectionGray}>
-//       <div className={styles.section}>
-//         <div style={{ textAlign: 'center' }}>
-//           <div className={styles.secLabel}>Pricing</div>
-//           <h2 className={styles.secTitle} style={{ maxWidth: '100%' }}>
-//             Pay Only for <span>What You Need</span>
-//           </h2>
-//           <p className={styles.secSub} style={{ margin: '14px auto 0', textAlign: 'center' }}>
-//             Drag or type to pick your reach. More companies = less per email.
-//           </p>
-//         </div>
+  return (
+    <section id="pricing-section" className={styles.sectionGray}>
+      <div className={styles.section}>
+        <div style={{ textAlign: 'center' }}>
+          <div className={styles.secLabel}>Pricing</div>
+          <h2 className={styles.secTitle} style={{ maxWidth: '100%' }}>
+            Pay Only for <span>What You Need</span>
+          </h2>
+          <p className={styles.secSub} style={{ margin: '14px auto 0', textAlign: 'center' }}>
+            Drag or type to pick your reach. More companies = less per email.
+          </p>
+        </div>
 
-//         <div className={styles.pricingBox}>
-//           {/* Left */}
-//           <div>
-//             <div className={styles.calcTitle}>Build Your Blast</div>
-//             <div className={styles.calcSub}>Minimum 10 · Maximum 20,000 companies</div>
-//             <div className={styles.rangeLblRow}><span>10</span><span>20,000</span></div>
-//             <input type="range" min="10" max="20000" step="10" value={count} onChange={handleSlider} />
-//             <div className={styles.inputRow}>
-//               <span className={styles.inputLbl}>Companies:</span>
-//               <input
-//                 type="number" className="company-num-input"
-//                 min="10" max="20000" value={count}
-//                 onChange={handleInput}
-//               />
-//             </div>
-//             <div className={styles.nicheLbl} style={{ marginTop: 16 }}>Filter by Industry</div>
-//             <div className={styles.nicheTags}>
-//               {NICHES.map(n => (
-//                 <button
-//                   key={n}
-//                   className={`ntag ${activeNiches.includes(n) ? 'active' : ''}`}
-//                   onClick={() => toggleNiche(n)}
-//                 >{n}</button>
-//               ))}
-//             </div>
-//           </div>
+        <div className={styles.pricingBox}>
+          {/* Left */}
+          <div>
+            <div className={styles.calcTitle}>Build Your Blast</div>
+            <div className={styles.calcSub}>Minimum 10 · Maximum 20,000 companies</div>
+            <div className={styles.rangeLblRow}><span>10</span><span>20,000</span></div>
+            <input type="range" min="10" max="20000" step="10" value={count} onChange={handleSlider} />
+            <div className={styles.inputRow}>
+              <span className={styles.inputLbl}>Companies:</span>
+              <input
+                type="number" className="company-num-input"
+                min="10" max="20000" value={count}
+                onChange={handleInput}
+              />
+            </div>
+            <div className={styles.nicheLbl} style={{ marginTop: 16 }}>Filter by Industry</div>
+            <div className={styles.nicheTags}>
+              {NICHES.map(n => (
+                <button
+                  key={n}
+                  className={`ntag ${activeNiches.includes(n) ? 'active' : ''}`}
+                  onClick={() => toggleNiche(n)}
+                >{n}</button>
+              ))}
+            </div>
+          </div>
 
-//           {/* Right */}
-//           <div>
-//             <div className={styles.priceSummary}>
-//               <div className={styles.psRow}>
-//                 <span className={styles.psLbl}>Companies selected</span>
-//                 <span className={styles.psVal}>{count.toLocaleString()}</span>
-//               </div>
-//               <div className={styles.psRow}>
-//                 <span className={styles.psLbl}>Price per company</span>
-//                 <span className={styles.psVal}>₦{per}</span>
-//               </div>
-//               <div className={styles.psRow}>
-//                 <span className={styles.psTotalLbl}>Total</span>
-//                 <span className={styles.psTotalVal}>{fmtNaira(total)}</span>
-//               </div>
-//             </div>
+          {/* Right */}
+          <div>
+            <div className={styles.priceSummary}>
+              <div className={styles.psRow}>
+                <span className={styles.psLbl}>Companies selected</span>
+                <span className={styles.psVal}>{count.toLocaleString()}</span>
+              </div>
+              <div className={styles.psRow}>
+                <span className={styles.psLbl}>Price per company</span>
+                <span className={styles.psVal}>₦{per}</span>
+              </div>
+              <div className={styles.psRow}>
+                <span className={styles.psTotalLbl}>Total</span>
+                <span className={styles.psTotalVal}>{fmtNaira(total)}</span>
+              </div>
+            </div>
 
-//             <div className={styles.cbTitle}>Estimated Breakdown by Region</div>
-//             {[
-//               { flag:'🇳🇬', name:'Nigeria', count: bd.ng, pct: 45 },
-//               { flag:'🌍', name:'Global/Remote', count: bd.gr, pct: 25 },
-//               { flag:'🇰🇪', name:'Kenya', count: bd.ke, pct: 15 },
-//               { flag:'🇿🇦', name:'South Africa', count: bd.sa, pct: 10 },
-//               { flag:'🌍', name:'Other Africa', count: bd.oa, pct: 5 },
-//             ].map(r => (
-//               <div key={r.name} className={styles.cbItem}>
-//                 <span>{r.flag}</span>
-//                 <span className={styles.cbName}>{r.name}</span>
-//                 <div className="prog-bar" style={{ flex: 1 }}>
-//                   <div className="prog-fill" style={{ width: `${r.pct}%` }} />
-//                 </div>
-//                 <span className={styles.cbCount}>{r.count}</span>
-//               </div>
-//             ))}
+            <div className={styles.cbTitle}>Estimated Breakdown by Region</div>
+            {[
+              { flag:'🇳🇬', name:'Nigeria', count: bd.ng, pct: 45 },
+              { flag:'🌍', name:'Global/Remote', count: bd.gr, pct: 25 },
+              { flag:'🇰🇪', name:'Kenya', count: bd.ke, pct: 15 },
+              { flag:'🇿🇦', name:'South Africa', count: bd.sa, pct: 10 },
+              { flag:'🌍', name:'Other Africa', count: bd.oa, pct: 5 },
+            ].map(r => (
+              <div key={r.name} className={styles.cbItem}>
+                <span>{r.flag}</span>
+                <span className={styles.cbName}>{r.name}</span>
+                <div className="prog-bar" style={{ flex: 1 }}>
+                  <div className="prog-fill" style={{ width: `${r.pct}%` }} />
+                </div>
+                <span className={styles.cbCount}>{r.count}</span>
+              </div>
+            ))}
 
-//             <button className={styles.payBtn} style={{ marginTop: 20 }} onClick={() => onGetStarted('signup')}>
-//               Get Started — Proceed to Payment ⚡
-//             </button>
-//           </div>
-//         </div>
-//       </div>
-//     </section>
-//   )
-// }
+            <button className={styles.payBtn} style={{ marginTop: 20 }} onClick={() => onGetStarted('signup')}>
+              Get Started — Proceed to Payment ⚡
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
 
 // ── Footer ────────────────────────────────────────────────────────────────────
 function Footer() {
