@@ -20,12 +20,12 @@ export default function Auth({ defaultTab = 'login', onLogin, onBack }) {
   const [googleLoading, setGoogleLoading] = useState(false)
   const { showToast } = useToast()
 
-  // const [loginEmail, setLoginEmail] = useState('')
-  // const [loginPass, setLoginPass] = useState('')
+  const [loginEmail, setLoginEmail] = useState('')
+  const [loginPass, setLoginPass] = useState('')
 
-  // const [signupName, setSignupName] = useState('')
-  // const [signupEmail, setSignupEmail] = useState('')
-  // const [signupPass, setSignupPass] = useState('')
+  const [signupName, setSignupName] = useState('')
+  const [signupEmail, setSignupEmail] = useState('')
+  const [signupPass, setSignupPass] = useState('')
 
 
   function handleSignup() {
