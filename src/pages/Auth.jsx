@@ -47,15 +47,15 @@ export default function Auth({ defaultTab = 'login', onLogin, onBack }) {
     }, 1500)
   }
 
-  if (googleLoading) {
-    return (
-      <div style={{
-        position: 'fixed', inset: 0,
-        background: '#fff',
-        display: 'flex', flexDirection: 'column',
-        alignItems: 'center', justifyContent: 'center',
-        zIndex: 9999, gap: 20,
-      }}>
+  // if (googleLoading) {
+  //   return (
+  //     <div style={{
+  //       position: 'fixed', inset: 0,
+  //       background: '#fff',
+  //       display: 'flex', flexDirection: 'column',
+  //       alignItems: 'center', justifyContent: 'center',
+  //       zIndex: 9999, gap: 20,
+  //     }}>
         <div style={{ fontSize: 28, fontWeight: 800, color: '#0f172a' }}>
           Reach<span style={{ color: 'var(--blue)' }}>HireJobs</span>
         </div>
