@@ -528,12 +528,12 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
             {/* CLASSIC */}
             {template === 'classic' && (
               <>
-                {/* <div className="cls-header">
+                <div className="cls-header">
                   {cv.photo && <img src={cv.photo} alt="photo" className="cls-photo" />}
                   <div className="cls-name">{fullName || 'Your Name'}</div>
                   <div className="cls-contact">{[cv.email, cv.phone, cv.location, cv.linkedin].filter(Boolean).join(' · ')}</div>
                   <hr className="cls-hr" />
-                </div> */}
+                </div>
                 {cv.summary && <div className="cls-section"><div className="cls-title">PROFESSIONAL SUMMARY</div><p>{cv.summary}</p></div>}
                 {cv.experience.some(e => e.company || e.role) && (
                   <div className="cls-section">
