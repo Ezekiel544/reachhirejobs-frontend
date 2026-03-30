@@ -561,7 +561,7 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
             )}
 
             {/* MINIMAL */}
-            {/* {template === 'minimal' && (
+            {template === 'minimal' && (
               <>
                 <div className="min-header">
                   {cv.photo && <img src={cv.photo} alt="photo" className="min-photo" />}
@@ -595,7 +595,7 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
                 )}
                 {cv.skills.length > 0 && <div className="min-section"><div className="min-title">Skills</div><div className="min-skills">{cv.skills.map((s, i) => <span key={i}>{s}</span>)}</div></div>}
               </>
-            )} */}
+            )}
 
           </div>
         </div>
