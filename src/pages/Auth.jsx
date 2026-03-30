@@ -16,24 +16,24 @@ const BACKEND_URL = import.meta.env.VITE_API_URL
   : 'http://localhost:5001'
 
 export default function Auth({ defaultTab = 'login', onLogin, onBack }) {
-  const [tab, setTab] = useState(defaultTab)
-  const [googleLoading, setGoogleLoading] = useState(false)
-  const { showToast } = useToast()
+  // const [tab, setTab] = useState(defaultTab)
+  // const [googleLoading, setGoogleLoading] = useState(false)
+  // const { showToast } = useToast()
 
-  const [loginEmail, setLoginEmail] = useState('')
-  const [loginPass, setLoginPass] = useState('')
+  // const [loginEmail, setLoginEmail] = useState('')
+  // const [loginPass, setLoginPass] = useState('')
 
-  const [signupName, setSignupName] = useState('')
-  const [signupEmail, setSignupEmail] = useState('')
-  const [signupPass, setSignupPass] = useState('')
+  // const [signupName, setSignupName] = useState('')
+  // const [signupEmail, setSignupEmail] = useState('')
+  // const [signupPass, setSignupPass] = useState('')
 
 
-  // function handleSignup() {
-  //   if (!signupName || !signupEmail || !signupPass) { showToast('Please fill in all fields', 'error'); return }
-  //   if (!signupEmail.includes('@')) { showToast('Enter a valid email address', 'error'); return }
-  //   if (signupPass.length < 8) { showToast('Password must be at least 8 characters', 'error'); return }
-  //   onLogin({ name: signupName, email: signupEmail })
-  // }
+  function handleSignup() {
+    if (!signupName || !signupEmail || !signupPass) { showToast('Please fill in all fields', 'error'); return }
+    if (!signupEmail.includes('@')) { showToast('Enter a valid email address', 'error'); return }
+    if (signupPass.length < 8) { showToast('Password must be at least 8 characters', 'error'); return }
+    onLogin({ name: signupName, email: signupEmail })
+  }
 
   function handleGoogle() {
     setGoogleLoading(true)
