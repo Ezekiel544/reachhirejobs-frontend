@@ -35,12 +35,12 @@ export default function Auth({ defaultTab = 'login', onLogin, onBack }) {
     onLogin({ name: signupName, email: signupEmail })
   }
 
-  function handleGoogle() {
-    setGoogleLoading(true)
-    setTimeout(() => {
-      window.location.href = `${BACKEND_URL}/api/auth/google`
-    }, 1500)
-  }
+  // function handleGoogle() {
+  //   setGoogleLoading(true)
+  //   setTimeout(() => {
+  //     window.location.href = `${BACKEND_URL}/api/auth/google`
+  //   }, 1500)
+  // }
 
   if (googleLoading) {
     return (
