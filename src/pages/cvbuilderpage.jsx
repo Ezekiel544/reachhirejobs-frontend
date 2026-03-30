@@ -303,7 +303,7 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
           )}
 
           {/* Step 3 — Education */}
-          {/* {step === 3 && (
+          {step === 3 && (
             <div className="cvb-form-body">
               {cv.education.map((edu, i) => (
                 <div key={i} className="cvb-block">
@@ -361,7 +361,7 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
               ))}
               <button className="cvb-add-block" onClick={addCert}>+ Add certification</button>
             </div>
-          )} */}
+          )}
 
           {/* Step 4 — Skills */}
           {step === 4 && (
