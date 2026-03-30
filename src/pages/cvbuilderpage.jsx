@@ -75,18 +75,18 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
   function addExpBullet(i) {
     const exp = [...cv.experience]; exp[i].bullets = [...exp[i].bullets, '']; update('experience', exp)
   }
-  // function removeExpBullet(i, bi) {
-  //   const exp = [...cv.experience]; exp[i].bullets = exp[i].bullets.filter((_, x) => x !== bi); update('experience', exp)
-  // }
-  // function addExp() { update('experience', [...cv.experience, { company: '', role: '', startDate: '', endDate: '', current: false, bullets: [''] }]) }
-  // function removeExp(i) { update('experience', cv.experience.filter((_, x) => x !== i)) }
+  function removeExpBullet(i, bi) {
+    const exp = [...cv.experience]; exp[i].bullets = exp[i].bullets.filter((_, x) => x !== bi); update('experience', exp)
+  }
+  function addExp() { update('experience', [...cv.experience, { company: '', role: '', startDate: '', endDate: '', current: false, bullets: [''] }]) }
+  function removeExp(i) { update('experience', cv.experience.filter((_, x) => x !== i)) }
 
   // Education
-  function updateEdu(i, field, val) {
-    const edu = [...cv.education]; edu[i] = { ...edu[i], [field]: val }; update('education', edu)
-  }
-  function addEdu() { update('education', [...cv.education, { school: '', degree: '', field: '', startYear: '', endYear: '' }]) }
-  function removeEdu(i) { update('education', cv.education.filter((_, x) => x !== i)) }
+  // function updateEdu(i, field, val) {
+  //   const edu = [...cv.education]; edu[i] = { ...edu[i], [field]: val }; update('education', edu)
+  // }
+  // function addEdu() { update('education', [...cv.education, { school: '', degree: '', field: '', startYear: '', endYear: '' }]) }
+  // function removeEdu(i) { update('education', cv.education.filter((_, x) => x !== i)) }
 
   // Skills
   function addSkill() {
