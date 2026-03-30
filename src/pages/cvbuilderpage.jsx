@@ -526,7 +526,7 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
             )}
 
             {/* CLASSIC */}
-            {/* {template === 'classic' && (
+            {template === 'classic' && (
               <>
                 <div className="cls-header">
                   {cv.photo && <img src={cv.photo} alt="photo" className="cls-photo" />}
@@ -558,7 +558,7 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
                 )}
                 {cv.skills.length > 0 && <div className="cls-section"><div className="cls-title">SKILLS</div><p>{cv.skills.join(' · ')}</p></div>}
               </>
-            )} */}
+            )}
 
             {/* MINIMAL */}
             {template === 'minimal' && (
