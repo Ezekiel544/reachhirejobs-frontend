@@ -476,7 +476,7 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
           <div ref={previewRef} className={`cvb-cv cvb-cv-${template}`}>
 
             {/* MODERN */}
-            {template === 'modern' && (
+            {/* {template === 'modern' && (
               <>
                 <div className="mod-header">
                   {cv.photo && <img src={cv.photo} alt="photo" className="mod-photo" />}
@@ -523,7 +523,7 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
                   </div>
                 )}
               </>
-            )}
+            )} */}
 
             {/* CLASSIC */}
             {template === 'classic' && (
