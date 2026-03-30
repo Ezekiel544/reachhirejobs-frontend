@@ -99,22 +99,22 @@ function HowItWorks() {
     { num: '04', icon: '⚡', title: 'Pay & Blast', desc: 'Complete your payment via card, bank transfer, or USSD. We handle the rest.' },
   ]
   return (
-    // <section id="how" className={styles.sectionGray}>
-    //   <div className={styles.section}>
-    //     <div className={styles.secLabel}>The Process</div>
-    //     <h2 className={styles.secTitle}>From Upload to Inbox <span>in Minutes</span></h2>
-    //     <div className={styles.stepsGrid}>
-    //       {steps.map(s => (
-    //         <div key={s.num} className={styles.stepCard}>
-    //           <span className={styles.stepNum}>{s.num}</span>
-    //           <span className={styles.stepIcon}>{s.icon}</span>
-    //           <div className={styles.stepTitle}>{s.title}</div>
-    //           <div className={styles.stepDesc}>{s.desc}</div>
-    //         </div>
-    //       ))}
-    //     </div>
-    //   </div>
-    // </section>
+    <section id="how" className={styles.sectionGray}>
+      <div className={styles.section}>
+        <div className={styles.secLabel}>The Process</div>
+        <h2 className={styles.secTitle}>From Upload to Inbox <span>in Minutes</span></h2>
+        <div className={styles.stepsGrid}>
+          {steps.map(s => (
+            <div key={s.num} className={styles.stepCard}>
+              <span className={styles.stepNum}>{s.num}</span>
+              <span className={styles.stepIcon}>{s.icon}</span>
+              <div className={styles.stepTitle}>{s.title}</div>
+              <div className={styles.stepDesc}>{s.desc}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   )
 }
 
