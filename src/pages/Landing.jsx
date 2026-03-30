@@ -99,22 +99,22 @@ function HowItWorks() {
     { num: '04', icon: '⚡', title: 'Pay & Blast', desc: 'Complete your payment via card, bank transfer, or USSD. We handle the rest.' },
   ]
   return (
-    <section id="how" className={styles.sectionGray}>
-      <div className={styles.section}>
-        <div className={styles.secLabel}>The Process</div>
-        <h2 className={styles.secTitle}>From Upload to Inbox <span>in Minutes</span></h2>
-        <div className={styles.stepsGrid}>
-          {steps.map(s => (
-            <div key={s.num} className={styles.stepCard}>
-              <span className={styles.stepNum}>{s.num}</span>
-              <span className={styles.stepIcon}>{s.icon}</span>
-              <div className={styles.stepTitle}>{s.title}</div>
-              <div className={styles.stepDesc}>{s.desc}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+    // <section id="how" className={styles.sectionGray}>
+    //   <div className={styles.section}>
+    //     <div className={styles.secLabel}>The Process</div>
+    //     <h2 className={styles.secTitle}>From Upload to Inbox <span>in Minutes</span></h2>
+    //     <div className={styles.stepsGrid}>
+    //       {steps.map(s => (
+    //         <div key={s.num} className={styles.stepCard}>
+    //           <span className={styles.stepNum}>{s.num}</span>
+    //           <span className={styles.stepIcon}>{s.icon}</span>
+    //           <div className={styles.stepTitle}>{s.title}</div>
+    //           <div className={styles.stepDesc}>{s.desc}</div>
+    //         </div>
+    //       ))}
+    //     </div>
+    //   </div>
+    // </section>
   )
 }
 
@@ -256,32 +256,32 @@ function PricingSection({ onGetStarted }) {
 // ── Footer ────────────────────────────────────────────────────────────────────
 function Footer() {
   return (
-    // <footer className={styles.footer}>
-    //   <div className={styles.footerInner}>
-    //     <div>
-    //       <div className={styles.fLogo}>Reach<span>Hire</span></div>
-    //       <div className={styles.fDesc}>The fastest way for African tech talent to get noticed. Blast your CV to 1,223+ companies across Africa and beyond.</div>
-    //     </div>
-    //     <div className={styles.fCol}>
-    //       <div className={styles.fColTitle}>Product</div>
-    //       <a onClick={() => scrollToSection('how')}>How it Works</a>
-    //       <a onClick={() => scrollToSection('pricing-section')}>Pricing</a>
-    //       <a onClick={() => scrollToSection('features')}>Features</a>
-    //     </div>
-    //     <div className={styles.fCol}>
-    //       <div className={styles.fColTitle}>Company</div>
-    //       <a>About Us</a><a>Blog</a><a>Contact</a>
-    //     </div>
-    //     <div className={styles.fCol}>
-    //       <div className={styles.fColTitle}>Legal</div>
-    //       <a>Privacy Policy</a><a>Terms of Service</a><a>Refund Policy</a>
-    //     </div>
-    //   </div>
-    //   <div className={styles.footerBottom}>
-    //     <span>© 2025 ReachHire. All rights reserved.</span>
-    //     <span>Made with ❤️ for African Tech Talent</span>
-    //   </div>
-    // </footer>
+    <footer className={styles.footer}>
+      <div className={styles.footerInner}>
+        <div>
+          <div className={styles.fLogo}>Reach<span>Hire</span></div>
+          <div className={styles.fDesc}>The fastest way for African tech talent to get noticed. Blast your CV to 1,223+ companies across Africa and beyond.</div>
+        </div>
+        <div className={styles.fCol}>
+          <div className={styles.fColTitle}>Product</div>
+          <a onClick={() => scrollToSection('how')}>How it Works</a>
+          <a onClick={() => scrollToSection('pricing-section')}>Pricing</a>
+          <a onClick={() => scrollToSection('features')}>Features</a>
+        </div>
+        <div className={styles.fCol}>
+          <div className={styles.fColTitle}>Company</div>
+          <a>About Us</a><a>Blog</a><a>Contact</a>
+        </div>
+        <div className={styles.fCol}>
+          <div className={styles.fColTitle}>Legal</div>
+          <a>Privacy Policy</a><a>Terms of Service</a><a>Refund Policy</a>
+        </div>
+      </div>
+      <div className={styles.footerBottom}>
+        <span>© 2025 ReachHire. All rights reserved.</span>
+        <span>Made with ❤️ for African Tech Talent</span>
+      </div>
+    </footer>
   )
 }
 
