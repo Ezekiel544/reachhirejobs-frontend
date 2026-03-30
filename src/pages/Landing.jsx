@@ -92,12 +92,12 @@ function Ticker() {
 
 // ── How It Works ──────────────────────────────────────────────────────────────
 function HowItWorks() {
-  const steps = [
-    { num: '01', icon: '📄', title: 'Upload Your CV', desc: 'Upload your CV and cover letter. Secure and ready to send anytime.' },
-    { num: '02', icon: '🎯', title: 'Pick Your Niche', desc: 'Select your role and preferred industries — Fintech, SaaS, AI, Health and more.' },
-    { num: '03', icon: '🎚️', title: 'Set Your Reach', desc: 'Drag the slider or type a number. Price updates instantly.' },
-    { num: '04', icon: '⚡', title: 'Pay & Blast', desc: 'Complete your payment via card, bank transfer, or USSD. We handle the rest.' },
-  ]
+  // const steps = [
+  //   { num: '01', icon: '📄', title: 'Upload Your CV', desc: 'Upload your CV and cover letter. Secure and ready to send anytime.' },
+  //   { num: '02', icon: '🎯', title: 'Pick Your Niche', desc: 'Select your role and preferred industries — Fintech, SaaS, AI, Health and more.' },
+  //   { num: '03', icon: '🎚️', title: 'Set Your Reach', desc: 'Drag the slider or type a number. Price updates instantly.' },
+  //   { num: '04', icon: '⚡', title: 'Pay & Blast', desc: 'Complete your payment via card, bank transfer, or USSD. We handle the rest.' },
+  // ]
   return (
     <section id="how" className={styles.sectionGray}>
       <div className={styles.section}>
