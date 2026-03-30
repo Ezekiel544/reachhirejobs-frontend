@@ -73,52 +73,52 @@ export default function Auth({ defaultTab = 'login', onLogin, onBack }) {
   }
 
   return (
-    // <div className={styles.page}>
-    //   <div className={styles.card}>
-    //     <div className={styles.logo}>RJobto<span>Mail</span></div>
-    //     <div className={styles.tagline}>Get your CV to 1,223+ tech companies across Africa</div>
+    <div className={styles.page}>
+      <div className={styles.card}>
+        <div className={styles.logo}>RJobto<span>Mail</span></div>
+        <div className={styles.tagline}>Get your CV to 1,223+ tech companies across Africa</div>
 
-    //     <div className={styles.tabs}>
-    //       <button className={`${styles.tab} ${tab === 'login' ? styles.active : ''}`} onClick={() => setTab('login')}>Sign In</button>
-    //       <button className={`${styles.tab} ${tab === 'signup' ? styles.active : ''}`} onClick={() => setTab('signup')}>Sign Up</button>
-    //     </div>
+        <div className={styles.tabs}>
+          <button className={`${styles.tab} ${tab === 'login' ? styles.active : ''}`} onClick={() => setTab('login')}>Sign In</button>
+          <button className={`${styles.tab} ${tab === 'signup' ? styles.active : ''}`} onClick={() => setTab('signup')}>Sign Up</button>
+        </div>
 
-    //     {tab === 'login' ? (
-    //       <div>
-    //         <div className={styles.formGroup}>
-    //           <label className={styles.label}>Email Address</label>
-    //           <input className="form-input" type="email" placeholder="you@example.com" value={loginEmail} onChange={e => setLoginEmail(e.target.value)} />
-    //         </div>
-    //         <div className={styles.formGroup}>
-    //           <label className={styles.label}>Password</label>
-    //           <input className="form-input" type="password" placeholder="••••••••" value={loginPass} onChange={e => setLoginPass(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleLogin()} />
-    //         </div>
-    //         <button className={styles.authBtn} onClick={handleLogin}>Sign In →</button>
-    //         <div className={styles.divider}>or continue with</div>
-    //         <button className={styles.googleBtn} onClick={handleGoogle}><GoogleIcon /> Google</button>
-    //       </div>
-    //     ) : (
-    //       <div>
-    //         <div className={styles.formGroup}>
-    //           <label className={styles.label}>Full Name</label>
-    //           <input className="form-input" type="text" placeholder="John Doe" value={signupName} onChange={e => setSignupName(e.target.value)} />
-    //         </div>
-    //         <div className={styles.formGroup}>
-    //           <label className={styles.label}>Email Address</label>
-    //           <input className="form-input" type="email" placeholder="you@example.com" value={signupEmail} onChange={e => setSignupEmail(e.target.value)} />
-    //         </div>
-    //         <div className={styles.formGroup}>
-    //           <label className={styles.label}>Password</label>
-    //           <input className="form-input" type="password" placeholder="Min. 8 characters" value={signupPass} onChange={e => setSignupPass(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleSignup()} />
-    //         </div>
-    //         <button className={styles.authBtn} onClick={handleSignup}>Create Account →</button>
-    //         <div className={styles.divider}>or continue with</div>
-    //         <button className={styles.googleBtn} onClick={handleGoogle}><GoogleIcon /> Google</button>
-    //       </div>
-    //     )}
+        {tab === 'login' ? (
+          <div>
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Email Address</label>
+              <input className="form-input" type="email" placeholder="you@example.com" value={loginEmail} onChange={e => setLoginEmail(e.target.value)} />
+            </div>
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Password</label>
+              <input className="form-input" type="password" placeholder="••••••••" value={loginPass} onChange={e => setLoginPass(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleLogin()} />
+            </div>
+            <button className={styles.authBtn} onClick={handleLogin}>Sign In →</button>
+            <div className={styles.divider}>or continue with</div>
+            <button className={styles.googleBtn} onClick={handleGoogle}><GoogleIcon /> Google</button>
+          </div>
+        ) : (
+          <div>
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Full Name</label>
+              <input className="form-input" type="text" placeholder="John Doe" value={signupName} onChange={e => setSignupName(e.target.value)} />
+            </div>
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Email Address</label>
+              <input className="form-input" type="email" placeholder="you@example.com" value={signupEmail} onChange={e => setSignupEmail(e.target.value)} />
+            </div>
+            <div className={styles.formGroup}>
+              <label className={styles.label}>Password</label>
+              <input className="form-input" type="password" placeholder="Min. 8 characters" value={signupPass} onChange={e => setSignupPass(e.target.value)} onKeyDown={e => e.key === 'Enter' && handleSignup()} />
+            </div>
+            <button className={styles.authBtn} onClick={handleSignup}>Create Account →</button>
+            <div className={styles.divider}>or continue with</div>
+            <button className={styles.googleBtn} onClick={handleGoogle}><GoogleIcon /> Google</button>
+          </div>
+        )}
 
-    //     <span className={styles.backLink} onClick={onBack}>← Back to homepage</span>
-    //   </div>
-    // </div>
+        <span className={styles.backLink} onClick={onBack}>← Back to homepage</span>
+      </div>
+    </div>
   )
 }
