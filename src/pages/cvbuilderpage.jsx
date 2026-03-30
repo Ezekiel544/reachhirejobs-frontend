@@ -5,20 +5,20 @@ import { useState, useRef } from 'react'
 import { useToast } from '../context/ToastContext'
 import './cvbuilderpage.css'
 
-const STEPS = [
-  { id: 1, label: 'Personal Info' },
-  { id: 2, label: 'Work History' },
-  { id: 3, label: 'Education' },
-  { id: 4, label: 'Skills' },
-  { id: 5, label: 'Summary' },
-  { id: 6, label: 'Finalise' },
-]
+// const STEPS = [
+//   { id: 1, label: 'Personal Info' },
+//   { id: 2, label: 'Work History' },
+//   { id: 3, label: 'Education' },
+//   { id: 4, label: 'Skills' },
+//   { id: 5, label: 'Summary' },
+//   { id: 6, label: 'Finalise' },
+// ]
 
-const TEMPLATES = [
-  { id: 'modern',  label: 'Modern',  accent: '#2563eb' },
-  { id: 'classic', label: 'Classic', accent: '#1e293b' },
-  { id: 'minimal', label: 'Minimal', accent: '#0f9373' },
-]
+// const TEMPLATES = [
+//   { id: 'modern',  label: 'Modern',  accent: '#2563eb' },
+//   { id: 'classic', label: 'Classic', accent: '#1e293b' },
+//   { id: 'minimal', label: 'Minimal', accent: '#0f9373' },
+// ]
 
 const EMPTY_CV = {
   photo: null,
