@@ -364,7 +364,7 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
           )}
 
           {/* Step 4 — Skills */}
-          {step === 4 && (
+          {/* {step === 4 && (
             <div className="cvb-form-body">
               <div className="cvb-field">
                 <label>Type a skill and press Enter or click Add *</label>
@@ -390,7 +390,7 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
                 </div>
               </div>
             </div>
-          )}
+          )} */}
 
           {/* Step 5 — Summary */}
           {step === 5 && (
