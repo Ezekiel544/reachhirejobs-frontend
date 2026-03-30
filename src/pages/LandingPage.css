@@ -433,7 +433,7 @@
   background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
 }
 /* ── Responsive ── */
-@media (max-width: 1024px) {
+/* @media (max-width: 1024px) {
   .lp-hero-inner { grid-template-columns: 1fr; gap: 40px; }
   .lp-hero { min-height: auto; }
   .lp-demo-card { max-width: 480px; }
@@ -441,7 +441,7 @@
   .lp-feats-grid { grid-template-columns: repeat(2,1fr); }
   .lp-pricing-box { grid-template-columns: 1fr; gap: 32px; }
   .lp-footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
-}
+} */
 @media (max-width: 768px) {
   .lp-nav-links { display: none; }
   .lp-hamburger { display: flex; }
