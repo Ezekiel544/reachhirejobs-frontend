@@ -32,15 +32,15 @@ const EMPTY_CV = {
 }
 
 export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
-  const { showToast } = useToast()
-  const [step, setStep]               = useState(1)
-  const [cv, setCv]                   = useState(EMPTY_CV)
-  const [template, setTemplate]       = useState('modern')
-  const [skillInput, setSkillInput]   = useState('')
-  const [showUseModal, setShowUseModal] = useState(false)
-  const [showTplDrop, setShowTplDrop] = useState(false)
-  const previewRef = useRef()
-  const photoRef   = useRef()
+  // const { showToast } = useToast()
+  // const [step, setStep]               = useState(1)
+  // const [cv, setCv]                   = useState(EMPTY_CV)
+  // const [template, setTemplate]       = useState('modern')
+  // const [skillInput, setSkillInput]   = useState('')
+  // const [showUseModal, setShowUseModal] = useState(false)
+  // const [showTplDrop, setShowTplDrop] = useState(false)
+  // const previewRef = useRef()
+  // const photoRef   = useRef()
 
   function update(field, val) { setCv(p => ({ ...p, [field]: val })) }
 
