@@ -27,25 +27,20 @@ export default function Auth({ defaultTab = 'login', onLogin, onBack }) {
   const [signupEmail, setSignupEmail] = useState('')
   const [signupPass, setSignupPass] = useState('')
 
-  function handleLogin() {
-    if (!loginEmail || !loginPass) { showToast('Please fill in all fields', 'error'); return }
-    if (!loginEmail.includes('@')) { showToast('Enter a valid email address', 'error'); return }
-    onLogin({ name: loginEmail.split('@')[0], email: loginEmail })
-  }
 
-  function handleSignup() {
-    if (!signupName || !signupEmail || !signupPass) { showToast('Please fill in all fields', 'error'); return }
-    if (!signupEmail.includes('@')) { showToast('Enter a valid email address', 'error'); return }
-    if (signupPass.length < 8) { showToast('Password must be at least 8 characters', 'error'); return }
-    onLogin({ name: signupName, email: signupEmail })
-  }
-
-  // function handleGoogle() {
-  //   setGoogleLoading(true)
-  //   setTimeout(() => {
-  //     window.location.href = `${BACKEND_URL}/api/auth/google`
-  //   }, 1500)
+  // function handleSignup() {
+  //   if (!signupName || !signupEmail || !signupPass) { showToast('Please fill in all fields', 'error'); return }
+  //   if (!signupEmail.includes('@')) { showToast('Enter a valid email address', 'error'); return }
+  //   if (signupPass.length < 8) { showToast('Password must be at least 8 characters', 'error'); return }
+  //   onLogin({ name: signupName, email: signupEmail })
   // }
+
+  function handleGoogle() {
+    setGoogleLoading(true)
+    setTimeout(() => {
+      window.location.href = `${BACKEND_URL}/api/auth/google`
+    }, 1500)
+  }
 
   if (googleLoading) {
     return (
