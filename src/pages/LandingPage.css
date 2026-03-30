@@ -442,7 +442,7 @@
   .lp-pricing-box { grid-template-columns: 1fr; gap: 32px; }
   .lp-footer-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
 }
-/* @media (max-width: 768px) {
+@media (max-width: 768px) {
   .lp-nav-links { display: none; }
   .lp-hamburger { display: flex; }
   .lp-steps-grid { grid-template-columns: 1fr; }
@@ -454,7 +454,7 @@
   .lp-section, .lp-gray, .lp-white { padding: 60px 5%; }
   .lp-footer-bottom { flex-direction: column; text-align: center; }
   .lp-hero { background-position: center center !important; background-size: cover !important; }
-} */
+}
 .faq{
     background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
 }
