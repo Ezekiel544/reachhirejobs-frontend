@@ -49,26 +49,26 @@ export default function Auth({ defaultTab = 'login', onLogin, onBack }) {
 
   if (googleLoading) {
     return (
-      // <div style={{
-      //   position: 'fixed', inset: 0,
-      //   background: '#fff',
-      //   display: 'flex', flexDirection: 'column',
-      //   alignItems: 'center', justifyContent: 'center',
-      //   zIndex: 9999, gap: 20,
-      // }}>
-      //   <div style={{ fontSize: 28, fontWeight: 800, color: '#0f172a' }}>
-      //     Reach<span style={{ color: 'var(--blue)' }}>HireJobs</span>
-      //   </div>
-      //   <div style={{
-      //     width: 44, height: 44, border: '4px solid #e2e8f0',
-      //     borderTop: '4px solid var(--blue)', borderRadius: '50%',
-      //     animation: 'spin 0.8s linear infinite',
-      //   }} />
-      //   <div style={{ fontSize: 15, color: '#64748b', fontWeight: 500 }}>
-      //     Redirecting to Google...
-      //   </div>
-      //   <style>{`@keyframes spin { to { transform: rotate(360deg) } }`}</style>
-      // </div>
+      <div style={{
+        position: 'fixed', inset: 0,
+        background: '#fff',
+        display: 'flex', flexDirection: 'column',
+        alignItems: 'center', justifyContent: 'center',
+        zIndex: 9999, gap: 20,
+      }}>
+        <div style={{ fontSize: 28, fontWeight: 800, color: '#0f172a' }}>
+          Reach<span style={{ color: 'var(--blue)' }}>HireJobs</span>
+        </div>
+        <div style={{
+          width: 44, height: 44, border: '4px solid #e2e8f0',
+          borderTop: '4px solid var(--blue)', borderRadius: '50%',
+          animation: 'spin 0.8s linear infinite',
+        }} />
+        <div style={{ fontSize: 15, color: '#64748b', fontWeight: 500 }}>
+          Redirecting to Google...
+        </div>
+        <style>{`@keyframes spin { to { transform: rotate(360deg) } }`}</style>
+      </div>
     )
   }
 
