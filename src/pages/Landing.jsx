@@ -40,7 +40,7 @@ function Hero({ onGetStarted }) {
           </div>
         </div>
 
-        <div className={styles.heroRight}>
+        {/* <div className={styles.heroRight}>
           <div className={styles.heroCard}>
             <div className={styles.cardTop}>
               <span className={styles.cardTitle}>Build Your Blast</span>
@@ -70,7 +70,7 @@ function Hero({ onGetStarted }) {
               <span className={styles.chip}>🇰🇪 Kenya · 88 companies</span>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   )
