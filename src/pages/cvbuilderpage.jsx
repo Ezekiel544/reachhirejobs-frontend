@@ -59,11 +59,11 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
   // }
 
   // Photo
-  function handlePhoto(e) {
-    const f = e.target.files[0]
-    if (!f) return
-    update('photo', URL.createObjectURL(f))
-  }
+  // function handlePhoto(e) {
+  //   const f = e.target.files[0]
+  //   if (!f) return
+  //   update('photo', URL.createObjectURL(f))
+  // }
 
   // Experience
   function updateExp(i, field, val) {
