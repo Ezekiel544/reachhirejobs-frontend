@@ -132,7 +132,7 @@ export default function AuthPage({ defaultTab = 'login', onLogin, onBack }) {
         )}
 
         {/* ── Signup ── */}
-        {tab === 'signup' && (
+        {/* {tab === 'signup' && (
           <div>
             <div className="ap-group">
               <label className="ap-label">Full Name</label>
@@ -158,7 +158,7 @@ export default function AuthPage({ defaultTab = 'login', onLogin, onBack }) {
               <GoogleIcon /> Continue with Google
             </button>
           </div>
-        )}
+        )} */}
 
         <span className="ap-back" onClick={onBack}>← Back to homepage</span>
       </div>
