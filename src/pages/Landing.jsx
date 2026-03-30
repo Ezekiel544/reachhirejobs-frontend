@@ -120,14 +120,14 @@ function HowItWorks() {
 
 // ── Features ──────────────────────────────────────────────────────────────────
 function Features() {
-  const feats = [
-    { icon: '🌍', title: 'Pan-African Reach', desc: 'From Lagos to Nairobi, Accra to Cairo — plus 277 global remote companies.' },
-    { icon: '🎯', title: 'Smart Targeting', desc: 'Filter by industry, role, and location. Your CV only goes where it matters.' },
-    { icon: '⚡', title: 'Instant Delivery', desc: 'Once payment is confirmed, emails go out immediately.' },
-    { icon: '🔒', title: 'Secure Payments', desc: 'Card, bank transfer, USSD or mobile money in Naira. Fully automated.' },
-    { icon: '📊', title: 'Live Tracking', desc: 'See exactly which companies got your CV, broken down by country and industry.' },
-    { icon: '💼', title: 'Every Tech Role', desc: 'Frontend, Backend, Data, DevOps, Product, Design, QA — all covered.' },
-  ]
+  // const feats = [
+  //   { icon: '🌍', title: 'Pan-African Reach', desc: 'From Lagos to Nairobi, Accra to Cairo — plus 277 global remote companies.' },
+  //   { icon: '🎯', title: 'Smart Targeting', desc: 'Filter by industry, role, and location. Your CV only goes where it matters.' },
+  //   { icon: '⚡', title: 'Instant Delivery', desc: 'Once payment is confirmed, emails go out immediately.' },
+  //   { icon: '🔒', title: 'Secure Payments', desc: 'Card, bank transfer, USSD or mobile money in Naira. Fully automated.' },
+  //   { icon: '📊', title: 'Live Tracking', desc: 'See exactly which companies got your CV, broken down by country and industry.' },
+  //   { icon: '💼', title: 'Every Tech Role', desc: 'Frontend, Backend, Data, DevOps, Product, Design, QA — all covered.' },
+  // ]
   return (
     <section id="features" className={styles.sectionWhite}>
       <div className={styles.section}>
