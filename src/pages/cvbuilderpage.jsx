@@ -412,7 +412,7 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
           )}
 
           {/* Step 6 — Finalise */}
-          {step === 6 && (
+          {/* {step === 6 && (
             <div className="cvb-form-body">
               {missingFields.length > 0 && (
                 <div className="cvb-missing-box">
@@ -431,7 +431,7 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
                 </button>
               </div>
             </div>
-          )}
+          )} */}
 
           {/* Navigation */}
           <div className="cvb-nav-btns">
