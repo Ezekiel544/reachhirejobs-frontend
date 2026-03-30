@@ -146,14 +146,14 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
   const fullName = [cv.firstName, cv.lastName].filter(Boolean).join(' ')
   const tpl = TEMPLATES.find(t => t.id === template)
 
-  // const stepTitles = {
-  //   1: { q: "What's the best way for employers to contact you?", sub: "We suggest including your full name, email and phone number." },
-  //   2: { q: "Tell us about your work experience.", sub: "Start with your most recent job. Include key achievements." },
-  //   3: { q: "What is your educational background?", sub: "Add your highest qualification first." },
-  //   4: { q: "What skills do you bring to the table?", sub: "Include both technical and soft skills relevant to your role." },
-  //   5: { q: "Write a professional summary.", sub: "A strong 2–4 sentence overview of who you are and what you offer." },
-  //   6: { q: "You're almost done!", sub: "Review your CV, download it or use it for a blast." },
-  // }
+  const stepTitles = {
+    1: { q: "What's the best way for employers to contact you?", sub: "We suggest including your full name, email and phone number." },
+    2: { q: "Tell us about your work experience.", sub: "Start with your most recent job. Include key achievements." },
+    3: { q: "What is your educational background?", sub: "Add your highest qualification first." },
+    4: { q: "What skills do you bring to the table?", sub: "Include both technical and soft skills relevant to your role." },
+    5: { q: "Write a professional summary.", sub: "A strong 2–4 sentence overview of who you are and what you offer." },
+    6: { q: "You're almost done!", sub: "Review your CV, download it or use it for a blast." },
+  }
 
   const missingFields = []
   if (!cv.firstName || !cv.lastName) missingFields.push('Full name')
