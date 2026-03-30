@@ -33,12 +33,12 @@ export default function Auth({ defaultTab = 'login', onLogin, onBack }) {
     onLogin({ name: loginEmail.split('@')[0], email: loginEmail })
   }
 
-  function handleSignup() {
-    if (!signupName || !signupEmail || !signupPass) { showToast('Please fill in all fields', 'error'); return }
-    if (!signupEmail.includes('@')) { showToast('Enter a valid email address', 'error'); return }
-    if (signupPass.length < 8) { showToast('Password must be at least 8 characters', 'error'); return }
-    onLogin({ name: signupName, email: signupEmail })
-  }
+  // function handleSignup() {
+  //   if (!signupName || !signupEmail || !signupPass) { showToast('Please fill in all fields', 'error'); return }
+  //   if (!signupEmail.includes('@')) { showToast('Enter a valid email address', 'error'); return }
+  //   if (signupPass.length < 8) { showToast('Password must be at least 8 characters', 'error'); return }
+  //   onLogin({ name: signupName, email: signupEmail })
+  // }
 
   function handleGoogle() {
     setGoogleLoading(true)
