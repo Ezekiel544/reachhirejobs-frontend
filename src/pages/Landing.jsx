@@ -288,13 +288,13 @@ function Footer() {
 // ── Landing (combines all sections) ──────────────────────────────────────────
 export default function Landing({ onGetStarted }) {
   return (
-    // <>
-    //   <Hero onGetStarted={onGetStarted} />
-    //   <Ticker />
-    //   <HowItWorks />
-    //   <Features />
-    //   <PricingSection onGetStarted={onGetStarted} />
-    //   <Footer />
-    // </>
+    <>
+      <Hero onGetStarted={onGetStarted} />
+      <Ticker />
+      <HowItWorks />
+      <Features />
+      <PricingSection onGetStarted={onGetStarted} />
+      <Footer />
+    </>
   )
 }
