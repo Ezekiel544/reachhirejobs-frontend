@@ -474,10 +474,10 @@
   font-size: 16px; font-weight: 600; color: var(--text-primary);
   text-align: left; gap: 16px; font-family: inherit;
 }
-.lp-faq-q:hover { color: var(--blue-bright); }
+/* .lp-faq-q:hover { color: var(--blue-bright); }
 .lp-faq-icon { font-size: 22px; font-weight: 300; color: var(--blue-glow); flex-shrink: 0; }
 .lp-faq-a { padding: 0 0 20px; font-size: 15px; color: var(--text-secondary); line-height: 1.8; text-align: left; }
-.lp-faq-open .lp-faq-q { color: var(--blue-bright); }
+.lp-faq-open .lp-faq-q { color: var(--blue-bright); } */
 
 @media (max-width: 370px) {
   .lp-stats {
