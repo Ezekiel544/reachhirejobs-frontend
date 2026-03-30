@@ -602,7 +602,7 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
       </div>
 
       {/* Resume Modal */}
-      {/* {showUseModal && (
+      {showUseModal && (
         <div className="cvb-modal-overlay" onClick={() => setShowUseModal(false)}>
           <div className="cvb-modal" onClick={e => e.stopPropagation()}>
             <div className="cvb-modal-title">⚠️ You already have a CV saved</div>
@@ -615,7 +615,7 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
             </div>
           </div>
         </div>
-      )} */}
+      )}
     </div>
   )
 }
