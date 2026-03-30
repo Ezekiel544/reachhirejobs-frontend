@@ -129,21 +129,21 @@ function Features() {
     { icon: '💼', title: 'Every Tech Role', desc: 'Frontend, Backend, Data, DevOps, Product, Design, QA — all covered.' },
   ]
   return (
-    <section id="features" className={styles.sectionWhite}>
-      <div className={styles.section}>
-        <div className={styles.secLabel}>Why ReachHire</div>
-        <h2 className={styles.secTitle}>Built for <span>African Tech Talent</span></h2>
-        <div className={styles.featsGrid}>
-          {feats.map(f => (
-            <div key={f.title} className={styles.featCard}>
-              <div className={styles.featIconWrap}>{f.icon}</div>
-              <div className={styles.featTitle}>{f.title}</div>
-              <div className={styles.featDesc}>{f.desc}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+    // <section id="features" className={styles.sectionWhite}>
+    //   <div className={styles.section}>
+    //     <div className={styles.secLabel}>Why ReachHire</div>
+    //     <h2 className={styles.secTitle}>Built for <span>African Tech Talent</span></h2>
+    //     <div className={styles.featsGrid}>
+    //       {feats.map(f => (
+    //         <div key={f.title} className={styles.featCard}>
+    //           <div className={styles.featIconWrap}>{f.icon}</div>
+    //           <div className={styles.featTitle}>{f.title}</div>
+    //           <div className={styles.featDesc}>{f.desc}</div>
+    //         </div>
+    //       ))}
+    //     </div>
+    //   </div>
+    // </section>
   )
 }
 
