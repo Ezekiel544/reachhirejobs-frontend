@@ -393,7 +393,7 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
           )}
 
           {/* Step 5 — Summary */}
-          {step === 5 && (
+          {/* {step === 5 && (
             <div className="cvb-form-body">
               <div className="cvb-field">
                 <label>Professional Summary *</label>
@@ -409,7 +409,7 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
                 </ul>
               </div>
             </div>
-          )}
+          )} */}
 
           {/* Step 6 — Finalise */}
           {step === 6 && (
