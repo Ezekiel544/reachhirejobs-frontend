@@ -82,11 +82,11 @@ export default function CVBuilderPage({ onUseForBlast, profile, onBack }) {
   function removeExp(i) { update('experience', cv.experience.filter((_, x) => x !== i)) }
 
   // Education
-  // function updateEdu(i, field, val) {
-  //   const edu = [...cv.education]; edu[i] = { ...edu[i], [field]: val }; update('education', edu)
-  // }
-  // function addEdu() { update('education', [...cv.education, { school: '', degree: '', field: '', startYear: '', endYear: '' }]) }
-  // function removeEdu(i) { update('education', cv.education.filter((_, x) => x !== i)) }
+  function updateEdu(i, field, val) {
+    const edu = [...cv.education]; edu[i] = { ...edu[i], [field]: val }; update('education', edu)
+  }
+  function addEdu() { update('education', [...cv.education, { school: '', degree: '', field: '', startYear: '', endYear: '' }]) }
+  function removeEdu(i) { update('education', cv.education.filter((_, x) => x !== i)) }
 
   // Skills
   function addSkill() {
